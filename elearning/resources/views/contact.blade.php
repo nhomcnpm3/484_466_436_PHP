@@ -36,4 +36,4 @@
          </div>
       </div>
       <!-- contact section end -->
-      @endsection
+@endsection

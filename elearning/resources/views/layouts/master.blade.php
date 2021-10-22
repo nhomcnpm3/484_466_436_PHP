@@ -82,6 +82,8 @@
 
       
     @yield('content')
+
+    
     <div class="footer_section layout_padding">
          <div class="container">
             <div class="subscribe_bt"><a href="#">Subscribe</a></div>
