@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLessonTable extends Migration
+class Tepbinhluan extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateLessonTable extends Migration
      */
     public function up()
     {
-        Schema::create('lesson', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('content');
-            $table->unsignedBigInteger('ID_post');
-            $table->foreign('ID_post')->references('id')->on('post');
+        Schema::create('TepBinhLuan', function (Blueprint $table) {
+            $table->bigIncrements('ID');
+            $table->string('Url');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -30,6 +28,6 @@ class CreateLessonTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lesson');
+        Schema::dropIfExists('TepBinhLuan');
     }
 }

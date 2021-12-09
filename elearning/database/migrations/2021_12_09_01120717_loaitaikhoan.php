@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAccountTable extends Migration
+class Loaitaikhoan extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateAccountTable extends Migration
      */
     public function up()
     {
-        Schema::create('account', function (Blueprint $table) {
-            $table->id();
-            $table->string('email');
-            $table->string('password');
-            $table->boolean('status');
-            $table->boolean('isadmin');
+        Schema::create('LoaiTaiKhoan', function (Blueprint $table) {
+            $table->bigIncrements('ID');
+            $table->string('TenLoai');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -30,6 +28,6 @@ class CreateAccountTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('account');
+        Schema::dropIfExists('LoaiTaiKhoan');
     }
 }
