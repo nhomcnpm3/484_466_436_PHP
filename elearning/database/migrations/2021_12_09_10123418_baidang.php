@@ -14,7 +14,7 @@ class Baidang extends Migration
     public function up()
     {
         Schema::create('BaiDang', function (Blueprint $table) {
-            $table->bigIncrements('ID');
+            $table->id();
             $table->string('TieuDe');
             $table->string('ChiTiet');
             $table->dateTime('HanNop');
@@ -23,10 +23,10 @@ class Baidang extends Migration
             $table->unsignedBigInteger('ID_Lop');
             $table->unsignedBigInteger('ID_TepBaiDang');
             $table->unsignedBigInteger('ID_ChiTietBaiDang');
-            $table->foreign('ID_TaiKhoan')->references('ID')->on('TaiKhoan');
-            $table->foreign('ID_Lop')->references('ID')->on('Lop');
-            $table->foreign('ID_TepBaiDang')->references('ID')->on('TepBaiDang');
-            $table->foreign('ID_ChiTietBaiDang')->references('ID')->on('ChiTietBaiDang');
+            $table->foreign('ID_TaiKhoan')->references('id')->on('TaiKhoan');
+            $table->foreign('ID_Lop')->references('id')->on('Lop');
+            $table->foreign('ID_TepBaiDang')->references('id')->on('TepBaiDang');
+            $table->foreign('ID_ChiTietBaiDang')->references('id')->on('ChiTietBaiDang');
             $table->timestamps();
             $table->softDeletes();
         });

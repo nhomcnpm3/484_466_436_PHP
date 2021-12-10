@@ -25,6 +25,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan->NgaySinh = "2001/05/26";
         $taiKhoan->ID_LoaiTaiKhoan = 1;
         $taiKhoan->TrangThai = 1;
+        $taiKhoan->save();
 
         //Thêm tài khoản học viên
         $taiKhoan1 = new TaiKhoan();
@@ -36,6 +37,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan1->NgaySinh = "2001/05/26";
         $taiKhoan1->ID_LoaiTaiKhoan = 2;
         $taiKhoan1->TrangThai = 1;
+        $taiKhoan1->save();
 
         $taiKhoan2 = new TaiKhoan();
         $taiKhoan2->Ten = "Trần Đức Anh Tú";
@@ -46,6 +48,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan2->NgaySinh = "2001/04/27";
         $taiKhoan2->ID_LoaiTaiKhoan = 2;
         $taiKhoan2->TrangThai = 1;
+        $taiKhoan2->save();
 
         $taiKhoan3 = new TaiKhoan();
         $taiKhoan3->Ten = "Nguyễn Huy";
@@ -56,6 +59,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan3->NgaySinh = "2001/08/17";
         $taiKhoan3->ID_LoaiTaiKhoan = 2;
         $taiKhoan3->TrangThai = 1;
+        $taiKhoan3->save();
 
         $taiKhoan4 = new TaiKhoan();
         $taiKhoan4->Ten = "Tống Thành Tài";
@@ -66,6 +70,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan4->NgaySinh = "2001/05/27";
         $taiKhoan4->ID_LoaiTaiKhoan = 2;
         $taiKhoan4->TrangThai = 1; 
+        $taiKhoan4->save();
 
         $taiKhoan5 = new TaiKhoan();
         $taiKhoan5->Ten = "Trần Thanh Toàn";
@@ -76,6 +81,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan5->NgaySinh = "2001/09/08";
         $taiKhoan5->ID_LoaiTaiKhoan = 2;
         $taiKhoan5->TrangThai = 1; 
+        $taiKhoan5->save();
 
         //Thêm tài khoản giáo viên
         $taiKhoan6 = new TaiKhoan();
@@ -87,6 +93,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan6->NgaySinh = "1990/01/01";
         $taiKhoan6->ID_LoaiTaiKhoan = 3;
         $taiKhoan6->TrangThai = 1;
+        $taiKhoan6->save();
 
         $taiKhoan7 = new TaiKhoan();
         $taiKhoan7->Ten = "Lữ Cao Tiến";
@@ -97,6 +104,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan7->NgaySinh = "1990/01/01";
         $taiKhoan7->ID_LoaiTaiKhoan = 3;
         $taiKhoan7->TrangThai = 1;
+        $taiKhoan7->save();
 
         $taiKhoan8 = new TaiKhoan();
         $taiKhoan8->Ten = "Phù Khắc Anh";
@@ -107,6 +115,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan8->NgaySinh = "1990/01/01";
         $taiKhoan8->ID_LoaiTaiKhoan = 3;
         $taiKhoan8->TrangThai = 1;
+        $taiKhoan8->save();
 
         $taiKhoan9 = new TaiKhoan();
         $taiKhoan9->Ten = "Nguyễn Minh Triết";
@@ -117,6 +126,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan9->NgaySinh = "1990/01/01";
         $taiKhoan9->ID_LoaiTaiKhoan = 3;
         $taiKhoan9->TrangThai = 1;
+        $taiKhoan9->save();
 
         $taiKhoan10 = new TaiKhoan();
         $taiKhoan10->Ten = "Nguyễn Minh HIền";
@@ -127,5 +137,6 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan10->NgaySinh = "1990/01/01";
         $taiKhoan10->ID_LoaiTaiKhoan = 3;
         $taiKhoan10->TrangThai = 1;
+        $taiKhoan10->save();
     }
 }

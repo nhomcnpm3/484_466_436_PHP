@@ -16,11 +16,14 @@ class LoaiTaiKhoanSeeder extends Seeder
     {
         $loaiTK = new LoaiTaiKhoan();
         $loaiTK->TenLoai = "Admin";
+        $loaiTK->save();
 
         $loaiTK1 = new LoaiTaiKhoan();
         $loaiTK1->TenLoai = "Học viên";
+        $loaiTK1->save();
 
         $loaiTK2 = new LoaiTaiKhoan();
         $loaiTK2->TenLoai = "Giáo Viên";
+        $loaiTK2->save();
     }
 }

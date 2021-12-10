@@ -14,13 +14,13 @@ class Gianhaplop extends Migration
     public function up()
     {
         Schema::create('GiaNhapLop', function (Blueprint $table) {
-            $table->bigIncrements('ID');
+            $table->id();
             $table->integer('TrangThaiTruyCap');
             $table->string('Token_mail');
             $table->unsignedBigInteger('ID_TaiKhoan');
             $table->unsignedBigInteger('ID_Lop');
-            $table->foreign('ID_TaiKhoan')->references('ID')->on('TaiKhoan');
-            $table->foreign('ID_Lop')->references('ID')->on('Lop');
+            $table->foreign('ID_TaiKhoan')->references('id')->on('TaiKhoan');
+            $table->foreign('ID_Lop')->references('id')->on('Lop');
             $table->timestamps();
             $table->softDeletes();
         });

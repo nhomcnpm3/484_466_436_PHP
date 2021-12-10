@@ -14,7 +14,7 @@ class Tepbinhluan extends Migration
     public function up()
     {
         Schema::create('TepBinhLuan', function (Blueprint $table) {
-            $table->bigIncrements('ID');
+            $table->id();
             $table->string('Url');
             $table->timestamps();
             $table->softDeletes();

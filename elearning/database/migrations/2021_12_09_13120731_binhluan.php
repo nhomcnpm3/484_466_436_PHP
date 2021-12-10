@@ -14,15 +14,15 @@ class Binhluan extends Migration
     public function up()
     {
         Schema::create('BinhLuan', function (Blueprint $table) {
-            $table->bigIncrements('ID');
+            $table->id();
             $table->string('NoiDung');
             $table->integer('TrangThai');
             $table->unsignedBigInteger('ID_TepBinhLuan');
             $table->unsignedBigInteger('ID_TaiKhoan');
             $table->unsignedBigInteger('ID_BaiDang');
-            $table->foreign('ID_TepBinhLuan')->references('ID')->on('TepBinhLuan');
-            $table->foreign('ID_TaiKhoan')->references('ID')->on('TaiKhoan');
-            $table->foreign('ID_BaiDang')->references('ID')->on('BaiDang');
+            $table->foreign('ID_TepBinhLuan')->references('id')->on('TepBinhLuan');
+            $table->foreign('ID_TaiKhoan')->references('id')->on('TaiKhoan');
+            $table->foreign('ID_BaiDang')->references('id')->on('BaiDang');
             $table->timestamps();
             $table->softDeletes();
         });

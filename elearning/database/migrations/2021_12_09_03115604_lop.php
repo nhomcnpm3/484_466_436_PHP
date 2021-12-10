@@ -14,12 +14,12 @@ class Lop extends Migration
     public function up()
     {
         Schema::create('Lop', function (Blueprint $table) {
-            $table->bigIncrements('ID');
+            $table->id();;
             $table->string('TenLop');
             $table->string('Logo');
             $table->string('Banner');
             $table->string('MauChuDe');
-            $table->bigInteger('MaLop');
+            $table->string('MaLop');
             $table->timestamps();
             $table->softDeletes();
         });
