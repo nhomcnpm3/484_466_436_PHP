@@ -15,11 +15,11 @@ class Chitietlop extends Migration
     {
         Schema::create('ChiTietLop', function (Blueprint $table) {
             $table->bigIncrements('ID');
-            $table->bigInteger('ID_TaiKhoan');
-            $table->bigInteger('ID_Lop');
+            $table->unsignedBigInteger('ID_TaiKhoan');
+            $table->unsignedBigInteger('ID_Lop');
             $table->integer('TrangThai');
-            //$table->foreign('ID_TaiKhoan')->references('ID')->on('TaiKhoan');
-            //$table->foreign('ID_Lop')->references('ID')->on('Lop');
+            $table->foreign('ID_TaiKhoan')->references('ID')->on('TaiKhoan');
+            $table->foreign('ID_Lop')->references('ID')->on('Lop');
             $table->timestamps();
             $table->softDeletes();
         });

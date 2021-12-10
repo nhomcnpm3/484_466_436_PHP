@@ -17,12 +17,12 @@ class Binhluan extends Migration
             $table->bigIncrements('ID');
             $table->string('NoiDung');
             $table->integer('TrangThai');
-            $table->bigInteger('ID_TepBinhLuan');
-            $table->bigInteger('ID_TaiKhoan');
-            $table->bigInteger('ID_BaiDang');
-            //$table->foreign('ID_TepBinhLuan')->references('ID')->on('TepBinhLuan');
-            //$table->foreign('ID_TaiKhoan')->references('ID')->on('TaiKhoan');
-            //$table->foreign('ID_BaiDang')->references('ID')->on('BaiDang');
+            $table->unsignedBigInteger('ID_TepBinhLuan');
+            $table->unsignedBigInteger('ID_TaiKhoan');
+            $table->unsignedBigInteger('ID_BaiDang');
+            $table->foreign('ID_TepBinhLuan')->references('ID')->on('TepBinhLuan');
+            $table->foreign('ID_TaiKhoan')->references('ID')->on('TaiKhoan');
+            $table->foreign('ID_BaiDang')->references('ID')->on('BaiDang');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -22,6 +22,8 @@ class Taikhoan extends Migration
             $table->string('MatKhau');
             $table->date('NgaySinh');
             $table->integer('TrangThai');
+            $table->unsignedBigInteger('ID_LoaiTaiKhoan');
+            $table->foreign('ID_LoaiTaiKhoan')->references('ID')->on('Loaitaikhoan');
             $table->timestamps();
             $table->softDeletes();
         });

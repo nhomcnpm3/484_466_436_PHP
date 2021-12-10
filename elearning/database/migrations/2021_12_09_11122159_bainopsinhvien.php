@@ -15,12 +15,12 @@ class Bainopsinhvien extends Migration
     {
         Schema::create('BaiNopSinhVien', function (Blueprint $table) {
             $table->bigIncrements('ID');
-            $table->bigInteger('ID_TaiKhoan');
-            $table->bigInteger('ID_BaiDang');
-            $table->bigInteger('ID_TepBaiNop');
-            //$table->foreign('ID_TaiKhoan')->references('ID')->on('TaiKhoan');
-            //$table->foreign('ID_BaiDang')->references('ID')->on('BaiDang');
-            //$table->foreign('ID_TepBaiNop')->references('ID')->on('TepBaiNop');
+            $table->unsignedBigInteger('ID_TaiKhoan');
+            $table->unsignedBigInteger('ID_BaiDang');
+            $table->unsignedBigInteger('ID_TepBaiNop');
+            $table->foreign('ID_TaiKhoan')->references('ID')->on('TaiKhoan');
+            $table->foreign('ID_BaiDang')->references('ID')->on('BaiDang');
+            $table->foreign('ID_TepBaiNop')->references('ID')->on('TepBaiNop');
             $table->timestamps();
             $table->softDeletes();
         });
