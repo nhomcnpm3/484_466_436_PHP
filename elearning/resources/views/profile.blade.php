@@ -24,8 +24,11 @@
                                     <div class="wm-student-nav-text">
                                         <h6>{{ auth()->user()->Ten}}</h6>
                                         <div class="input-file-container">  
-                                            <input class="input-file" id="my-file" type="file">
+                                          <form action="{{ route('upload-image') }}" method="post" enctype="multipart/form-data">
+                                            @csrf
+                                            <input class="input-file" id="my-file" type="file" name="image" onchange="form.submit()">
                                             <label tabindex="0" for="my-file" class="input-file-trigger">Upload Image</label>
+                                          </form>                                            
                                         </div>
                                     </div>
                                     <ul>

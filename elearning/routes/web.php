@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DangNhapController;
+use App\Http\Controllers\ThongTinController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +38,5 @@ Route::get('/profile/Updatebirthday', function () {
 })->name('reset_profile_birthday');
 Route::post('/login', [DangNhapController::class, 'xuLyDangNhap'])->name('xl-dang-nhap');
 Route::get('/logout', [DangNhapController::class, 'dangxuat'])->name('logout');
+
+Route::post('/upload', [ThongTinController::class, 'uploadImage'])->name('upload-image');
