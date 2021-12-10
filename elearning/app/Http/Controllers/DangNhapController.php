@@ -11,9 +11,8 @@ class DangNhapController extends Controller
 {
     public function xuLyDangNhap(Request $request)
     {
-        dd(Auth::attempt(['Email' => $request->email,'MatKhau' =>
-        $request->password]));
-        if (Auth::attempt(['Ten' => $request->username, 'MatKhau' =>
+        //dd(Auth::attempt(['Email' => $request->email, 'password' =>$request->password]));
+        if (Auth::attempt(['Email' => $request->email, 'password' =>
         $request->password])) {
             echo("hi");
         } else {
