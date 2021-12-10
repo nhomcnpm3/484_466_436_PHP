@@ -23,7 +23,10 @@
                                     </figure>
                                     <div class="wm-student-nav-text">
                                         <h6>{{ auth()->user()->Ten}}</h6>
-                                        <a href="#">update image</a>
+                                        <div class="input-file-container">  
+                                            <input class="input-file" id="my-file" type="file">
+                                            <label tabindex="0" for="my-file" class="input-file-trigger">Upload Image</label>
+                                        </div>
                                     </div>
                                     <ul>
                                         <li class="active">

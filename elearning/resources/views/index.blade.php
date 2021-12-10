@@ -2,9 +2,6 @@
 
 @section('title', 'Home Page')
 
-@section('sidebar')
-	@parent
-@endsection
 
 @section('content')
 <!--// Main Content \\-->
