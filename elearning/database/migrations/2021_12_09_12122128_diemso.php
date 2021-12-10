@@ -14,12 +14,12 @@ class Diemso extends Migration
     public function up()
     {
         Schema::create('DiemSo', function (Blueprint $table) {
-            $table->bigIncrements('ID');
+            $table->id();
             $table->integer('Diem');
             $table->unsignedBigInteger('ID_TaiKhoan');
             $table->unsignedBigInteger('ID_BaiDang');
-            $table->foreign('ID_TaiKhoan')->references('ID')->on('TaiKhoan');
-            $table->foreign('ID_BaiDang')->references('ID')->on('BaiDang');
+            $table->foreign('ID_TaiKhoan')->references('id')->on('TaiKhoan');
+            $table->foreign('ID_BaiDang')->references('id')->on('BaiDang');
             $table->timestamps();
             $table->softDeletes();
         });

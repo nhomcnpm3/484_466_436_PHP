@@ -14,7 +14,7 @@ class Taikhoan extends Migration
     public function up()
     {
         Schema::create('TaiKhoan', function (Blueprint $table) {
-            $table->bigIncrements('ID');
+            $table->id();
             $table->string('Ten');
             $table->string('AVT');
             $table->string('Email');
@@ -23,7 +23,7 @@ class Taikhoan extends Migration
             $table->date('NgaySinh');
             $table->integer('TrangThai');
             $table->unsignedBigInteger('ID_LoaiTaiKhoan');
-            $table->foreign('ID_LoaiTaiKhoan')->references('ID')->on('Loaitaikhoan');
+            $table->foreign('ID_LoaiTaiKhoan')->references('id')->on('Loaitaikhoan');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -15,12 +15,15 @@ class LoaiTaiKhoanSeeder extends Seeder
     public function run()
     {
         $loaiTK = new LoaiTaiKhoan();
-        $loaiTK->Ten_Loai = "Admin";
+        $loaiTK->TenLoai = "Admin";
+        $loaiTK->save();
 
         $loaiTK1 = new LoaiTaiKhoan();
-        $loaiTK1->Ten_Loai = "Học viên";
+        $loaiTK1->TenLoai = "Học viên";
+        $loaiTK1->save();
 
         $loaiTK2 = new LoaiTaiKhoan();
-        $loaiTK2->Ten_Loai = "Giáo Viên";
+        $loaiTK2->TenLoai = "Giáo Viên";
+        $loaiTK2->save();
     }
 }

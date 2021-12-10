@@ -14,7 +14,7 @@ class Chitietbaidang extends Migration
     public function up()
     {
         Schema::create('ChiTietBaiDang', function (Blueprint $table) {
-            $table->bigIncrements('ID');
+            $table->id();
             $table->string('TenBaiDang');
             $table->timestamps();
             $table->softDeletes();
