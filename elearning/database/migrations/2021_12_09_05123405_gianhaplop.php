@@ -17,10 +17,10 @@ class Gianhaplop extends Migration
             $table->bigIncrements('ID');
             $table->integer('TrangThaiTruyCap');
             $table->string('Token_mail');
-            $table->bigInteger('ID_TaiKhoan');
-            $table->bigInteger('ID_Lop');
-            //$table->foreign('ID_TaiKhoan')->references('ID')->on('TaiKhoan');
-            //$table->foreign('ID_Lop')->references('ID')->on('Lop');
+            $table->unsignedBigInteger('ID_TaiKhoan');
+            $table->unsignedBigInteger('ID_Lop');
+            $table->foreign('ID_TaiKhoan')->references('ID')->on('TaiKhoan');
+            $table->foreign('ID_Lop')->references('ID')->on('Lop');
             $table->timestamps();
             $table->softDeletes();
         });
