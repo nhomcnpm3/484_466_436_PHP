@@ -15,21 +15,21 @@ class LopnSeeder extends Seeder
     public function run()
     {
         $lop = new Lop();
-        $lop->Ten_Lop = "Lớp học bổ túc";
+        $lop->TenLop = "Lớp học bổ túc";
         $lop->Logo = "logo.png";
         $lop->Banner = "banner.png";
         $lop->MauChuDe = "#CCCCCC";
         $lop->MaLop ="lophocbotuc";
 
         $lop1 = new Lop();
-        $lop1->Ten_Lop = "Lớp học Anh Văn A1";
+        $lop1->TenLop = "Lớp học Anh Văn A1";
         $lop1->Logo = "logo.png";
         $lop1->Banner = "banner.png";
         $lop1->MauChuDe = "#CCCCCC";
         $lop1->MaLop ="lophocanhvan1";
 
         $lop2 = new Lop();
-        $lop2->Ten_Lop = "Lớp học Laravel";
+        $lop2->TenLop = "Lớp học Laravel";
         $lop2->Logo = "logo.png";
         $lop2->Banner = "banner.png";
         $lop2->MauChuDe = "#CCCCCC";

@@ -22,7 +22,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan->DiaChi = "TP HCM";
         $taiKhoan->MatKhau ="12345678";
         $taiKhoan->NgaySinh = "2001/05/26";
-        $taiKhoan->ID_Loai_Tai_Khoan = 1;
+        $taiKhoan->ID_LoaiTaiKhoan = 1;
         $taiKhoan->TrangThai = 1;
 
         //Thêm tài khoản học viên
@@ -33,7 +33,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan1->DiaChi = "TP HCM";
         $taiKhoan1->MatKhau ="12345678";
         $taiKhoan1->NgaySinh = "2001/05/26";
-        $taiKhoan1->ID_Loai_Tai_Khoan = 2;
+        $taiKhoan1->ID_LoaiTaiKhoan = 2;
         $taiKhoan1->TrangThai = 1;
 
         $taiKhoan2 = new TaiKhoan();
@@ -43,7 +43,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan2->DiaChi = "TP Vũng Tàu";
         $taiKhoan2->MatKhau ="12345678";
         $taiKhoan2->NgaySinh = "2001/04/27";
-        $taiKhoan2->ID_Loai_Tai_Khoan = 2;
+        $taiKhoan2->ID_LoaiTaiKhoan = 2;
         $taiKhoan2->TrangThai = 1;
 
         $taiKhoan3 = new TaiKhoan();
@@ -53,7 +53,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan3->DiaChi = "TP Bà Rịa";
         $taiKhoan3->MatKhau ="12345678";
         $taiKhoan3->NgaySinh = "2001/08/17";
-        $taiKhoan3->ID_Loai_Tai_Khoan = 2;
+        $taiKhoan3->ID_LoaiTaiKhoan = 2;
         $taiKhoan3->TrangThai = 1;
 
         $taiKhoan4 = new TaiKhoan();
@@ -63,7 +63,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan4->DiaChi = "TP Bến Tre";
         $taiKhoan4->MatKhau ="12345678";
         $taiKhoan4->NgaySinh = "2001/05/27";
-        $taiKhoan4->ID_Loai_Tai_Khoan = 2;
+        $taiKhoan4->ID_LoaiTaiKhoan = 2;
         $taiKhoan4->TrangThai = 1; 
 
         $taiKhoan5 = new TaiKhoan();
@@ -73,7 +73,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan5->DiaChi = "TP Đà Nẵng";
         $taiKhoan5->MatKhau ="12345678";
         $taiKhoan5->NgaySinh = "2001/09/08";
-        $taiKhoan5->ID_Loai_Tai_Khoan = 2;
+        $taiKhoan5->ID_LoaiTaiKhoan = 2;
         $taiKhoan5->TrangThai = 1; 
 
         //Thêm tài khoản giáo viên
@@ -84,7 +84,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan6->DiaChi = "TP HN";
         $taiKhoan6->MatKhau ="12345678";
         $taiKhoan6->NgaySinh = "1990/01/01";
-        $taiKhoan6->ID_Loai_Tai_Khoan = 3;
+        $taiKhoan6->ID_LoaiTaiKhoan = 3;
         $taiKhoan6->TrangThai = 1;
 
         $taiKhoan7 = new TaiKhoan();
@@ -94,7 +94,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan7->DiaChi = "TP HN";
         $taiKhoan7->MatKhau ="12345678";
         $taiKhoan7->NgaySinh = "1990/01/01";
-        $taiKhoan7->ID_Loai_Tai_Khoan = 3;
+        $taiKhoan7->ID_LoaiTaiKhoan = 3;
         $taiKhoan7->TrangThai = 1;
 
         $taiKhoan8 = new TaiKhoan();
@@ -104,7 +104,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan8->DiaChi = "TP Vũng Tàu";
         $taiKhoan8->MatKhau ="12345678";
         $taiKhoan8->NgaySinh = "1990/01/01";
-        $taiKhoan8->ID_Loai_Tai_Khoan = 3;
+        $taiKhoan8->ID_LoaiTaiKhoan = 3;
         $taiKhoan8->TrangThai = 1;
 
         $taiKhoan9 = new TaiKhoan();
@@ -114,7 +114,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan9->DiaChi = "TP Bến Tre";
         $taiKhoan9->MatKhau ="12345678";
         $taiKhoan9->NgaySinh = "1990/01/01";
-        $taiKhoan9->ID_Loai_Tai_Khoan = 3;
+        $taiKhoan9->ID_LoaiTaiKhoan = 3;
         $taiKhoan9->TrangThai = 1;
 
         $taiKhoan10 = new TaiKhoan();
@@ -124,7 +124,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan10->DiaChi = "TP Bến Tre";
         $taiKhoan10->MatKhau ="12345678";
         $taiKhoan10->NgaySinh = "1990/01/01";
-        $taiKhoan10->ID_Loai_Tai_Khoan = 3;
+        $taiKhoan10->ID_LoaiTaiKhoan = 3;
         $taiKhoan10->TrangThai = 1;
     }
 }
