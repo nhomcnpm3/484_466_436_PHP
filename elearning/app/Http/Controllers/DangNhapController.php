@@ -11,12 +11,17 @@ class DangNhapController extends Controller
 {
     public function xuLyDangNhap(Request $request)
     {
-        //dd(Auth::attempt(['Email' => $request->email, 'password' =>$request->password]));
         if (Auth::attempt(['Email' => $request->email, 'password' =>
         $request->password])) {
-            echo("hi");
+            return redirect()->route('home');
         } else {
             echo("fail");
         }
     }
+    public function dangxuat()
+    {
+        $user= Auth::logout();
+        return redirect()->route('home');
+    }
+    
 }

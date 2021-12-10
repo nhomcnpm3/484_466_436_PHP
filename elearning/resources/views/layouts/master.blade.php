@@ -18,13 +18,54 @@
     <link href="{{asset('css/color-three.css')}}" rel="stylesheet">
     <link href="{{asset('css/color-four.css')}}" rel="stylesheet">
     <link href="{{asset('css/responsive.css')}}" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+.dropbtn {
+  background-color:#222845;
+  color: white;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 8px 16px;
+  font-size:13px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+</style>
   </head>
   <body>
 	
@@ -47,12 +88,22 @@
                                 <li><i class="wmicon-clock2"></i> Mon - fri: 7:00am - 6:00pm</li>
                             </ul>
                             <ul class="wm-adminuser-section">
+                                @if(!empty(auth()->user()))
+                                <li>
+                                <div class="dropdown">
+                                <img style="width:30px;height:30px;border-radius:50px;border:none;margin-right:5px;" src="{{asset('extra-images')}}/{{ auth()->user()->AVT}}" alt=""><button onclick="myFunction()" class="dropbtn" style="font-size:13px">{{ auth()->user()->Email}}</button>
+                                    <div id="myDropdown" class="dropdown-content">
+                                        <a style="color:black;font-size:13px"href="{{route('profile')}}">Profile</a>
+                                        <a style="color:black;font-size:13px"href="#about">About</a>
+                                        <a style="color:black;font-size:13px"href="{{route('logout')}}">Logout</a>
+                                    </div>
+                                    </div>
+                                    </li>
+                                    @else
                                 <li>
                                     <a href="#" data-toggle="modal" data-target="#ModalLogin">login</a>
                                 </li>
-                                <li>
-                                    <a href="#">Contact</a>
-                                </li>
+                                @endif
                                 <li>
                                     <a href="#" class="wm-search-btn" data-toggle="modal" data-target="#ModalSearch"><i class="wmicon-search"></i></a>
                                 </li>
@@ -67,7 +118,7 @@
             <div class="wm-main-header">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-3"><a href="{{route('home')}}" class="wm-logo"><img src="images/logo-1.png" alt=""></a></div>
+                        <div class="col-md-3"><a href="{{route('home')}}" class="wm-logo"><img src="{{asset('images/logo-1.png')}}" alt=""></a></div>
                         <div class="col-md-9">
                             <!--// Navigation \\-->
                             <nav class="navbar navbar-default">
@@ -120,7 +171,6 @@
                                 </div>
                             </nav>
                             <!--// Navigation \\-->
-                            <!-- <a href="#" class="wm-header-btn">get started</a> -->
                         </div>
                     </div>
                 </div>
@@ -312,7 +362,27 @@
       </div>
     </div>
     <!-- ModalSearch Box -->
+    <script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
 
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
 	<!-- jQuery (necessary for JavaScript plugins) -->
 	<script type="text/javascript" src="{{asset('script/jquery.js')}}"></script>
 	<script type="text/javascript" src="{{asset('script/modernizr.js')}}"></script>

@@ -23,8 +23,17 @@ Route::get('/contact', function () {
 Route::get('/classlist', function () {
     return view('classlist');
 })->name('classlist');
-Route::get('/classdetail', function () {
+Route::get('/classlist/classdetail', function () {
     return view('class_detail');
 })->name('classdetail');
-
+Route::get('/profile', function () {
+    return view('profile');
+})->name('profile');
+Route::get('/profile/UpdateFullName', function () {
+    return view('reset_profile_name');
+})->name('reset_profile_name');
+Route::get('/profile/Updatebirthday', function () {
+    return view('reset_profile_birthday');
+})->name('reset_profile_birthday');
 Route::post('/login', [DangNhapController::class, 'xuLyDangNhap'])->name('xl-dang-nhap');
+Route::get('/logout', [DangNhapController::class, 'dangxuat'])->name('logout');
