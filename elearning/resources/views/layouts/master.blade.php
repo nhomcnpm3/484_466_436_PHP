@@ -243,14 +243,14 @@
     <div class="modal fade" id="ModalLogin" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-body">
-            
+          <div class="modal-body">            
             <div class="wm-modallogin-form wm-login-popup">
                 <span class="wm-color">Login to Your Account</span>
-                <form>
+                <form action="{{ route('xl-dang-nhap') }}" method="POST">
+                    @csrf
                     <ul>
-                        <li> <input type="text" value="Your Username" onblur="if(this.value == '') { this.value ='Your Username'; }" onfocus="if(this.value =='Your Username') { this.value = ''; }"> </li>
-                        <li> <input type="password" value="password" onblur="if(this.value == '') { this.value ='password'; }" onfocus="if(this.value =='password') { this.value = ''; }"> </li>
+                        <li> <input type="text" value="Your Email" name="email" onblur="if(this.value == '') { this.value ='Your Email'; }" onfocus="if(this.value =='Your Email') { this.value = ''; }"> </li>
+                        <li> <input type="password" value="password" name="password" onblur="if(this.value == '') { this.value ='password'; }" onfocus="if(this.value =='password') { this.value = ''; }"> </li>
                         <li> <a href="#" class="wm-forgot-btn">Forgot Password?</a> </li>
                         <li> <input type="submit" value="Sign In"> </li>
                     </ul>
