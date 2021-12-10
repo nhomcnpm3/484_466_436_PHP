@@ -9,17 +9,7 @@ use Illuminate\Foundation\Auth\User as Authentication;
 class TaiKhoan extends Authentication
 {
     use HasFactory;    
-    protected $table = "TaiKhoan";
-    public function getPasswordAttribute()
-    {
-        return $this->MatKhau;
-    }
-
-    public function getAuthPassword()
-    {
-        return $this->MatKhau;
-    }
-    
+    protected $table = "TaiKhoan";    
     public function LoaiTaiKhoan()
     {
         return $this->belongsTo('App\Models\LoaiTaiKhoan');

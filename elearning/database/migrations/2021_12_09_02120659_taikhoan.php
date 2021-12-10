@@ -19,7 +19,7 @@ class Taikhoan extends Migration
             $table->string('AVT');
             $table->string('Email');
             $table->string('DiaChi');
-            $table->string('MatKhau');
+            $table->string('password');
             $table->date('NgaySinh');
             $table->integer('TrangThai');
             $table->unsignedBigInteger('ID_LoaiTaiKhoan');

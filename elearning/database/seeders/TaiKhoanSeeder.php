@@ -21,7 +21,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan->AVT = "avt_mac_dinh.png";        
         $taiKhoan->Email = "Admin@gmail.com";
         $taiKhoan->DiaChi = "TP HCM";
-        $taiKhoan->MatKhau = Hash::make("12345678");
+        $taiKhoan->password = Hash::make("12345678");
         $taiKhoan->NgaySinh = "2001/05/26";
         $taiKhoan->ID_LoaiTaiKhoan = 1;
         $taiKhoan->TrangThai = 1;
@@ -33,7 +33,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan1->AVT = "avt_mac_dinh.png";        
         $taiKhoan1->Email = "Loc@gmail.com";
         $taiKhoan1->DiaChi = "TP HCM";
-        $taiKhoan1->MatKhau = Hash::make("12345678");
+        $taiKhoan1->password = Hash::make("12345678");
         $taiKhoan1->NgaySinh = "2001/05/26";
         $taiKhoan1->ID_LoaiTaiKhoan = 2;
         $taiKhoan1->TrangThai = 1;
@@ -44,7 +44,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan2->AVT = "avt_mac_dinh.png";        
         $taiKhoan2->Email = "Tu@gmail.com";
         $taiKhoan2->DiaChi = "TP Vũng Tàu";
-        $taiKhoan2->MatKhau = Hash::make("12345678");
+        $taiKhoan2->password = Hash::make("12345678");
         $taiKhoan2->NgaySinh = "2001/04/27";
         $taiKhoan2->ID_LoaiTaiKhoan = 2;
         $taiKhoan2->TrangThai = 1;
@@ -55,7 +55,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan3->AVT = "avt_mac_dinh.png";        
         $taiKhoan3->Email = "Huy@gmail.com";
         $taiKhoan3->DiaChi = "TP Bà Rịa";
-        $taiKhoan3->MatKhau = Hash::make("12345678");
+        $taiKhoan3->password = Hash::make("12345678");
         $taiKhoan3->NgaySinh = "2001/08/17";
         $taiKhoan3->ID_LoaiTaiKhoan = 2;
         $taiKhoan3->TrangThai = 1;
@@ -66,7 +66,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan4->AVT = "avt_mac_dinh.png";        
         $taiKhoan4->Email = "Tai@gmail.com";
         $taiKhoan4->DiaChi = "TP Bến Tre";
-        $taiKhoan4->MatKhau = Hash::make("12345678");
+        $taiKhoan4->password = Hash::make("12345678");
         $taiKhoan4->NgaySinh = "2001/05/27";
         $taiKhoan4->ID_LoaiTaiKhoan = 2;
         $taiKhoan4->TrangThai = 1; 
@@ -77,7 +77,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan5->AVT = "avt_mac_dinh.png";        
         $taiKhoan5->Email = "Toan@gmail.com";
         $taiKhoan5->DiaChi = "TP Đà Nẵng";
-        $taiKhoan5->MatKhau = Hash::make("12345678");
+        $taiKhoan5->password = Hash::make("12345678");
         $taiKhoan5->NgaySinh = "2001/09/08";
         $taiKhoan5->ID_LoaiTaiKhoan = 2;
         $taiKhoan5->TrangThai = 1; 
@@ -89,7 +89,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan6->AVT = "avt_mac_dinh.png";        
         $taiKhoan6->Email = "Tuan@gmail.com";
         $taiKhoan6->DiaChi = "TP HN";
-        $taiKhoan6->MatKhau = Hash::make("12345678");
+        $taiKhoan6->password = Hash::make("12345678");
         $taiKhoan6->NgaySinh = "1990/01/01";
         $taiKhoan6->ID_LoaiTaiKhoan = 3;
         $taiKhoan6->TrangThai = 1;
@@ -100,7 +100,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan7->AVT = "avt_mac_dinh.png";        
         $taiKhoan7->Email = "Tien@gmail.com";
         $taiKhoan7->DiaChi = "TP HN";
-        $taiKhoan7->MatKhau = Hash::make("12345678");
+        $taiKhoan7->password = Hash::make("12345678");
         $taiKhoan7->NgaySinh = "1990/01/01";
         $taiKhoan7->ID_LoaiTaiKhoan = 3;
         $taiKhoan7->TrangThai = 1;
@@ -111,7 +111,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan8->AVT = "avt_mac_dinh.png";        
         $taiKhoan8->Email = "Anh@gmail.com";
         $taiKhoan8->DiaChi = "TP Vũng Tàu";
-        $taiKhoan8->MatKhau = Hash::make("12345678");
+        $taiKhoan8->password = Hash::make("12345678");
         $taiKhoan8->NgaySinh = "1990/01/01";
         $taiKhoan8->ID_LoaiTaiKhoan = 3;
         $taiKhoan8->TrangThai = 1;
@@ -122,7 +122,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan9->AVT = "avt_mac_dinh.png";        
         $taiKhoan9->Email = "Triet@gmail.com";
         $taiKhoan9->DiaChi = "TP Bến Tre";
-        $taiKhoan9->MatKhau = Hash::make("12345678");
+        $taiKhoan9->password = Hash::make("12345678");
         $taiKhoan9->NgaySinh = "1990/01/01";
         $taiKhoan9->ID_LoaiTaiKhoan = 3;
         $taiKhoan9->TrangThai = 1;
@@ -133,7 +133,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan10->AVT = "avt_mac_dinh.png";        
         $taiKhoan10->Email = "Hiền@gmail.com";
         $taiKhoan10->DiaChi = "TP Bến Tre";
-        $taiKhoan10->MatKhau = Hash::make("12345678");
+        $taiKhoan10->password = Hash::make("12345678");
         $taiKhoan10->NgaySinh = "1990/01/01";
         $taiKhoan10->ID_LoaiTaiKhoan = 3;
         $taiKhoan10->TrangThai = 1;
