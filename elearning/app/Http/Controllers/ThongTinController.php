@@ -7,6 +7,7 @@ use App\Models\TaiKhoan;
 
 class ThongTinController extends Controller
 {
+    
     public function uploadImage(Request $request)
     {
         $time = time();

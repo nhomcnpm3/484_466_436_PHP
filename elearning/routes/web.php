@@ -5,6 +5,7 @@ use App\Http\Controllers\DangNhapController;
 use App\Http\Controllers\ThongTinController;
 use App\Http\Controllers\TwilioSMSController;
 use App\Http\Controllers\MailerController;
+use App\Http\Controllers\AnyController;
 
 
 /*
@@ -17,10 +18,15 @@ use App\Http\Controllers\MailerController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('clear/session/{key}', [AnyController::class,'clearSessionKey']);
 Route::post('sendSMS', [TwilioSMSController::class, 'index'])->name('verify');
 Route::post('checkotp', [TwilioSMSController::class, 'Checkotp'])->name('verifyotp');
 Route::get('/email', [TwilioSMSController::class, 'checkemail']);
 Route::post('newpass', [TwilioSMSController::class, 'newpass'])->name('checkpass');
+Route::get('/forgotpassword', [TwilioSMSController::class, 'getForgotpassword'])->name('forgotpassword');
+Route::get('/newpassword',[TwilioSMSController::class, 'getNewpassword'])->name('newpass');
+
+Route::get('/rep',[TwilioSMSController::class, 'replyOTP'])->name('replayotp');
 
 
 Route::post('/login', [DangNhapController::class, 'xuLyDangNhap'])->name('xl-dang-nhap');
@@ -33,9 +39,7 @@ Route::post('/upload', [ThongTinController::class, 'uploadImage'])->name('upload
 
 
 
-Route::get('/newpassword', function () {
-    return view('new_password');
-})->name('newpass');
+
 
 
 Route::get('/', function () {
@@ -53,9 +57,6 @@ Route::get('/classlist/classdetail', function () {
     return view('class_detail');
 })->name('classdetail');
 
-Route::get('/forgotpassword', function () {
-    return view('forgot_password');
-})->name('forgotpassword');
 
 Route::get('/profile', function () {
     return view('profile');
