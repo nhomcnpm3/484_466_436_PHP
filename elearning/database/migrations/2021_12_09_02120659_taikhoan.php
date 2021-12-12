@@ -17,10 +17,12 @@ class Taikhoan extends Migration
             $table->id();
             $table->string('Ten');
             $table->string('AVT');
+            $table->string('Phone');
             $table->string('Email');
             $table->string('DiaChi');
             $table->string('password');
             $table->date('NgaySinh');
+            $table->string('token');
             $table->integer('TrangThai');
             $table->unsignedBigInteger('ID_LoaiTaiKhoan');
             $table->foreign('ID_LoaiTaiKhoan')->references('id')->on('Loaitaikhoan');

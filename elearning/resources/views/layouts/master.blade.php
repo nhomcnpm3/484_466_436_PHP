@@ -361,7 +361,7 @@
                     <ul>
                         <li> <input type="text" value="Your Email" name="email" onblur="if(this.value == '') { this.value ='Your Email'; }" onfocus="if(this.value =='Your Email') { this.value = ''; }"> </li>
                         <li> <input type="password" value="password" name="password" onblur="if(this.value == '') { this.value ='password'; }" onfocus="if(this.value =='password') { this.value = ''; }"> </li>
-                        <li> <a href="#" class="wm-forgot-btn">Forgot Password?</a> </li>
+                        <li> <a href="{{route('forgotpassword')}}" class="wm-forgot-btn">Forgot Password?</a> </li>
                         <li> <input type="submit" value="Sign In"> </li>
                     </ul>
                 </form>
@@ -461,6 +461,7 @@ button.addEventListener( "click", function( event ) {
 fileInput.addEventListener( "change", function( event ) {  
     the_return.innerHTML = this.value;  
 });  
+
 </script>
 	<!-- jQuery (necessary for JavaScript plugins) -->
 	<script type="text/javascript" src="{{asset('script/jquery.js')}}"></script>
