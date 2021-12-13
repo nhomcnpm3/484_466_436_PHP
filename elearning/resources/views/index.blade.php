@@ -11,7 +11,7 @@
     <div class="wm-main-section">
         <div class="container">
             <div class="row">
-                
+
                 <div class="col-md-4">
                     <div class="wm-search-course">
                         <h3 class="wm-short-title wm-color">Find Your Class</h3>
@@ -25,7 +25,7 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li> <input type="text" value="Course Name" onblur="if(this.value == '') { this.value ='Course Name'; }" onfocus="if(this.value =='Course Name') { this.value = ''; }"> <i class="wmicon-search"></i> </li>                              
+                                <li> <input type="text" value="Course Name" onblur="if(this.value == '') { this.value ='Course Name'; }" onfocus="if(this.value =='Course Name') { this.value = ''; }"> <i class="wmicon-search"></i> </li>
                                 <li> <input type="submit" value="Search Class"> </li>
                             </ul>
                         </form>
@@ -90,46 +90,46 @@
         </div>
     </div>
     <!--// Main Section \\-->
-    <br/>
-    <br/>
-    <br/>
-    <br/>
+    <br />
+    <br />
+    <br />
+    <br />
 
-		<!--// Main Banner \\-->
-		<div class="wm-main-banner">
-            
-            <div class="wm-banner-one">
-                <div class="wm-banner-one-for">
-                    <div class="wm-banner-one-for-layer"> <img src="extra-images/banner-view1-1.jpg" alt=""> </div>
-                    <div class="wm-banner-one-for-layer"> <img src="extra-images/banner-view1-2.jpg" alt=""> </div>
-                    <div class="wm-banner-one-for-layer"> <img src="extra-images/banner-view1-3.jpg" alt=""> </div>
-                    <div class="wm-banner-one-for-layer"> <img src="extra-images/banner-view1-1.jpg" alt=""> </div>
+    <!--// Main Banner \\-->
+    <div class="wm-main-banner">
+
+        <div class="wm-banner-one">
+            <div class="wm-banner-one-for">
+                <div class="wm-banner-one-for-layer"> <img src="extra-images/banner-view1-1.jpg" alt=""> </div>
+                <div class="wm-banner-one-for-layer"> <img src="extra-images/banner-view1-2.jpg" alt=""> </div>
+                <div class="wm-banner-one-for-layer"> <img src="extra-images/banner-view1-3.jpg" alt=""> </div>
+                <div class="wm-banner-one-for-layer"> <img src="extra-images/banner-view1-1.jpg" alt=""> </div>
+            </div>
+            <div class="wm-banner-one-nav">
+                <div class="wm-banner-one-nav-layer">
+                    <h1>International Programmes</h1>
+                    <p>The study programmes of the Enroll Campus University are open to people from all nationalities.</p>
+                    <a href="#" class="wm-banner-btn">learn more</a>
                 </div>
-                <div class="wm-banner-one-nav">
-                    <div class="wm-banner-one-nav-layer">
-                        <h1>International Programmes</h1>
-                        <p>The study programmes of the Enroll Campus University are open to people from all nationalities.</p>
-                        <a href="#" class="wm-banner-btn">learn more</a>
-                    </div>
-                    <div class="wm-banner-one-nav-layer">
-                        <h1>UA Degree Programmes</h1>
-                        <p>We offer companies the opportunity to access the technology and knowledge developed at the  Enroll Campus University.</p>
-                        <a href="#" class="wm-banner-btn">know more</a>
-                    </div>
-                    <div class="wm-banner-one-nav-layer banner-bgcolor">
-                        <h1>Research & Business</h1>
-                        <p>The scientific community nominates CRISPR System, based on research developed at the UA.</p>
-                        <a href="#" class="wm-banner-btn">learn more</a>
-                    </div>
-                    <div class="wm-banner-one-nav-layer">
-                        <h1>International Programmes</h1>
-                        <p>The study programmes of the Enroll Campus University are open to people from all nationalities.</p>
-                        <a href="#" class="wm-banner-btn">learn more</a>
-                    </div>
+                <div class="wm-banner-one-nav-layer">
+                    <h1>UA Degree Programmes</h1>
+                    <p>We offer companies the opportunity to access the technology and knowledge developed at the Enroll Campus University.</p>
+                    <a href="#" class="wm-banner-btn">know more</a>
+                </div>
+                <div class="wm-banner-one-nav-layer banner-bgcolor">
+                    <h1>Research & Business</h1>
+                    <p>The scientific community nominates CRISPR System, based on research developed at the UA.</p>
+                    <a href="#" class="wm-banner-btn">learn more</a>
+                </div>
+                <div class="wm-banner-one-nav-layer">
+                    <h1>International Programmes</h1>
+                    <p>The study programmes of the Enroll Campus University are open to people from all nationalities.</p>
+                    <a href="#" class="wm-banner-btn">learn more</a>
                 </div>
             </div>
+        </div>
 
-		</div>
-		<!--// Main Banner \\-->
-	</div>
-   @endsection
+    </div>
+    <!--// Main Banner \\-->
+</div>
+@endsection
