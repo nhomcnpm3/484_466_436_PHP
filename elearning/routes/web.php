@@ -59,16 +59,20 @@ Route::get('/classlist/classdetail', function () {
 
 
 Route::get('/profile', function () {
-    return view('profile');
+    return view('profile/profile');
 })->name('profile');
 
 Route::get('/profile/UpdateFullName', function () {
-    return view('reset_profile_name');
+    return view('profile/reset_profile_name');
 })->name('reset_profile_name');
 
 Route::get('/profile/Updatebirthday', function () {
-    return view('reset_profile_birthday');
+    return view('profile/reset_profile_birthday');
 })->name('reset_profile_birthday');
+Route::get('/profile/Updatephone', function () {
+    return view('profile/reset_profile_phone');
+})->name('reset_profile_phone');
+
 
 
 

@@ -32,15 +32,16 @@ class TwilioSMSController extends Controller
     }
     public function index(Request $request) {  
         if(!empty(session('phone'))){
-           // $request->email=session('phone');
            session()->forget('phone');
         }
         $pos = strpos($request->email, "@");
-        if($pos){
+        if($pos !== false){
             require base_path("vendor/autoload.php");
-            $mail = new PHPMailer(true);     // Passing `true` enables exceptions
+            $mail = new PHPMailer(true);  
+            // Passing `true` enables exceptions
+            
             try {
-                $taikhoan= TaiKhoan::where('Email',$request->email)->first();
+                $taikhoan= TaiKhoan::where('Email',"$request->email")->first();
                 if(empty($taikhoan)){
                     return back()->with("failed", "Your email does not exist");
                 }

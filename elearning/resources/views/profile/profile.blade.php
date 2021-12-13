@@ -80,15 +80,16 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2" for="pwd">Email:</label>
+      <label class="control-label col-sm-2" for="pwd">Phone:</label>
       <div class="col-sm-10">          
-      <lable  class="form-control">{{ auth()->user()->Email}}</lable>
+      <lable  class="form-control">{{ auth()->user()->phone}}</lable>
+      <a style="color:#b99663"href="{{route('reset_profile_phone')}}">Do you want to change the number phone?</a>
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2" for="pwd">Password:</label>
+      <label class="control-label col-sm-2" for="pwd">Email:</label>
       <div class="col-sm-10">          
-        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+      <lable  class="form-control">{{ auth()->user()->Email}}</lable>
       </div>
     </div>
     <div class="form-group">
