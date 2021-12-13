@@ -63,7 +63,10 @@
                         <a href="#" class="wmicon-signs"></a>
                     </div>
                 </div>
-                <div class="wm-courses wm-courses-popular wm-courses-mediumsec">
+                <a href="{{route('createclass')}}" class="btn  btn-lg" style="background-color:#b99663;color:white">
+                    <span class="glyphicon glyphicon-plus" style="color:white" ></span>More class 
+                 </a>
+                        <div class="wm-courses wm-courses-popular wm-courses-mediumsec">
                     <ul class="row">
                         <li class="col-md-12">
                             <div class="wm-courses-popular-wrap">

@@ -27,6 +27,16 @@ Route::get('/forgotpassword', [TwilioSMSController::class, 'getForgotpassword'])
 Route::get('/newpassword',[TwilioSMSController::class, 'getNewpassword'])->name('newpass');
 
 Route::get('/rep',[TwilioSMSController::class, 'replyOTP'])->name('replayotp');
+Route::get('/repupdateotp',[TwilioSMSController::class, 'replyupdateOTP'])->name('replyupdateOTP');
+
+
+
+Route::post('checkupdateotp', [TwilioSMSController::class, 'Checkupdateotp'])->name('verifyupdateotp');
+
+Route::post('sendotp', [TwilioSMSController::class, 'Updatephone'])->name('sendotp');
+
+
+
 
 
 Route::post('/login', [DangNhapController::class, 'xuLyDangNhap'])->name('xl-dang-nhap');
@@ -50,12 +60,15 @@ Route::get('/contact', function () {
 });
 
 Route::get('/classlist', function () {
-    return view('classlist');
+    return view('class/classlist');
 })->name('classlist');
 
 Route::get('/classlist/classdetail', function () {
-    return view('class_detail');
+    return view('class/class_detail');
 })->name('classdetail');
+Route::get('/classlist/create_class', function () {
+    return view('class/create_class');
+})->name('createclass');
 
 
 Route::get('/profile', function () {
@@ -66,12 +79,19 @@ Route::get('/profile/UpdateFullName', function () {
     return view('profile/reset_profile_name');
 })->name('reset_profile_name');
 
+Route::get('/profile/UpdatePhone', function () {
+    return view('profile/reset_profile_phone');
+})->name('reset_profile_phone');
+Route::post('/profile/UpdatePhone', [ThongTinController::class ,'capNhatDT'])->name('capNhatDT');
+
+Route::post('/profile/UpdateFullName', [ThongTinController::class ,'capNhatTen'])->name('capNhatTen');
+
 Route::get('/profile/Updatebirthday', function () {
     return view('profile/reset_profile_birthday');
 })->name('reset_profile_birthday');
-Route::get('/profile/Updatephone', function () {
-    return view('profile/reset_profile_phone');
-})->name('reset_profile_phone');
+Route::post('/profile/Updatebirthday', [ThongTinController::class ,'capNhatNgaySinh'])->name('capNhatNgaySinh');
+
+Route::post('/ChangePassword', [ThongTinController::class, 'capNhatMatKhau'])->name('capNhatMatKhau');
 
 
 

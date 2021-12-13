@@ -105,6 +105,30 @@ class TwilioSMSController extends Controller
         }
         
     }
+    public function Updatephone(Request $request){
+        $generator = "1357902468";
+        $otp = "";
+        for ($i = 1; $i <= 6; $i++) {
+            $otp .= substr($generator, (rand()%(strlen($generator))), 1);
+        }        
+        $message = "otp $otp";
+        try {
+            $account_sid = getenv("TWILIO_SID");
+            $auth_token = getenv("TWILIO_TOKEN");
+            $twilio_number = getenv("TWILIO_FROM");
+  
+            // $client = new Client($account_sid, $auth_token);
+            // $client->messages->create("$request->email", [
+            //     'from' => $twilio_number, 
+            //     'body' => $message]);
+            session(['otp1' => $otp]);
+            session()->put('updatephone', $request->phone);
+            return redirect()->route('reset_profile_phone');
+  
+        } catch (Exception $e) {
+            dd("Error: ". $e->getMessage());
+        }
+    }
     public function replyOTP(){
         $generator = "1357902468";
             $otp = "";
@@ -128,6 +152,29 @@ class TwilioSMSController extends Controller
                 dd("Error: ". $e->getMessage());
             }
     }
+    public function replyupdateOTP(){
+        $generator = "1357902468";
+            $otp = "";
+            for ($i = 1; $i <= 6; $i++) {
+                $otp .= substr($generator, (rand()%(strlen($generator))), 1);
+            }        
+            $message = "otp $otp";
+            try {
+                $account_sid = getenv("TWILIO_SID");
+                $auth_token = getenv("TWILIO_TOKEN");
+                $twilio_number = getenv("TWILIO_FROM");
+      
+                // $client = new Client($account_sid, $auth_token);
+                // $client->messages->create(session('phone'), [
+                //     'from' => $twilio_number, 
+                //     'body' => $message]);
+                    session(['otp1' => $otp]);
+                return redirect()->route('reset_profile_phone');
+      
+            } catch (Exception $e) {
+                dd("Error: ". $e->getMessage());
+            }
+    }
     public function Checkotp(Request $request){
         if(session('otp')== $request->otp){
             session()->put('checkforgot', 'true');
@@ -135,6 +182,17 @@ class TwilioSMSController extends Controller
             return redirect()->route('newpass');
         }
     }
+    public function Checkupdateotp(Request $request){
+        if(session('otp1')== $request->otp)
+        {
+            $taikhoan = TaiKhoan::find(auth()->user()->id);
+            session()->forget('otp1');
+            $taikhoan->phone= session('updatephone');
+            $taikhoan->save();
+            return back()->with('success', 'Update your phone success');
+        }
+    }
+
     public function checkemail(Request $request){
         session()->put('checkforgot', 'true');
         $token=$request->input('token');
