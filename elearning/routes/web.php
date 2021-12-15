@@ -45,12 +45,12 @@ Route::post('/profile/UpdateFullName', [ThongTinController::class ,'capNhatTen']
 Route::get('/profile/Updatebirthday', function () {
     return view('profile/reset_profile_birthday');
 })->name('reset_profile_birthday');
-
 Route::post('/profile/Updatebirthday', [ThongTinController::class ,'capNhatNgaySinh'])->name('capNhatNgaySinh');
+
+Route::post('/ChangePassword', [ThongTinController::class, 'capNhatMatKhau'])->name('capNhatMatKhau');
 
 Route::post('/login', [DangNhapController::class, 'xuLyDangNhap'])->name('xl-dang-nhap');
 Route::get('/logout', [DangNhapController::class, 'dangxuat'])->name('logout');
 
 Route::post('/upload', [ThongTinController::class, 'uploadImage'])->name('upload-image');
 
-Route::post('/ChangePassword', [ThongTinController::class, 'capNhatMatKhau'])->name('capNhatMatKhau');
