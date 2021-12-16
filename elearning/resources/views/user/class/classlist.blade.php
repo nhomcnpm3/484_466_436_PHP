@@ -19,7 +19,8 @@
                 <div class="widget wm-search-course">
                     <h3 class="wm-short-title wm-color">Find Your Class</h3>
                     <p>Find your class here:</p>
-                    <form>
+                    <form action="{{route('joinclass')}}" method="post">
+                        @csrf
                         <ul>
                             <li>
                                 <div class="wm-radio">
@@ -28,7 +29,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li> <input type="text" value="Course Name" onblur="if(this.value == '') { this.value ='Course Name'; }" onfocus="if(this.value =='Course Name') { this.value = ''; }"> <i class="wmicon-search"></i> </li>                   
+                            <li> <input type="text" name="joinclass"value="Course Name" onblur="if(this.value == '') { this.value ='Course Name'; }" onfocus="if(this.value =='Course Name') { this.value = ''; }"> <i class="wmicon-search"></i> </li>                   
                             <li> <input type="submit" value="Search class"> </li>
                         </ul>
                     </form>
@@ -63,67 +64,30 @@
                         <a href="#" class="wmicon-signs"></a>
                     </div>
                 </div>
-                <a href="{{route('createclass')}}" class="btn  btn-lg" style="background-color:#b99663;color:white">
+                @if(auth()->user()->ID_LoaiTaiKhoan != 2)
+                <a href="{{route('showCreateClass')}}" class="btn  btn-lg" style="background-color:#b99663;color:white">
                     <span class="glyphicon glyphicon-plus" style="color:white" ></span>More class 
                  </a>
-                        <div class="wm-courses wm-courses-popular wm-courses-mediumsec">
+                 @endif
+                <div class="wm-courses wm-courses-popular wm-courses-mediumsec">
                     <ul class="row">
+                    @forelse($classlist->DSLop as $class)    
                         <li class="col-md-12">
                             <div class="wm-courses-popular-wrap">
-                                <figure> <a href="{{route('classdetail')}}"><img src="extra-images/papular-courses-1.jpg" alt=""> <span class="wm-popular-hover"> <small>see class</small> </span> </a>
+                                <figure> <a href="{{route('classdetail',['id'=>$class->id])}}"><img src="{{asset('extra-images')}}/{{$class->Logo}}" style="width:265px;height:155px;"  alt=""> <span class="wm-popular-hover"> <small>see class</small> </span> </a>
                                     <figcaption>
-                                        <img src="extra-images/papular-courses-thumb-1.jpg" alt="">
-                                        <h6><a href="{{route('classdetail')}}">Trần Thanh Tuấn</a></h6>
+                                        <h6><a href="{{route('classdetail',['id'=>$class->id])}}">{{$class->TaiKhoan->Ten}}</a></h6>
                                     </figcaption>
                                 </figure>
                                 <div class="wm-popular-courses-text">
-                                    <h6><a href="{{route('classdetail')}}">PHP nâng cao CDTH19PMC</a></h6>
-                                    <p>Học kỳ 5</p>
+                                    <h6><a href="{{route('classdetail',['id'=>$class->id])}}">{{$class->TenLop}}</a></h6>
+                                    <p>{{$class->mota}}</p>
                                 </div>
                             </div>
                         </li>
-                        <li class="col-md-12">
-                            <div class="wm-courses-popular-wrap">
-                                <figure> <a href="{{route('classdetail')}}"><img src="extra-images/papular-courses-1.jpg" alt=""> <span class="wm-popular-hover"> <small>see class</small> </span> </a>
-                                    <figcaption>
-                                        <img src="extra-images/papular-courses-thumb-1.jpg" alt="">
-                                        <h6><a href="{{route('classdetail')}}">Trần Thanh Tuấn</a></h6>
-                                    </figcaption>
-                                </figure>
-                                <div class="wm-popular-courses-text">
-                                    <h6><a href="#">PHP nâng cao CDTH19PMC</a></h6>
-                                    <p>Học kỳ 5</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-md-12">
-                            <div class="wm-courses-popular-wrap">
-                                <figure> <a href="{{route('classdetail')}}"><img src="extra-images/papular-courses-1.jpg" alt=""> <span class="wm-popular-hover"> <small>see class</small> </span> </a>
-                                    <figcaption>
-                                        <img src="extra-images/papular-courses-thumb-1.jpg" alt="">
-                                        <h6><a href="{{route('classdetail')}}">Trần Thanh Tuấn</a></h6>
-                                    </figcaption>
-                                </figure>
-                                <div class="wm-popular-courses-text">
-                                    <h6><a href="{{route('classdetail')}}">PHP nâng cao CDTH19PMC</a></h6>
-                                    <p>Học kỳ 5</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-md-12">
-                            <div class="wm-courses-popular-wrap">
-                                <figure> <a href="{{route('classdetail')}}"><img src="extra-images/papular-courses-1.jpg" alt=""> <span class="wm-popular-hover"> <small>see class</small> </span> </a>
-                                    <figcaption>
-                                        <img src="extra-images/papular-courses-thumb-1.jpg" alt="">
-                                        <h6><a href="{{route('classdetail')}}">Trần Thanh Tuấn</a></h6>
-                                    </figcaption>
-                                </figure>
-                                <div class="wm-popular-courses-text">
-                                    <h6><a href="#">PHP nâng cao CDTH19PMC</a></h6>
-                                    <p>Học kỳ 5</p>
-                                </div>
-                            </div>
-                        </li>
+                    @empty
+                        <p>Khong co du lieu</p>
+                    @endforelse
                     </ul>
                 </div>
                 <div class="wm-pagination">

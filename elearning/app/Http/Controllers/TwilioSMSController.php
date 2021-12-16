@@ -21,14 +21,14 @@ class TwilioSMSController extends Controller
         if(empty(session('checkforgot'))){
             return redirect()->route('forgotpassword');
         }
-        return view('new_password');
+        return view('user/new_password');
     }
     public function getForgotpassword(){
         if (Auth::check()) {
             return redirect()->route('home');
 
             }
-        return view('forgot_password');
+        return view('user/forgot_password');
     }
     public function index(Request $request) {  
         if(!empty(session('phone'))){

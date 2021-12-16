@@ -9,4 +9,11 @@ class Lop extends Model
 {
     use HasFactory;
     protected $table = "Lop";
+    public function DSTaiKhoan(){
+        return $this->belongsToMany('App\Models\taikhoan','chitietlop','ID_TaiKhoan','ID_Lop');
+    }
+    public function TaiKhoan()
+    {
+        return $this->belongsTo('App\Models\taikhoan','ID_TaiKhoan','id');
+    }
 }

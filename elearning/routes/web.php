@@ -6,6 +6,9 @@ use App\Http\Controllers\ThongTinController;
 use App\Http\Controllers\TwilioSMSController;
 use App\Http\Controllers\MailerController;
 use App\Http\Controllers\AnyController;
+use App\Http\Controllers\LopController;
+
+
 
 
 /*
@@ -35,8 +38,11 @@ Route::post('checkupdateotp', [TwilioSMSController::class, 'Checkupdateotp'])->n
 
 Route::post('sendotp', [TwilioSMSController::class, 'Updatephone'])->name('sendotp');
 
-
-
+Route::get('/classlist', [LopController::class, 'showclass'])->name('classlist');
+Route::get('/classlist/create_class',[LopController::class, 'showCreateClass'])->name('showCreateClass');
+Route::post('/classlist/create_class',[LopController::class, 'CreateClass'])->name('CreateClass');
+Route::post('/classlist/join',[LopController::class, 'joinclass'])->name('joinclass');
+Route::get('/classlist/classdetail/{id}',[LopController::class, 'classdetail'])->name('classdetail');
 
 
 Route::post('/login', [DangNhapController::class, 'xuLyDangNhap'])->name('xl-dang-nhap');
@@ -53,22 +59,15 @@ Route::post('/upload', [ThongTinController::class, 'uploadImage'])->name('upload
 
 
 Route::get('/', function () {
-    return view('index');
+    return view('user/index');
 })->name('home');
 Route::get('/contact', function () {
-    return view('contact');
+    return view('user/contact');
 });
 
-Route::get('/classlist', function () {
-    return view('class/classlist');
-})->name('classlist');
 
-Route::get('/classlist/classdetail', function () {
-    return view('class/class_detail');
-})->name('classdetail');
-Route::get('/classlist/create_class', function () {
-    return view('class/create_class');
-})->name('createclass');
+
+
 
 
 Route::get('/profile', function () {
@@ -92,6 +91,18 @@ Route::get('/profile/Updatebirthday', function () {
 Route::post('/profile/Updatebirthday', [ThongTinController::class ,'capNhatNgaySinh'])->name('capNhatNgaySinh');
 
 Route::post('/ChangePassword', [ThongTinController::class, 'capNhatMatKhau'])->name('capNhatMatKhau');
+
+
+
+
+
+
+
+Route::get('/admin', function () {
+    return view('admin/index');
+})->name('admin_index');
+
+
 
 
 
