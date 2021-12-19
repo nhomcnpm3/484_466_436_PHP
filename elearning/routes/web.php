@@ -43,6 +43,14 @@ Route::get('/classlist/create_class',[LopController::class, 'showCreateClass'])-
 Route::post('/classlist/create_class',[LopController::class, 'CreateClass'])->name('CreateClass');
 Route::post('/classlist/join',[LopController::class, 'joinclass'])->name('joinclass');
 Route::get('/classlist/classdetail/{id}',[LopController::class, 'classdetail'])->name('classdetail');
+Route::get('/classlist/addstudent/{id}',[LopController::class, 'addstudent'])->name('addstudent');
+Route::post('/classlist/add_student/{id}',[LopController::class, 'add_student'])->name('add_student');
+Route::get('/student_join_class', [LopController::class, 'checktoken']);
+Route::get('/linkclass', [LopController::class, 'joinlink']);
+
+
+
+
 
 
 Route::post('/login', [DangNhapController::class, 'xuLyDangNhap'])->name('xl-dang-nhap');
@@ -61,6 +69,9 @@ Route::post('/upload', [ThongTinController::class, 'uploadImage'])->name('upload
 Route::get('/', function () {
     return view('user/index');
 })->name('home');
+Route::get('/home', function () {
+    return view('user/index');
+});
 Route::get('/contact', function () {
     return view('user/contact');
 });
@@ -101,6 +112,9 @@ Route::post('/ChangePassword', [ThongTinController::class, 'capNhatMatKhau'])->n
 Route::get('/admin', function () {
     return view('admin/index');
 })->name('admin_index');
+Route::get('/404', function () {
+    return view('404');
+})->name('404');
 
 
 

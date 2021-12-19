@@ -14,7 +14,7 @@
 			    <div class="row">
 				    <div class="col-md-12">
 				        <div class="wm-mini-title">
-				       		<h1>Our Courses</h1> 
+				       		<h1>Class Detail</h1> 
 				        </div>
 				        <div class="wm-breadcrumb">
 				          	<ul>
@@ -42,30 +42,30 @@
 									<h2>About Professor</h2>
 								</div>
 								<figure>
-									<a href="#"><img src="extra-images/our-courses-author.jpg" alt=""></a>
+									<a href="#"><img style="border-radius:50%;width:60px;height:60px;" src="{{asset('extra-images')}}/{{$classdetail->taikhoan->AVT}}" alt=""></a>
 								</figure>
 								<div class="wm-Professor-info">
-									<h6><a href="#">Trần Thanh Tuấn</a></h6>
-									<span>15 yrs. experience</span>
+									<h6><a href="#">{{$classdetail->taikhoan->Ten}}</a></h6>
+									<span>{{$classdetail->taikhoan->Email}}</span>
 								</div>
-								<p>Shelly T. accompanied Dr. Stephen Harnish to SC12, an international supercomputing conference in Salt Lake City, Utah. At the conference.</p>
+								<p>{{$classdetail->mota}}</p>
 								<a class="wm-read-more" href="#">Read More</a>
 							</div>
 							
 						</aside>
 						<div class="col-md-9">
 							<div class="wm-blog-single wm-courses">
-								<figure class="wm-detail-thumb">
-									<img src="extra-images/our-courses1.jpg" alt="">
-								</figure>
 								<div class="wm-blog-author wm-ourcourses">
 									<div class="wm-blogauthor-left">
-										<img src="extra-images/our-courses-author.jpg" alt="">
-										<a class="wm-authorpost" href="#">Trần Thanh Tuấn</a>
+										<a class="wm-authorpost" href="#">{{$classdetail->taikhoan->Ten}}</a>
 									</div>
 								</div>								
 							</div>
-							
+							@if(auth()->user()->id == $classdetail->ID_TaiKhoan)
+                <a href="{{route('addstudent',['id'=> $classdetail->id])}}" class="btn  btn-lg" style="background-color:#b99663;color:white">
+                    <span class="glyphicon glyphicon-plus" style="color:white" ></span>Add students
+                 </a>
+                 @endif
 							<div class="wm-courses-getting-started">
 								<div class="wm-title-full">
 									<h2>Getting Started</h2>

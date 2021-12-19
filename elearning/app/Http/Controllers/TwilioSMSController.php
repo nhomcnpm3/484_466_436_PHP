@@ -181,6 +181,7 @@ class TwilioSMSController extends Controller
             session()->forget('otp');
             return redirect()->route('newpass');
         }
+        return back()->with('failed', 'OTP code is wrong');
     }
     public function Checkupdateotp(Request $request){
         if(session('otp1')== $request->otp)
@@ -208,7 +209,7 @@ class TwilioSMSController extends Controller
     public function newpass(Request $request){
         $taikhoan= TaiKhoan::where('phone',session('phone'))->first();
         $taikhoan->password=Hash::make($request->repassword);
-        $taikhoan->token=null;
+        $taikhoan->token="";
         $taikhoan->save();
         session()->forget('phone');
         session()->forget('checkforgot');

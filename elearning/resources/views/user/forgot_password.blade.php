@@ -65,6 +65,11 @@
                                 </div>	
                                 <form class="form-horizontal" action="{{route('verifyotp')}}" method="post">
                                     @csrf
+                                    @if(Session::has("success"))
+									<div class="alert alert-success alert-dismissible"><button type="button" class="close">&times;</button>{{Session::get('success')}}</div>
+								@elseif(Session::has("failed"))
+									<div class="alert alert-danger alert-dismissible"><button type="button" class="close">&times;</button>{{Session::get('failed')}}</div>
+								@endif
                                     <div class="form-group">
                                     <label class="control-label col-sm-2">OTP:</label>
                                     <div class="col-sm-10">

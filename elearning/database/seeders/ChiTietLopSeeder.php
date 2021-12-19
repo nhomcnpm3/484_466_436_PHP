@@ -16,43 +16,43 @@ class ChiTietLopSeeder extends Seeder
     {
         $ctLop = new ChiTietLop();
         $ctLop->ID_TaiKhoan = 2;
-        $ctLop->ID_Lop = 1;
+        $ctLop->ID_Lop = 2;
         $ctLop->TrangThai = 1;
         $ctLop->save();
 
         $ctLop1 = new ChiTietLop();
         $ctLop1->ID_TaiKhoan = 3;
-        $ctLop1->ID_Lop = 1;
+        $ctLop1->ID_Lop = 2;
         $ctLop1->TrangThai = 1;
         $ctLop1->save();
 
         $ctLop2 = new ChiTietLop();
         $ctLop2->ID_TaiKhoan = 4;
-        $ctLop2->ID_Lop = 1;
+        $ctLop2->ID_Lop = 2;
         $ctLop2->TrangThai = 1;
         $ctLop2->save();
 
         $ctLop3 = new ChiTietLop();
         $ctLop3->ID_TaiKhoan = 7;
-        $ctLop3->ID_Lop = 1;
+        $ctLop3->ID_Lop = 2;
         $ctLop3->TrangThai = 1;
         $ctLop3->save();
 
         $ctLop4 = new ChiTietLop();
         $ctLop4->ID_TaiKhoan = 4;
-        $ctLop4->ID_Lop = 2;
+        $ctLop4->ID_Lop = 4;
         $ctLop4->TrangThai = 1;
         $ctLop4->save();
 
         $ctLop5 = new ChiTietLop();
         $ctLop5->ID_TaiKhoan = 5;
-        $ctLop5->ID_Lop = 2;
+        $ctLop5->ID_Lop = 4;
         $ctLop5->TrangThai = 1;
         $ctLop5->save();
 
         $ctLop6 = new ChiTietLop();
         $ctLop6->ID_TaiKhoan = 8;
-        $ctLop6->ID_Lop = 2;
+        $ctLop6->ID_Lop = 4;
         $ctLop6->TrangThai = 1;
         $ctLop6->save();
 
