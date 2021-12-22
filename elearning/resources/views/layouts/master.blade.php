@@ -141,7 +141,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="wm-language"> <ul> <li><a href="#">English</a></li> <li><a href="#">español</a></li> </ul> </div>
+                            <div  class="wm-language"> <ul> <li><a href="#">English</a></li> <li><a href="#">español</a></li> </ul> </div>
                             <ul class="wm-stripinfo">
                                 <li><i class="wmicon-location"></i> 2925 Swick Hill Street, Charlotte, NC 28202</li>
                                 <li><i class="wmicon-technology4"></i> +1 984-700-7129</li>
@@ -375,12 +375,16 @@
             </div>
             <div class="wm-modallogin-form wm-register-popup">
                 <span class="wm-color">create Your Account today</span>
-                <form>
+                <form action="{{route('signup')}}" method="POST">
+                  @csrf
                     <ul>
-                        <li> <input type="text" value="Your Username" onblur="if(this.value == '') { this.value ='Your Username'; }" onfocus="if(this.value =='Your Username') { this.value = ''; }"> </li>
                         <li> <input type="text" value="Your E-mail" onblur="if(this.value == '') { this.value ='Your E-mail'; }" onfocus="if(this.value =='Your E-mail') { this.value = ''; }"> </li>
+                        <li> <input type="text" value="FullName" onblur="if(this.value == '') { this.value ='Your Username'; }" onfocus="if(this.value =='Your Username') { this.value = ''; }"> </li>
+                        <li> <input type="text" value="Phone" onblur="if(this.value == '') { this.value ='Phone'; }" onfocus="if(this.value =='Phone') { this.value = ''; }"> </li>
+                        <li> <input type="text" value="Address" onblur="if(this.value == '') { this.value ='Address'; }" onfocus="if(this.value =='Address') { this.value = ''; }"> </li>
+                        <li> <input type="date" value="Birth of Date" onblur="if(this.value == '') { this.value ='Birth of Date'; }" onfocus="if(this.value =='Birth of Date') { this.value = ''; }"> </li>
                         <li> <input type="password" value="password" onblur="if(this.value == '') { this.value ='password'; }" onfocus="if(this.value =='password') { this.value = ''; }"> </li>
-                        <li> <input type="text" value="Confirm Password" onblur="if(this.value == '') { this.value ='Confirm Password'; }" onfocus="if(this.value =='Confirm Password') { this.value = ''; }"> </li>
+                        <li> <input type="password" value="Confirm Password" onblur="if(this.value == '') { this.value ='Confirm Password'; }" onfocus="if(this.value =='Confirm Password') { this.value = ''; }"> </li>
                         <li> <input type="submit" value="Create Account"> </li>
                     </ul>
                 </form>

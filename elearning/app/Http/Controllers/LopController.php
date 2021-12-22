@@ -159,21 +159,25 @@ class LopController extends Controller
     {
         $token = $request->input('token');
         $checkgianhap = gianhaplop::where('Token_mail', $token)->first();
-        $taikhoan = taikhoan::where('id', $checkgianhap->ID_TaiKhoan)->first();
-
-        if ($checkgianhap->ID_TaiKhoan==auth()->user()->id) {
-            $checkgianhap->TrangThaiTruyCap = 1;
-            $checkgianhap->Token_mail = "";
-            $chitietlop = new chitietlop;
-            $chitietlop->ID_TaiKhoan = $checkgianhap->ID_TaiKhoan;
-            $chitietlop->ID_Lop = $checkgianhap->ID_Lop;
-            $chitietlop->TrangThai = 1;
-            $chitietlop->save();
-            $checkgianhap->save();
-            return redirect()->route('classlist');
+        if(!empty($checkgianhap)){
+            $taikhoan = taikhoan::where('id', $checkgianhap->ID_TaiKhoan)->first();
+            if ($checkgianhap->ID_TaiKhoan==auth()->user()->id) {
+                $checkgianhap->TrangThaiTruyCap = 1;
+                $checkgianhap->Token_mail = "";
+                $chitietlop = new chitietlop;
+                $chitietlop->ID_TaiKhoan = $checkgianhap->ID_TaiKhoan;
+                $chitietlop->ID_Lop = $checkgianhap->ID_Lop;
+                $chitietlop->TrangThai = 1;
+                $chitietlop->save();
+                $checkgianhap->save();
+                return redirect()->route('classdetail',['id' => $checkgianhap->ID_TaiKhoan]);
+            }else{
+                return"Vui lòng đăng nhập với Email là: <b>$taikhoan->Email</b> <br/> <a href='home'>Đăng nhập</a>";
+            }
         }else{
-            return"Vui lòng đăng nhập với Email là: <b>$taikhoan->Email</b> <br/> <a href='home'>Đăng nhập</a>";
+            return redirect()->route('404');
         }
+        
     }
     public function joinlink(Request $request)
     {
@@ -188,7 +192,7 @@ class LopController extends Controller
                     $chitietlop->ID_Lop = $class->id;
                     $chitietlop->TrangThai = 1;
                     $chitietlop->save();
-                    return redirect()->route('classlist');
+                    return redirect()->route('classdetail',['id' => $class->id]);
                 }
                 return redirect()->route('classlist');
             }

@@ -56,7 +56,7 @@
 						<div class="col-md-9">
 							<div class="wm-blog-single wm-courses">
 								<div class="wm-blog-author wm-ourcourses">
-									<div class="wm-blogauthor-left">
+									<div class="wm-blogauthor-left" >
 										<a class="wm-authorpost" href="#">{{$classdetail->taikhoan->Ten}}</a>
 									</div>
 								</div>								

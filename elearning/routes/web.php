@@ -6,6 +6,7 @@ use App\Http\Controllers\ThongTinController;
 use App\Http\Controllers\TwilioSMSController;
 use App\Http\Controllers\MailerController;
 use App\Http\Controllers\AnyController;
+use App\Http\Controllers\DangKyController;
 use App\Http\Controllers\LopController;
 
 
@@ -28,14 +29,9 @@ Route::get('/email', [TwilioSMSController::class, 'checkemail']);
 Route::post('newpass', [TwilioSMSController::class, 'newpass'])->name('checkpass');
 Route::get('/forgotpassword', [TwilioSMSController::class, 'getForgotpassword'])->name('forgotpassword');
 Route::get('/newpassword',[TwilioSMSController::class, 'getNewpassword'])->name('newpass');
-
 Route::get('/rep',[TwilioSMSController::class, 'replyOTP'])->name('replayotp');
 Route::get('/repupdateotp',[TwilioSMSController::class, 'replyupdateOTP'])->name('replyupdateOTP');
-
-
-
 Route::post('checkupdateotp', [TwilioSMSController::class, 'Checkupdateotp'])->name('verifyupdateotp');
-
 Route::post('sendotp', [TwilioSMSController::class, 'Updatephone'])->name('sendotp');
 
 Route::get('/classlist', [LopController::class, 'showclass'])->name('classlist');
@@ -55,9 +51,9 @@ Route::get('/linkclass', [LopController::class, 'joinlink']);
 
 Route::post('/login', [DangNhapController::class, 'xuLyDangNhap'])->name('xl-dang-nhap');
 Route::get('/logout', [DangNhapController::class, 'dangxuat'])->name('logout');
+Route::post('/signup',[DangKyController::class, 'signup'])->name('signup');
 
 Route::post('/upload', [ThongTinController::class, 'uploadImage'])->name('upload-image');
-
 
 
 
