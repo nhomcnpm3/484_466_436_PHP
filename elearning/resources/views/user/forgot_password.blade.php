@@ -49,7 +49,7 @@
 								@elseif(Session::has("failed"))
 									<div class="alert alert-danger alert-dismissible"><button type="button" class="close">&times;</button>{{Session::get('failed')}}</div>
 								@endif
-                            <label class="control-label col-sm-2" for="email">Email:</label>
+                            <label class="control-label col-sm-2" for="email">Email, Phone:</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="custom" placeholder="Enter email" name="email">
                             </div>
@@ -61,7 +61,7 @@
                             </div>
                         </form>
                             @else
-                            <span>Verify OTP{{session('otp')}}</span>
+                            <span>Verify OTP</span>
                                 </div>	
                                 <form class="form-horizontal" action="{{route('verifyotp')}}" method="post">
                                     @csrf
@@ -141,7 +141,7 @@ function initializeClock(id, endtime) {
   updateClock();
   var timeinterval = setInterval(updateClock, 1000);
 }
-var deadline = new Date(Date.parse(new Date()) +  20 * 1000);
+var deadline = new Date(Date.parse(new Date()) +  2*60 * 1000);
 initializeClock('clockdiv', deadline);
 			</script>
 

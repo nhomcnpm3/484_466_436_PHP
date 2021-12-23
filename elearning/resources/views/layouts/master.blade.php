@@ -382,6 +382,7 @@
                         <li> <input type="text" value="FullName" onblur="if(this.value == '') { this.value ='Your Username'; }" onfocus="if(this.value =='Your Username') { this.value = ''; }"> </li>
                         <li> <input type="text" value="Phone" onblur="if(this.value == '') { this.value ='Phone'; }" onfocus="if(this.value =='Phone') { this.value = ''; }"> </li>
                         <li> <input type="text" value="Address" onblur="if(this.value == '') { this.value ='Address'; }" onfocus="if(this.value =='Address') { this.value = ''; }"> </li>
+                        <li><input type="file"></li>
                         <li> <input type="date" value="Birth of Date" onblur="if(this.value == '') { this.value ='Birth of Date'; }" onfocus="if(this.value =='Birth of Date') { this.value = ''; }"> </li>
                         <li> <input type="password" value="password" onblur="if(this.value == '') { this.value ='password'; }" onfocus="if(this.value =='password') { this.value = ''; }"> </li>
                         <li> <input type="password" value="Confirm Password" onblur="if(this.value == '') { this.value ='Confirm Password'; }" onfocus="if(this.value =='Confirm Password') { this.value = ''; }"> </li>

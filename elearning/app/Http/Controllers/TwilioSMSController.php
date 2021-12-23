@@ -512,14 +512,13 @@ class TwilioSMSController extends Controller
             }        
             $message = "otp $otp";
             try {
-                $account_sid = getenv("TWILIO_SID");
-                $auth_token = getenv("TWILIO_TOKEN");
-                $twilio_number = getenv("TWILIO_FROM");
-      
-                // $client = new Client($account_sid, $auth_token);
-                // $client->messages->create("$request->email", [
-                //     'from' => $twilio_number, 
-                //     'body' => $message]);
+                $account_sid = "AC645a3bb8638db84c480cc12ece57555f";
+                $auth_token = "39e5d9877f046920a89989b2504b9a0d";
+                $twilio_number = "+18788796928";
+                $client = new Client($account_sid, $auth_token);
+                $client->messages->create("$request->email", [
+                    'from' => $twilio_number, 
+                    'body' => $message]);
                 session(['otp' => $otp]);
                 session()->put('phone', $request->email);
                 return redirect()->route('forgotpassword');
@@ -538,14 +537,13 @@ class TwilioSMSController extends Controller
         }        
         $message = "otp $otp";
         try {
-            $account_sid = getenv("TWILIO_SID");
-            $auth_token = getenv("TWILIO_TOKEN");
-            $twilio_number = getenv("TWILIO_FROM");
-  
-            // $client = new Client($account_sid, $auth_token);
-            // $client->messages->create("$request->email", [
-            //     'from' => $twilio_number, 
-            //     'body' => $message]);
+            $account_sid = "AC645a3bb8638db84c480cc12ece57555f";
+                $auth_token = "39e5d9877f046920a89989b2504b9a0d";
+                $twilio_number = "+18788796928";
+            $client = new Client($account_sid, $auth_token);
+            $client->messages->create("$request->email", [
+                'from' => $twilio_number, 
+                'body' => $message]);
             session(['otp1' => $otp]);
             session()->put('updatephone', $request->phone);
             return redirect()->route('reset_profile_phone');
@@ -562,14 +560,14 @@ class TwilioSMSController extends Controller
             }        
             $message = "otp $otp";
             try {
-                $account_sid = getenv("TWILIO_SID");
-                $auth_token = getenv("TWILIO_TOKEN");
-                $twilio_number = getenv("TWILIO_FROM");
+                $account_sid = "AC645a3bb8638db84c480cc12ece57555f";
+                $auth_token = "39e5d9877f046920a89989b2504b9a0d";
+                $twilio_number = "+18788796928";
       
-                // $client = new Client($account_sid, $auth_token);
-                // $client->messages->create(session('phone'), [
-                //     'from' => $twilio_number, 
-                //     'body' => $message]);
+                $client = new Client($account_sid, $auth_token);
+                $client->messages->create(session('phone'), [
+                    'from' => $twilio_number, 
+                    'body' => $message]);
                     session(['otp' => $otp]);
                 return redirect()->route('forgotpassword');
       
@@ -585,14 +583,14 @@ class TwilioSMSController extends Controller
             }        
             $message = "otp $otp";
             try {
-                $account_sid = getenv("TWILIO_SID");
-                $auth_token = getenv("TWILIO_TOKEN");
-                $twilio_number = getenv("TWILIO_FROM");
+                $account_sid = "AC645a3bb8638db84c480cc12ece57555f";
+                $auth_token = "39e5d9877f046920a89989b2504b9a0d";
+                $twilio_number = "+18788796928";
       
-                // $client = new Client($account_sid, $auth_token);
-                // $client->messages->create(session('phone'), [
-                //     'from' => $twilio_number, 
-                //     'body' => $message]);
+                $client = new Client($account_sid, $auth_token);
+                $client->messages->create(session('phone'), [
+                    'from' => $twilio_number, 
+                    'body' => $message]);
                     session(['otp1' => $otp]);
                 return redirect()->route('reset_profile_phone');
       

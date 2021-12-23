@@ -5,7 +5,23 @@
 @section('sidebar')
 	@parent
 @endsection
-
+<style>
+	ul {
+	  list-style-type: none;
+	  margin: 0;
+	  padding: 0;
+	}
+	
+	li {
+	  display: inline;
+	}
+	li>a{
+		color:blue;
+		padding-left:10px;
+		padding-right:10px;
+		font-size:17px;
+	}
+	</style>
 @section('content')
 		<!--// Mini Header \\-->
 		<div class="wm-mini-header">
@@ -61,11 +77,11 @@
 									</div>
 								</div>								
 							</div>
-							@if(auth()->user()->id == $classdetail->ID_TaiKhoan)
-                <a href="{{route('addstudent',['id'=> $classdetail->id])}}" class="btn  btn-lg" style="background-color:#b99663;color:white">
-                    <span class="glyphicon glyphicon-plus" style="color:white" ></span>Add students
-                 </a>
-                 @endif
+				 <ul>
+					<li><a style="border-right:solid 1px blue;color:#424242" href="#">Post</a></li>
+					<li><a style="border-right:solid 1px blue;" href="#">Exercise</a></li>
+					<li><a href="{{route('everyone',['id'=>$classdetail->id])}}">Everyone</a></li>
+				</ul>
 							<div class="wm-courses-getting-started">
 								<div class="wm-title-full">
 									<h2>Getting Started</h2>

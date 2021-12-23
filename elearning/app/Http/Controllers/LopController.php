@@ -20,7 +20,7 @@ class LopController extends Controller
     {
         if ((Auth::check())) {
             $classlist = taikhoan::find(auth()->user()->id);
-            return view('user/class/classlist', compact('classlist'));
+            return view('user/class/classlist', compact('classlist'))->with('order', '1');
         }
         return redirect()->route('home');
     }
@@ -108,7 +108,7 @@ class LopController extends Controller
             $mail->setFrom('tranducanhtu.backend@gmail.com', 'tranducanhtu.developer');
             $error = "";
             $exist = "";
-            $success="";
+            $success = "";
             foreach ($email_array as $email) {
                 $token = openssl_random_pseudo_bytes(16);
                 $token = bin2hex($token);
@@ -143,9 +143,9 @@ class LopController extends Controller
                     $error .= "{$email} - ";
                 }
             }
-                return back()->with("failed1", "{$error}")
-                             ->with("failed2", "{$exist}")
-                             ->with("success1", "{$success}");
+            return back()->with("failed1", "{$error}")
+                ->with("failed2", "{$exist}")
+                ->with("success1", "{$success}");
             if (!$mail->send()) {
                 return back()->with("failed", "Email not sent.")->withErrors($mail->ErrorInfo);
             } else {
@@ -159,9 +159,9 @@ class LopController extends Controller
     {
         $token = $request->input('token');
         $checkgianhap = gianhaplop::where('Token_mail', $token)->first();
-        if(!empty($checkgianhap)){
+        if (!empty($checkgianhap)) {
             $taikhoan = taikhoan::where('id', $checkgianhap->ID_TaiKhoan)->first();
-            if ($checkgianhap->ID_TaiKhoan==auth()->user()->id) {
+            if ($checkgianhap->ID_TaiKhoan == auth()->user()->id) {
                 $checkgianhap->TrangThaiTruyCap = 1;
                 $checkgianhap->Token_mail = "";
                 $chitietlop = new chitietlop;
@@ -170,34 +170,51 @@ class LopController extends Controller
                 $chitietlop->TrangThai = 1;
                 $chitietlop->save();
                 $checkgianhap->save();
-                return redirect()->route('classdetail',['id' => $checkgianhap->ID_TaiKhoan]);
-            }else{
-                return"Vui lòng đăng nhập với Email là: <b>$taikhoan->Email</b> <br/> <a href='home'>Đăng nhập</a>";
+                return redirect()->route('classdetail', ['id' => $checkgianhap->ID_TaiKhoan]);
+            } else {
+                return "Vui lòng đăng nhập với Email là: <b>$taikhoan->Email</b> <br/> <a href='home'>Đăng nhập</a>";
             }
-        }else{
+        } else {
             return redirect()->route('404');
         }
-        
     }
     public function joinlink(Request $request)
     {
         $token = $request->input('token');
         $class = lop::where('token', $token)->first();
-        if(!empty($class)){
+        if (!empty($class)) {
             if ((Auth::check())) {
                 $checkchitietlop = chitietlop::where([['ID_TaiKhoan', auth()->user()->id], ['ID_Lop', $class->id]])->first();
-                if(empty($checkchitietlop)){
+                if (empty($checkchitietlop)) {
                     $chitietlop = new chitietlop;
                     $chitietlop->ID_TaiKhoan = auth()->user()->id;
                     $chitietlop->ID_Lop = $class->id;
                     $chitietlop->TrangThai = 1;
                     $chitietlop->save();
-                    return redirect()->route('classdetail',['id' => $class->id]);
+                    return redirect()->route('classdetail', ['id' => $class->id]);
                 }
                 return redirect()->route('classlist');
             }
-            return"Vui lòng đăng nhập <a href='home'>Đăng nhập</a>";
+            return "Vui lòng đăng nhập <a href='home'>Đăng nhập</a>";
         }
         return redirect()->route('404');
+    }
+    public function everyone($id)
+    {
+        $classdetail = lop::find($id);
+        return view('user/class/everyone', compact('classdetail'));
+    }
+    public function showpersonalclass(Request $request)
+    {
+        if ((Auth::check())) {
+            if ($request->order == 1) {
+                $classlist = taikhoan::find(auth()->user()->id);
+                return view('user/class/classlist', compact('classlist'))->with('order', '1');
+            } else {
+                $classlist = taikhoan::find(auth()->user()->id);
+                return view('user/class/classlist', compact('classlist'))->with('order', '2');
+            }
+        }
+        return redirect()->route('home');
     }
 }

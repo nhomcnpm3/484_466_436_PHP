@@ -12,7 +12,7 @@ class TaiKhoan extends Authentication
     protected $table = "TaiKhoan";  
     public function DanhsachLop()
     {
-        return $this->hasMany('App\Models\lop');
+        return $this->hasMany('App\Models\lop','ID_TaiKhoan','id');
     }  
     public function LoaiTaiKhoan()
     {

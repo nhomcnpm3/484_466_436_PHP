@@ -19,7 +19,8 @@
                     <div class="widget wm-search-course">
                         <h3 class="wm-short-title wm-color">Find Your Class</h3>
                         <p>Find your class here:</p>
-                        <form>
+                        <form action="{{route('joinclass')}}" method="post">
+                            @csrf
                             <ul>
                                 <li>
                                     <div class="wm-radio">
@@ -28,12 +29,12 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li> <input type="text" value="Course Name" onblur="if(this.value == '') { this.value ='Course Name'; }" onfocus="if(this.value =='Course Name') { this.value = ''; }"> <i class="wmicon-search"></i> </li>
+                                <li> <input type="text" name="joinclass"value="Course Name" onblur="if(this.value == '') { this.value ='Course Name'; }" onfocus="if(this.value =='Course Name') { this.value = ''; }"> <i class="wmicon-search"></i> </li>                   
                                 <li> <input type="submit" value="Search class"> </li>
                             </ul>
                         </form>
                     </div>
-
+                    
                 </aside>
 
                 <div class="col-md-9">

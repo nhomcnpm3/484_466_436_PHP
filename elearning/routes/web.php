@@ -35,6 +35,7 @@ Route::post('checkupdateotp', [TwilioSMSController::class, 'Checkupdateotp'])->n
 Route::post('sendotp', [TwilioSMSController::class, 'Updatephone'])->name('sendotp');
 
 Route::get('/classlist', [LopController::class, 'showclass'])->name('classlist');
+Route::post('/classlist', [LopController::class, 'showpersonalclass'])->name('showpersonalclass');
 Route::get('/classlist/create_class',[LopController::class, 'showCreateClass'])->name('showCreateClass');
 Route::post('/classlist/create_class',[LopController::class, 'CreateClass'])->name('CreateClass');
 Route::post('/classlist/join',[LopController::class, 'joinclass'])->name('joinclass');
@@ -43,8 +44,7 @@ Route::get('/classlist/addstudent/{id}',[LopController::class, 'addstudent'])->n
 Route::post('/classlist/add_student/{id}',[LopController::class, 'add_student'])->name('add_student');
 Route::get('/student_join_class', [LopController::class, 'checktoken']);
 Route::get('/linkclass', [LopController::class, 'joinlink']);
-
-
+Route::get('/classlist/classdetail/everyone/{id}', [LopController::class, 'everyone'])->name('everyone');
 
 
 
@@ -98,6 +98,8 @@ Route::get('/profile/Updatebirthday', function () {
 Route::post('/profile/Updatebirthday', [ThongTinController::class ,'capNhatNgaySinh'])->name('capNhatNgaySinh');
 
 Route::post('/ChangePassword', [ThongTinController::class, 'capNhatMatKhau'])->name('capNhatMatKhau');
+
+
 
 
 
