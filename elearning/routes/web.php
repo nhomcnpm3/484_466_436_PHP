@@ -8,9 +8,7 @@ use App\Http\Controllers\MailerController;
 use App\Http\Controllers\AnyController;
 use App\Http\Controllers\DangKyController;
 use App\Http\Controllers\LopController;
-
-
-
+use App\Http\Controllers\SocialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,22 +76,22 @@ Route::get('/contact', function () {
 
 
 Route::get('/profile', function () {
-    return view('profile/profile');
+    return view('user/profile/profile');
 })->name('profile');
 
 Route::get('/profile/UpdateFullName', function () {
-    return view('profile/reset_profile_name');
+    return view('user/profile/reset_profile_name');
 })->name('reset_profile_name');
 
 Route::get('/profile/UpdatePhone', function () {
-    return view('profile/reset_profile_phone');
+    return view('user/profile/reset_profile_phone');
 })->name('reset_profile_phone');
 Route::post('/profile/UpdatePhone', [ThongTinController::class ,'capNhatDT'])->name('capNhatDT');
 
 Route::post('/profile/UpdateFullName', [ThongTinController::class ,'capNhatTen'])->name('capNhatTen');
 
 Route::get('/profile/Updatebirthday', function () {
-    return view('profile/reset_profile_birthday');
+    return view('user/profile/reset_profile_birthday');
 })->name('reset_profile_birthday');
 Route::post('/profile/Updatebirthday', [ThongTinController::class ,'capNhatNgaySinh'])->name('capNhatNgaySinh');
 
@@ -114,6 +112,8 @@ Route::get('/404', function () {
     return view('404');
 })->name('404');
 
+Route::get('auth/redirect/{provider}', [SocialController::class, 'redirect']);
+Route::get('callback/{provider}', [SocialController::class, 'callback']);
 
 
 

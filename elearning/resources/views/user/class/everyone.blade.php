@@ -60,8 +60,13 @@
                                 <h2>About Professor</h2>
                             </div>
                             <figure>
+                                @if(empty( $classdetail->taikhoan->provider))
                                 <a href="#"><img style="border-radius:50%;width:60px;height:60px;"
                                         src="{{ asset('extra-images') }}/{{ $classdetail->taikhoan->AVT }}" alt=""></a>
+                                @else
+                                <a href="#"><img style="border-radius:50%;width:60px;height:60px;"
+                                    src="{{ $classdetail->taikhoan->AVT }}" alt=""></a>
+                                @endif
                             </figure>
                             <div class="wm-Professor-info">
                                 <h6><a href="#">{{ $classdetail->taikhoan->Ten }}</a></h6>
@@ -90,8 +95,13 @@
                                 <h2>Teacher</h2>
                             </div>
                             <div>
+                                @if(empty( $classdetail->taikhoan->provider))
                                 <img style="border-radius:50%;width:40px;height:40px;"
                                     src="{{ asset('extra-images') }}/{{ $classdetail->taikhoan->AVT }}" alt="">
+                                    @else
+                                    <img style="border-radius:50%;width:40px;height:40px;"
+                                    src="{{ $classdetail->taikhoan->AVT }}" alt="">
+                                    @endif
                                 <span
                                     style="color:#424242;font-size:16px;font-weight:bold">{{ $classdetail->taikhoan->Ten }}</span>
                             </div>
@@ -109,8 +119,13 @@
                             <div>
                                 @foreach ($classdetail->DSTaiKhoan as $value)
                                   @if($value->id!= $classdetail->taikhoan->id)
+                                    @if(empty( $value->provider))
                                     <img style="border-radius:50%;width:40px;height:40px;"
                                         src="{{ asset('extra-images') }}/{{ $value->AVT }}" alt="">
+                                        @else
+                                        <img style="border-radius:50%;width:40px;height:40px;"
+                                        src="{{ $value->AVT }}" alt="">
+                                        @endif
                                     <span
                                         style="color:#424242;font-size:16px;font-weight:bold">{{ $value->Ten }}</span>
                                         </br>

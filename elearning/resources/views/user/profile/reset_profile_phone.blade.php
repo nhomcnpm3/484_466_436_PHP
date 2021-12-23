@@ -19,8 +19,11 @@
                     <div class="wm-student-dashboard-nav">
                         <div class="wm-student-nav">
                             <figure>
-                                <a href="#"><img style="width:70px;height:70px;" src=" {{asset('extra-images')}}/{{auth()->user()->AVT}}" alt=""></a>
-                            </figure>
+                                @if(empty(auth()->user()->provider))
+                                <a href="#"><img style="width:70px;height:70px;" src="extra-images/{{ auth()->user()->AVT}}" alt=""></a>
+                                @else
+                                <a href="#"><img style="width:70px;height:70px;" src="{{ auth()->user()->AVT}}" alt=""></a>
+                                @endif                            </figure>
                             <div class="wm-student-nav-text">
                                 <h6>{{ auth()->user()->Ten}}</h6>
                                 <a href="#">update image</a>

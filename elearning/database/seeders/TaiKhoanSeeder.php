@@ -27,6 +27,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan->NgaySinh = "2001/05/26";
         $taiKhoan->ID_LoaiTaiKhoan = 1;
         $taiKhoan->TrangThai = 1;
+        $taiKhoan->provider="";
         $taiKhoan->token="";
         $taiKhoan->save();
 
@@ -41,6 +42,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan1->NgaySinh = "2001/05/26";
         $taiKhoan1->ID_LoaiTaiKhoan = 2;
         $taiKhoan1->TrangThai = 1;
+        $taiKhoan1->provider="";
         $taiKhoan1->token="";
         $taiKhoan1->save();
 
@@ -54,6 +56,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan2->NgaySinh = "2001/04/27";
         $taiKhoan2->ID_LoaiTaiKhoan = 2;
         $taiKhoan2->TrangThai = 1;
+        $taiKhoan2->provider="";
         $taiKhoan2->token="";
         $taiKhoan2->save();
 
@@ -68,6 +71,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan3->ID_LoaiTaiKhoan = 2;
         $taiKhoan3->TrangThai = 1;
         $taiKhoan3->token="";
+        $taiKhoan3->provider="";
         $taiKhoan3->save();
 
         $taiKhoan4 = new TaiKhoan();
@@ -81,6 +85,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan4->ID_LoaiTaiKhoan = 2;
         $taiKhoan4->TrangThai = 1; 
         $taiKhoan4->token="";
+        $taiKhoan4->provider="";
         $taiKhoan4->save();
 
         $taiKhoan5 = new TaiKhoan();
@@ -94,6 +99,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan5->ID_LoaiTaiKhoan = 2;
         $taiKhoan5->TrangThai = 1; 
         $taiKhoan5->token="";
+        $taiKhoan5->provider="";
         $taiKhoan5->save();
 
         //Thêm tài khoản giáo viên
@@ -108,6 +114,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan6->ID_LoaiTaiKhoan = 3;
         $taiKhoan6->TrangThai = 1;
         $taiKhoan6->token="";
+        $taiKhoan6->provider="";
         $taiKhoan6->save();
 
         $taiKhoan7 = new TaiKhoan();
@@ -121,6 +128,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan7->ID_LoaiTaiKhoan = 3;
         $taiKhoan7->TrangThai = 1;
         $taiKhoan7->token="";
+        $taiKhoan7->provider="";
         $taiKhoan7->save();
 
         $taiKhoan8 = new TaiKhoan();
@@ -134,6 +142,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan8->ID_LoaiTaiKhoan = 3;
         $taiKhoan8->TrangThai = 1;
         $taiKhoan8->token="";
+        $taiKhoan8->provider="";
         $taiKhoan8->save();
 
         $taiKhoan9 = new TaiKhoan();
@@ -147,6 +156,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan9->ID_LoaiTaiKhoan = 3;
         $taiKhoan9->TrangThai = 1;
         $taiKhoan9->token="";
+        $taiKhoan9->provider="";
         $taiKhoan9->save();
 
         $taiKhoan10 = new TaiKhoan();
@@ -160,6 +170,7 @@ class TaiKhoanSeeder extends Seeder
         $taiKhoan10->ID_LoaiTaiKhoan = 3;
         $taiKhoan10->TrangThai = 1;
         $taiKhoan10->token="";
+        $taiKhoan10->provider="";
         $taiKhoan10->save();
     }
 }

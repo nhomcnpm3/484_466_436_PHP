@@ -58,7 +58,12 @@
 									<h2>About Professor</h2>
 								</div>
 								<figure>
+									@if(empty($classdetail->taikhoan->provider))
 									<a href="#"><img style="border-radius:50%;width:60px;height:60px;" src="{{asset('extra-images')}}/{{$classdetail->taikhoan->AVT}}" alt=""></a>
+									@else
+									<a href="#"><img style="border-radius:50%;width:60px;height:60px;" src="{{$classdetail->taikhoan->AVT}}" alt=""></a>
+
+									@endif
 								</figure>
 								<div class="wm-Professor-info">
 									<h6><a href="#">{{$classdetail->taikhoan->Ten}}</a></h6>
