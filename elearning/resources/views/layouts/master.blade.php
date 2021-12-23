@@ -151,11 +151,7 @@
                                 @if(!empty(auth()->user()))
                                 <li>
                                 <div class="dropdown">
-                                  @if(empty(auth()->user()->provider))
                                 <img style="width:30px;height:30px;border-radius:50px;border:none;margin-right:5px;" src="{{asset('extra-images')}}/{{ auth()->user()->AVT}}" alt=""><button onclick="myFunction()" class="dropbtn" style="font-size:13px">{{ auth()->user()->Email}}</button>
-                                @else
-                                <img style="width:30px;height:30px;border-radius:50px;border:none;margin-right:5px;" src="{{ auth()->user()->AVT}}" alt=""><button onclick="myFunction()" class="dropbtn" style="font-size:13px">{{ auth()->user()->Email}}</button>
-                                  @endif
                                     <div id="myDropdown" class="dropdown-content">
                                         <a style="color:black;font-size:13px"href="{{route('profile')}}">Profile</a>
                                         <a style="color:black;font-size:13px"href="#about">About</a>

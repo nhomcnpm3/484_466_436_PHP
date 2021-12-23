@@ -7,6 +7,7 @@ use Validator,Redirect,Response,File;
 use Socialite;
 use App\Models\User;
 use App\Models\TaiKhoan;
+use Illuminate\Support\Facades\Storage;
 
 class SocialController extends Controller
 {
@@ -30,10 +31,13 @@ function createUser($getInfo,$provider){
  $user1 = TaiKhoan::where('Email', $getInfo->email)->first();
  
  if (!$user1) {
-
+    $time = time();
+    Storage::disk('local1')->put($time.$getInfo->avatar.".png", file_get_contents($getInfo->avatar));   
+    
+    
      $user = new TaiKhoan;
      $user->Ten     = $getInfo->name;
-     $user->AVT    = $getInfo->avatar;
+     $user->AVT    = $time.$getInfo->avatar.".png";
      $user->Phone    = "";
      $user->Email   = $getInfo->email;
      $user->DiaChi   = "";

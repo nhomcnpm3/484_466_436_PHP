@@ -60,13 +60,9 @@
                                 <h2>About Professor</h2>
                             </div>
                             <figure>
-                                @if(empty( $classdetail->taikhoan->provider))
                                 <a href="#"><img style="border-radius:50%;width:60px;height:60px;"
                                         src="{{ asset('extra-images') }}/{{ $classdetail->taikhoan->AVT }}" alt=""></a>
-                                @else
-                                <a href="#"><img style="border-radius:50%;width:60px;height:60px;"
-                                    src="{{ $classdetail->taikhoan->AVT }}" alt=""></a>
-                                @endif
+
                             </figure>
                             <div class="wm-Professor-info">
                                 <h6><a href="#">{{ $classdetail->taikhoan->Ten }}</a></h6>
@@ -86,7 +82,8 @@
                             </div>
                         </div>
                         <ul>
-                            <li><a style="border-right:solid 1px blue;" href="{{route('classdetail',['id'=>$classdetail->id])}}">Post</a></li>
+                            <li><a style="border-right:solid 1px blue;"
+                                    href="{{ route('classdetail', ['id' => $classdetail->id]) }}">Post</a></li>
                             <li><a style="border-right:solid 1px blue;" href="#">Exercise</a></li>
                             <li><a style="color:#424242" href="#">Everyone</a></li>
                         </ul>
@@ -95,13 +92,9 @@
                                 <h2>Teacher</h2>
                             </div>
                             <div>
-                                @if(empty( $classdetail->taikhoan->provider))
                                 <img style="border-radius:50%;width:40px;height:40px;"
                                     src="{{ asset('extra-images') }}/{{ $classdetail->taikhoan->AVT }}" alt="">
-                                    @else
-                                    <img style="border-radius:50%;width:40px;height:40px;"
-                                    src="{{ $classdetail->taikhoan->AVT }}" alt="">
-                                    @endif
+
                                 <span
                                     style="color:#424242;font-size:16px;font-weight:bold">{{ $classdetail->taikhoan->Ten }}</span>
                             </div>
@@ -111,26 +104,22 @@
                                 <h2>Students</h2>
                             </div>
                             @if (auth()->user()->id == $classdetail->ID_TaiKhoan)
-                            <a href="{{ route('addstudent', ['id' => $classdetail->id]) }}" class="btn  btn-lg"
-                                style="background-color:#b99663;color:white">
-                                <span class="glyphicon glyphicon-plus" style="color:white"></span>Add students
-                            </a>
-                        @endif
+                                <a href="{{ route('addstudent', ['id' => $classdetail->id]) }}" class="btn  btn-lg"
+                                    style="background-color:#b99663;color:white">
+                                    <span class="glyphicon glyphicon-plus" style="color:white"></span>Add students
+                                </a>
+                            @endif
                             <div>
                                 @foreach ($classdetail->DSTaiKhoan as $value)
-                                  @if($value->id!= $classdetail->taikhoan->id)
-                                    @if(empty( $value->provider))
-                                    <img style="border-radius:50%;width:40px;height:40px;"
-                                        src="{{ asset('extra-images') }}/{{ $value->AVT }}" alt="">
-                                        @else
+                                    @if ($value->id != $classdetail->taikhoan->id)
                                         <img style="border-radius:50%;width:40px;height:40px;"
-                                        src="{{ $value->AVT }}" alt="">
-                                        @endif
-                                    <span
-                                        style="color:#424242;font-size:16px;font-weight:bold">{{ $value->Ten }}</span>
+                                            src="{{ asset('extra-images') }}/{{ $value->AVT }}" alt="">
+
+                                        <span
+                                            style="color:#424242;font-size:16px;font-weight:bold">{{ $value->Ten }}</span>
                                         </br>
-                                        @endif
-                                        @endforeach
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
 

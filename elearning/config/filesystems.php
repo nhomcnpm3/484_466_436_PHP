@@ -34,7 +34,10 @@ return [
             'driver' => 'local',
             'root' => public_path(),
         ],
-
+        'local1' => [
+            'driver' => 'local',
+            'root' => public_path('extra-images'),
+        ],
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
