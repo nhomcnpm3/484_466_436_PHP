@@ -21,4 +21,8 @@ class TaiKhoan extends Authentication
     public function DSLop(){
         return $this->belongsToMany('App\Models\lop','chitietlop','ID_TaiKhoan','ID_Lop');
     }
+    public function DSBaiDang()
+    {
+        return $this->hasMany('App\Models\baidang');
+    }
 }

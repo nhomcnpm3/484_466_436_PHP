@@ -13,6 +13,11 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
+    'facebook' => [
+        'client_id' => env('FACEBOOK_APP_ID'),
+        'client_secret' => env('FACEBOOK_APP_SECRET'),
+        'redirect' => env('FACEBOOK_APP_CALLBACK_URL'),
+    ],
     'google' => [
         'client_id' => '1004422227591-90c8fcgg6fu3iphnvmb71un5mahhe1bg.apps.googleusercontent.com',
         'client_secret' => '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',

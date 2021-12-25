@@ -8,6 +8,8 @@ use App\Models\lop;
 use App\Models\taikhoan;
 use App\Models\chitietlop;
 use App\Models\gianhaplop;
+use App\Models\baidang;
+use App\Models\tepbaidang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -79,8 +81,10 @@ class LopController extends Controller
     }
     public function classdetail($id)
     {
+        $taikhoan = taikhoan::find(auth()->user()->id);
         $classdetail = lop::find($id);
-        return view('user/class/class_detail', compact('classdetail'));
+        $dsBaiDang = baidang::where('ID_Lop',$id)->get();
+        return view('user/class/class_detail', compact('classdetail','dsBaiDang', 'taikhoan'));
     }
     public function addstudent($id)
     {
@@ -216,5 +220,35 @@ class LopController extends Controller
             }
         }
         return redirect()->route('home');
+    }
+    public function showaddlesson($id)
+    {
+        $taikhoan = taikhoan::find(auth()->user()->id);
+        $class = lop::find($id);        ;
+        return view('user/class/add_lesson',compact('taikhoan', 'class'));
+    }
+    public function addlesson($id, Request $request)
+    {
+        $baidang = new baidang;
+        $baidang->TieuDe = $request->title;
+        $baidang->ChiTiet = $request->description;
+        $baidang->HanNop = $request->deadline;
+        $baidang->TrangThai = $request->status;
+        $baidang->ID_TaiKhoan = auth()->user()->id;
+        $baidang->ID_Lop = $id;
+
+        $time = time();
+        $file = $request->file('file_upload')->getClientOriginalName();
+        $new_file_name = $time."-".$file;
+        $uploadFile = $request->file_upload;
+        $uploadFile->storeAs('file', $new_file_name);
+
+        $tepbaidang = new tepbaidang;
+        $tepbaidang->Url = $new_file_name;
+        $tepbaidang->save();
+
+        $baidang->ID_TepBaiDang = $tepbaidang->id;
+        $baidang->save();
+        return redirect()->route('classdetail', ['id'=>$id]);
     }
 }
