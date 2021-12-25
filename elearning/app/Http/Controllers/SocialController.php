@@ -8,6 +8,7 @@ use Socialite;
 use App\Models\User;
 use App\Models\TaiKhoan;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class SocialController extends Controller
 {
@@ -19,7 +20,7 @@ public function redirect($provider)
 public function callback($provider)
 {
            
-    $getInfo = Socialite::driver($provider)->user();
+    $getInfo = Socialite::driver($provider)->stateless()->user();
     $user = $this->createUser($getInfo,$provider);
     auth()->login($user);
  
@@ -32,12 +33,13 @@ function createUser($getInfo,$provider){
  
  if (!$user1) {
     $time = time();
-    Storage::disk('local1')->put($time.$getInfo->avatar.".png", file_get_contents($getInfo->avatar));   
+    $random = Str::random(6);
+    Storage::disk('local1')->put($time.$random .".png", file_get_contents($getInfo->avatar));   
     
     
      $user = new TaiKhoan;
      $user->Ten     = $getInfo->name;
-     $user->AVT    = $time.$getInfo->avatar.".png";
+     $user->AVT    = $time.$random.".png";
      $user->Phone    = "";
      $user->Email   = $getInfo->email;
      $user->DiaChi   = "";

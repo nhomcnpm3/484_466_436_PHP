@@ -43,6 +43,8 @@ Route::post('/classlist/add_student/{id}',[LopController::class, 'add_student'])
 Route::get('/student_join_class', [LopController::class, 'checktoken']);
 Route::get('/linkclass', [LopController::class, 'joinlink']);
 Route::get('/classlist/classdetail/everyone/{id}', [LopController::class, 'everyone'])->name('everyone');
+Route::get('/classlist/addlesson/{id}',[LopController::class, 'showaddlesson'])->name('showaddlesson');
+Route::post('/classlist/addlesson/{id}',[LopController::class, 'addlesson'])->name('addlesson');
 
 
 

@@ -26,7 +26,7 @@ class Baidang extends Migration
             $table->foreign('ID_TaiKhoan')->references('id')->on('TaiKhoan');
             $table->foreign('ID_Lop')->references('id')->on('Lop');
             $table->foreign('ID_TepBaiDang')->references('id')->on('TepBaiDang');
-            $table->foreign('ID_ChiTietBaiDang')->references('id')->on('ChiTietBaiDang');
+            // $table->foreign('ID_ChiTietBaiDang')->references('id')->on('ChiTietBaiDang');
             $table->timestamps();
             $table->softDeletes();
         });

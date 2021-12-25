@@ -375,19 +375,20 @@
             </div>
             <div class="wm-modallogin-form wm-register-popup">
                 <span class="wm-color">create Your Account today</span>
-                <form action="{{route('signup')}}" method="POST">
+                <form action="{{route('signup')}}" method="POST" enctype="multipart/form-data">
                   @csrf
-                    <ul>
-                        <li> <input type="text" value="Your E-mail" onblur="if(this.value == '') { this.value ='Your E-mail'; }" onfocus="if(this.value =='Your E-mail') { this.value = ''; }"> </li>
-                        <li> <input type="text" value="FullName" onblur="if(this.value == '') { this.value ='Your Username'; }" onfocus="if(this.value =='Your Username') { this.value = ''; }"> </li>
-                        <li> <input type="text" value="Phone" onblur="if(this.value == '') { this.value ='Phone'; }" onfocus="if(this.value =='Phone') { this.value = ''; }"> </li>
-                        <li> <input type="text" value="Address" onblur="if(this.value == '') { this.value ='Address'; }" onfocus="if(this.value =='Address') { this.value = ''; }"> </li>
-                        <li><input type="file"></li>
-                        <li> <input type="date" value="Birth of Date" onblur="if(this.value == '') { this.value ='Birth of Date'; }" onfocus="if(this.value =='Birth of Date') { this.value = ''; }"> </li>
-                        <li> <input type="password" value="password" onblur="if(this.value == '') { this.value ='password'; }" onfocus="if(this.value =='password') { this.value = ''; }"> </li>
-                        <li> <input type="password" value="Confirm Password" onblur="if(this.value == '') { this.value ='Confirm Password'; }" onfocus="if(this.value =='Confirm Password') { this.value = ''; }"> </li>
-                        <li> <input type="submit" value="Create Account"> </li>
-                    </ul>
+                  <ul>
+                    <li> <input type="text" name="mail" value="Your E-mail" onblur="if(this.value == '') { this.value ='Your E-mail'; }" onfocus="if(this.value =='Your E-mail') { this.value = ''; }"> </li>
+                    <li> <input type="text" name="fullname" value="FullName" onblur="if(this.value == '') { this.value ='Your Username'; }" onfocus="if(this.value =='Your Username') { this.value = ''; }"> </li>
+                    <li> <input type="text" name="phone" value="Phone" onblur="if(this.value == '') { this.value ='Phone'; }" onfocus="if(this.value =='Phone') { this.value = ''; }"> </li>
+                    <li> <input type="text" name="address" value="Address" onblur="if(this.value == '') { this.value ='Address'; }" onfocus="if(this.value =='Address') { this.value = ''; }"> </li>
+                    <li> <input type="date" name="birthday" value="Birth of Date" onblur="if(this.value == '') { this.value ='Birth of Date'; }" onfocus="if(this.value =='Birth of Date') { this.value = ''; }"> </li>
+                    <li> <input type="file" name="image"></li>
+                    <li> <input type="password" id="newaccpassword" name="pass" value="password" onblur="if(this.value == '') { this.value ='password'; }" onfocus="if(this.value =='password') { this.value = ''; }"> </li>
+                    <li> <input type="password" id="newaccconfirm_password"  name="passconfirm" value="Confirm Password" onblur="if(this.value == '') { this.value ='Confirm Password'; }" onfocus="if(this.value =='Confirm Password') { this.value = ''; }"> </li>
+                    <span id='message'></span>
+                    <li> <input id="submit"  disabled="disabled" type="submit" value="Create Account"> </li>
+                  </ul>
                 </form>
                 <span class="wm-color">or signup with your socials:</span>
                 <ul class="wm-login-social-media">
@@ -468,6 +469,20 @@ fileInput.addEventListener( "change", function( event ) {
 });  
 
 </script>
+<script>
+	$('#newaccpassword, #newaccconfirm_password').on('keyup', function () {
+  if (($('#newaccpassword').val() == $('#newaccconfirm_password').val()) && ($('#newaccpassword').val().length >= 8))
+   {
+    $('#message').html('Invalid').css('color', 'green');
+	document.getElementById("submit").disabled=false;
+  } else {
+    $('#message').html('UnInvalid').css('color', 'red');
+	document.getElementById("submit").disabled=true;
+  }
+	
+});
+	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<!-- jQuery (necessary for JavaScript plugins) -->
 	<script type="text/javascript" src="{{asset('script/jquery.js')}}"></script>
 	<script type="text/javascript" src="{{asset('script/modernizr.js')}}"></script>

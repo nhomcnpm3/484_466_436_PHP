@@ -40,19 +40,19 @@ class ChiTietLopSeeder extends Seeder
 
         $ctLop4 = new ChiTietLop();
         $ctLop4->ID_TaiKhoan = 4;
-        $ctLop4->ID_Lop = 4;
+        $ctLop4->ID_Lop = 3;
         $ctLop4->TrangThai = 1;
         $ctLop4->save();
 
         $ctLop5 = new ChiTietLop();
         $ctLop5->ID_TaiKhoan = 5;
-        $ctLop5->ID_Lop = 4;
+        $ctLop5->ID_Lop = 3;
         $ctLop5->TrangThai = 1;
         $ctLop5->save();
 
         $ctLop6 = new ChiTietLop();
         $ctLop6->ID_TaiKhoan = 8;
-        $ctLop6->ID_Lop = 4;
+        $ctLop6->ID_Lop = 3;
         $ctLop6->TrangThai = 1;
         $ctLop6->save();
 
