@@ -128,14 +128,14 @@ class LopController extends Controller
                             $GiaNhapLop->ID_TaiKhoan = $taikhoan->id;
                             $GiaNhapLop->ID_Lop = $id;
                             $mail->addAddress($email);
-                            $mail->MsgHTML("<p>$request->content</p><a href='http://127.0.0.1:8000/student_join_class?token={$token}'>click here</a>");
+                            $mail->MsgHTML("<p>Xin vui long đăng nhập bằng email: <b>$email</b> trước khi nhân vào:click here.</p> <p>$request->content</p><a href='http://127.0.0.1:8000/student_join_class?token={$token}'>click here</a>");
                             $mail->send();
                             $GiaNhapLop->save();
                             $success .= "{$email} - ";
                         } else {
                             $checkgianhap->Token_mail = $token;
                             $mail->addAddress($email);
-                            $mail->MsgHTML("<p>$request->content</p><a href='http://127.0.0.1:8000/student_join_class?token={$token}'>click here</a>");
+                            $mail->MsgHTML("<p>Xin vui long đăng nhập bằng email: <b>$email</b> trước khi nhân vào:click here.</p> <p>$request->content</p><a href='http://127.0.0.1:8000/student_join_class?token={$token}'>click here</a>");
                             $mail->send();
                             $checkgianhap->save();
                             $success .= "{$email} - ";
@@ -165,17 +165,24 @@ class LopController extends Controller
         $checkgianhap = gianhaplop::where('Token_mail', $token)->first();
         if (!empty($checkgianhap)) {
             $taikhoan = taikhoan::where('id', $checkgianhap->ID_TaiKhoan)->first();
-            if ($checkgianhap->ID_TaiKhoan == auth()->user()->id) {
-                $checkgianhap->TrangThaiTruyCap = 1;
-                $checkgianhap->Token_mail = "";
-                $chitietlop = new chitietlop;
-                $chitietlop->ID_TaiKhoan = $checkgianhap->ID_TaiKhoan;
-                $chitietlop->ID_Lop = $checkgianhap->ID_Lop;
-                $chitietlop->TrangThai = 1;
-                $chitietlop->save();
-                $checkgianhap->save();
-                return redirect()->route('classdetail', ['id' => $checkgianhap->ID_TaiKhoan]);
-            } else {
+            if ((Auth::check())) {
+                if ($checkgianhap->ID_TaiKhoan == auth()->user()->id) {
+                    $checkgianhap->TrangThaiTruyCap = 1;
+                    $checkgianhap->Token_mail = "";
+                    $chitietlop = new chitietlop;
+                    $chitietlop->ID_TaiKhoan = $checkgianhap->ID_TaiKhoan;
+                    $chitietlop->ID_Lop = $checkgianhap->ID_Lop;
+                    $chitietlop->TrangThai = 1;
+                    $chitietlop->save();
+                    $checkgianhap->save();
+                    return redirect()->route('classdetail', ['id' => $checkgianhap->ID_TaiKhoan]);
+                } else {
+                    session(['token' => $token]);
+                    return "Vui lòng đăng nhập với Email là: <b>$taikhoan->Email</b> <br/> <a href='home'>Đăng nhập</a>";
+                }
+            }
+            else{
+                session(['token' => $token]);
                 return "Vui lòng đăng nhập với Email là: <b>$taikhoan->Email</b> <br/> <a href='home'>Đăng nhập</a>";
             }
         } else {

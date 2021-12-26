@@ -40,7 +40,7 @@ Route::post('/classlist/join',[LopController::class, 'joinclass'])->name('joincl
 Route::get('/classlist/classdetail/{id}',[LopController::class, 'classdetail'])->name('classdetail');
 Route::get('/classlist/addstudent/{id}',[LopController::class, 'addstudent'])->name('addstudent');
 Route::post('/classlist/add_student/{id}',[LopController::class, 'add_student'])->name('add_student');
-Route::get('/student_join_class', [LopController::class, 'checktoken']);
+Route::get('/student_join_class', [LopController::class, 'checktoken'])->name('checktoken');
 Route::get('/linkclass', [LopController::class, 'joinlink']);
 Route::get('/classlist/classdetail/everyone/{id}', [LopController::class, 'everyone'])->name('everyone');
 Route::get('/classlist/addlesson/{id}',[LopController::class, 'showaddlesson'])->name('showaddlesson');

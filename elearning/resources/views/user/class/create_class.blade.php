@@ -95,7 +95,7 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-2">Theme:</label>
                                 <div class="col-sm-10">
-                                    <input type="color" id="favcolor" name="favcolor" value="#ff0000">
+                                    <input type="color" id="favcolor" name="favcolor" value="#222845">
                                 </div>
                             </div>
                             <div class="form-group">

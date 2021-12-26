@@ -79,7 +79,7 @@
                                                             src="{{ asset('extra-images') }}/{{ $class->Logo }}"
                                                             style="width:265px;height:155px;" alt=""> <span
                                                             class="wm-popular-hover"> <small>see class</small> </span> </a>
-                                                    <figcaption>
+                                                    <figcaption style="background-color:{{$class->MauChuDe}}">
                                                         <h6><a
                                                                 href="{{ route('classdetail', ['id' => $class->id]) }}">{{ $class->TaiKhoan->Ten }}</a>
                                                         </h6>
@@ -104,7 +104,7 @@
                                                             src="{{ asset('extra-images') }}/{{ $class->Logo }}"
                                                             style="width:265px;height:155px;" alt=""> <span
                                                             class="wm-popular-hover"> <small>see class</small> </span> </a>
-                                                    <figcaption>
+                                                    <figcaption style="background-color:{{$class->MauChuDe}}>
                                                         <h6><a
                                                                 href="{{ route('classdetail', ['id' => $class->id]) }}">{{ $class->TaiKhoan->Ten }}</a>
                                                         </h6>
