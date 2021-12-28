@@ -73,6 +73,7 @@
                             <ul class="row">
                                 @if ($order == 1)
                                     @forelse($classlist->DSLop as $class)
+                                        @if($class->pivot->TrangThai==1)
                                         <li class="col-md-12">
                                             <div class="wm-courses-popular-wrap">
                                                 <figure> <a href="{{ route('classdetail', ['id' => $class->id]) }}"><img
@@ -93,11 +94,13 @@
                                                 </div>
                                             </div>
                                         </li>
+                                        @endif
                                     @empty
                                         <p>Khong co du lieu</p>
                                     @endforelse
                                 @elseif($order ==2)
                                     @forelse($classlist->DanhsachLop as $class)
+                                    @if($class->pivot->TrangThai==1)
                                         <li class="col-md-12">
                                             <div class="wm-courses-popular-wrap">
                                                 <figure> <a href="{{ route('classdetail', ['id' => $class->id]) }}"><img
@@ -118,6 +121,8 @@
                                                 </div>
                                             </div>
                                         </li>
+                                        @endif
+
                                     @empty
                                         <p>Khong co du lieu</p>
                                     @endforelse

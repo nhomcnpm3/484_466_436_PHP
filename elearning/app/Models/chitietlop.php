@@ -9,4 +9,8 @@ class ChiTietLop extends Model
 {
     use HasFactory;
     protected $table = "ChiTietLop";
+    public function TaiKhoan()
+    {
+        return $this->belongsTo('App\Models\TaiKhoan');
+    }
 }

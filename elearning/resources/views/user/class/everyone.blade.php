@@ -23,6 +23,66 @@
         font-size: 17px;
     }
 
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked+.slider {
+        background-color: #b99663;
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
 </style>
 @section('content')
     <!--// Mini Header \\-->
@@ -111,7 +171,7 @@
                             @endif
                             <div>
                                 @foreach ($classdetail->DSTaiKhoan as $value)
-                                    @if ($value->id != $classdetail->taikhoan->id)
+                                    @if ($value->id != $classdetail->taikhoan->id&& $value->pivot->TrangThai==1)
                                         <img style="border-radius:50%;width:40px;height:40px;"
                                             src="{{ asset('extra-images') }}/{{ $value->AVT }}" alt="">
 
@@ -122,7 +182,37 @@
                                 @endforeach
                             </div>
                         </div>
+                        @if (auth()->user()->id == $classdetail->ID_TaiKhoan)
+                        <div class="wm-courses-getting-started">
+                            <div class="wm-title-full">
+                                <h2>wait for confirmation</h2>
+                            </div>
+                                <h5>Auto join class</h5>
+                                <label class="switch">
+                                    <input type="checkbox" @if($classdetail->trangthai==1)checked @endif onclick="turnon()">
+                                    <span class="slider round"></span>
+                                </label>
+                            <div>
+                                @foreach ($classdetail->DSTaiKhoan as $value)
+                                    @if ($value->id != $classdetail->taikhoan->id && $value->pivot->TrangThai==2)
+                                        <img style="border-radius:50%;width:40px;height:40px;"
+                                            src="{{ asset('extra-images') }}/{{ $value->AVT }}" alt="">
 
+                                        <span
+                                            style="color:#424242;font-size:16px;font-weight:bold">{{ $value->Ten }}</span>
+                                            <a href="{{route('confirmstudent',['id_lop'=>$classdetail->id,'id_taikhoan'=>$value->id])}}" style="background-color: #b99663;color:white" class="btn">Confirm</a>
+                                            {{-- <button onclick="deletestudent({{$value->id}})" class="btn">Delete</button> --}}
+                                            <a href="{{route('deletestudent',['id_lop'=>$classdetail->id,'id_taikhoan'=>$value->id])}}" class="btn">Delete</a>
+                                            {{-- href="{{route('deletestudent',['id_lop'=>$classdetail->id,'id_taikhoan'=>$value->id])}}" --}}
+                                        </br>
+                                    @endif
+                                @endforeach
+                            </div>
+                            <a href="#" style="color:#b99663">Confirm all</a>
+                            <a href="#" style="color:#b99663">Delete all</a>
+                        </div>
+                        @endif
+                        
 
                     </div>
                 </div>
@@ -133,4 +223,23 @@
         <!--// Main Section \\-->
     </div>
     <!--// Main Content \\-->
+    <script>
+        function turnon() {
+            var a="/autojoinclass/{{$classdetail->id}}";
+            $.getJSON(a,
+        function(data) {
+            //doSomethingWith(data); 
+        }); 
+            // window.location.href = "{{route('autojoin',['id'=>$classdetail->id])}}";  
+        };
+        </script>
+        {{-- <script>
+        function deletestudent(id) {
+            var b="http://127.0.0.1:8000/student_join_class/delete/{{$classdetail->id}}/"+id;
+            $.getJSON(b,
+        function(data) {
+            //doSomethingWith(data); 
+        }); 
+        };
+    </script> --}}
 @endsection

@@ -22,6 +22,7 @@ class LopSeeder extends Seeder
         $lop->MauChuDe = "#CCCCCC";
         $lop->MaLop ="lophocbotuc";
         $lop->token = "abc";
+        $lop->trangthai ="1";
         $lop->ID_TaiKhoan="1";
 
         $lop->save();
@@ -34,6 +35,7 @@ class LopSeeder extends Seeder
         $lop1->MauChuDe = "#CCCCCC";
         $lop1->MaLop ="lophocanhvan1";
         $lop1->token = "abcd";
+        $lop1->trangthai ="1";
         $lop1->ID_TaiKhoan="1";
         $lop1->save();
 
@@ -45,6 +47,7 @@ class LopSeeder extends Seeder
         $lop2->MauChuDe = "#CCCCCC";
         $lop2->MaLop ="lophoclaravel";
         $lop2->token = "abcq";
+        $lop2->trangthai ="1";
         $lop2->ID_TaiKhoan="1";
         $lop2->save();
     }

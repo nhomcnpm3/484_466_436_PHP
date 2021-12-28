@@ -22,6 +22,7 @@ class Lop extends Migration
             $table->string('MauChuDe');
             $table->string('MaLop');
             $table->string('token');
+            $table->integer('trangthai');
             $table->unsignedBigInteger('ID_TaiKhoan');
             $table->foreign('ID_TaiKhoan')->references('ID')->on('TaiKhoan');
             $table->timestamps();

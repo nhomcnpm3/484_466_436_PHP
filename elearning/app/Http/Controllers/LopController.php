@@ -48,6 +48,7 @@ class LopController extends Controller
         $uploadBanner->storeAs('extra-images', $new_img_name);
         $lop->Banner = $new_img_name;
         $lop->MauChuDe = $request->favcolor;
+        $lop->trangthai = 1;
         $lop->ID_TaiKhoan = auth()->user()->id;
         $lop->MaLop = Str::random(7);
         $token = openssl_random_pseudo_bytes(16);
@@ -73,8 +74,11 @@ class LopController extends Controller
             $chitietlop = new chitietlop;
             $chitietlop->ID_TaiKhoan = auth()->user()->id;
             $chitietlop->ID_Lop = $lop->id;
-            $chitietlop->TrangThai = 1;
-            $chitietlop->save();
+            if($lop->trangthai==1){
+                $chitietlop->TrangThai = 1;
+            }elseif($lop->trangthai==2){
+                $chitietlop->TrangThai = 2;
+            }            $chitietlop->save();
             return redirect()->route('classlist');
         }
         return redirect()->route('classlist');
@@ -175,7 +179,7 @@ class LopController extends Controller
                     $chitietlop->TrangThai = 1;
                     $chitietlop->save();
                     $checkgianhap->save();
-                    return redirect()->route('classdetail', ['id' => $checkgianhap->ID_TaiKhoan]);
+                    return redirect()->route('classdetail', ['id' => $checkgianhap->ID_Lop]);
                 } else {
                     session(['token' => $token]);
                     return "Vui lòng đăng nhập với Email là: <b>$taikhoan->Email</b> <br/> <a href='home'>Đăng nhập</a>";
@@ -200,7 +204,11 @@ class LopController extends Controller
                     $chitietlop = new chitietlop;
                     $chitietlop->ID_TaiKhoan = auth()->user()->id;
                     $chitietlop->ID_Lop = $class->id;
-                    $chitietlop->TrangThai = 1;
+                    if($class->trangthai==1){
+                        $chitietlop->TrangThai = 1;
+                    }elseif($class->trangthai==2){
+                        $chitietlop->TrangThai = 2;
+                    }
                     $chitietlop->save();
                     return redirect()->route('classdetail', ['id' => $class->id]);
                 }
@@ -213,6 +221,8 @@ class LopController extends Controller
     public function everyone($id)
     {
         $classdetail = lop::find($id);
+        // $waitjoin = chitietlop::where([["ID_Lop",$id], ['TrangThai', 2]])->get(); 
+        // dd($waitjoin->TaiKhoan);       
         return view('user/class/everyone', compact('classdetail'));
     }
     public function showpersonalclass(Request $request)
@@ -257,5 +267,34 @@ class LopController extends Controller
         $baidang->ID_TepBaiDang = $tepbaidang->id;
         $baidang->save();
         return redirect()->route('classdetail', ['id'=>$id]);
+    }
+    public function autojoinclass($id){
+        $StatusClass=lop::find($id);
+        if($StatusClass->trangthai==1){
+            $StatusClass->trangthai=2;
+        }elseif($StatusClass->trangthai==2){
+            $StatusClass->trangthai=1;
+        }
+        $StatusClass->save();
+        return redirect()->route('everyone', ['id'=>$id]);
+    }
+    public function confirmstudent($id_lop,$id_taikhoan)
+    {
+        $chitietlop=chitietlop::where([['ID_Lop',$id_lop],['ID_TaiKhoan',$id_taikhoan]])->first();
+        if(empty($chitietlop)){
+            return redirect()->route('home');
+        }
+        $chitietlop->TrangThai=1;
+        $chitietlop->save();
+        return redirect()->route('everyone', ['id'=>$id_lop]);
+    }
+    public function deletestudent($id_lop,$id_taikhoan)
+    {
+        $chitietlop=chitietlop::where([['ID_Lop',$id_lop],['ID_TaiKhoan',$id_taikhoan]])->first();
+        if(empty($chitietlop)){
+            return redirect()->route('home');
+        }
+        $chitietlop-> delete();
+        return redirect()->route('everyone', ['id'=>$id_lop]);
     }
 }

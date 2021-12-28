@@ -33,6 +33,7 @@ Route::post('checkupdateotp', [TwilioSMSController::class, 'Checkupdateotp'])->n
 Route::post('sendotp', [TwilioSMSController::class, 'Updatephone'])->name('sendotp');
 
 Route::get('/classlist', [LopController::class, 'showclass'])->name('classlist');
+Route::get('/autojoinclass/{id}', [LopController::class,'autojoinclass'])->name('autojoin');
 Route::post('/classlist', [LopController::class, 'showpersonalclass'])->name('showpersonalclass');
 Route::get('/classlist/create_class',[LopController::class, 'showCreateClass'])->name('showCreateClass');
 Route::post('/classlist/create_class',[LopController::class, 'CreateClass'])->name('CreateClass');
@@ -45,6 +46,8 @@ Route::get('/linkclass', [LopController::class, 'joinlink']);
 Route::get('/classlist/classdetail/everyone/{id}', [LopController::class, 'everyone'])->name('everyone');
 Route::get('/classlist/addlesson/{id}',[LopController::class, 'showaddlesson'])->name('showaddlesson');
 Route::post('/classlist/addlesson/{id}',[LopController::class, 'addlesson'])->name('addlesson');
+Route::get('/student_join_class/confirm/{id_lop}/{id_taikhoan}',[LopController::class, 'confirmstudent'])->name('confirmstudent');
+Route::get('/student_join_class/delete/{id_lop}/{id_taikhoan}',[LopController::class, 'deletestudent'])->name('deletestudent');
 
 
 
