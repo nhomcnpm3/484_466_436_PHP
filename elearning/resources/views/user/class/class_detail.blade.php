@@ -109,7 +109,7 @@
                                                         datetime="2017-02-14">{{$baidang->HanNop}}</time></span>
                                             </div>
                                             <div class="wm-courses-preview">
-                                                <a class="previe" href="#">Preview</a>
+                                                <a class="previe" href="{{ route('showdetaillesson', ['id' => $baidang->id]) }}">Preview</a>
                                             </div>
                                         </li>
                                     </ul>

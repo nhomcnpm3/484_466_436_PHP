@@ -297,4 +297,24 @@ class LopController extends Controller
         $chitietlop-> delete();
         return redirect()->route('everyone', ['id'=>$id_lop]);
     }
+    public function showdetaillesson($id)
+    {
+        $lesson = baidang::find($id);
+        $taikhoan = taikhoan::find(auth()->user()->id);
+        $loaibaidang = $lesson->TrangThai;
+        if($loaibaidang == 1)
+        {
+            $view = "Lesson";
+        }
+        else if ($loaibaidang == 2)
+        {
+            $view = "Exercise";
+        }
+        else if ($loaibaidang == 3)
+        {
+            $view = "Question";
+        }
+        $tep = tepbaidang::find($lesson->ID_TepBaiDang);
+        return view('user/class/lesson_detail', compact('taikhoan', 'lesson', 'view','tep'));
+    }
 }

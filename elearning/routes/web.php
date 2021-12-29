@@ -48,6 +48,7 @@ Route::get('/classlist/addlesson/{id}',[LopController::class, 'showaddlesson'])-
 Route::post('/classlist/addlesson/{id}',[LopController::class, 'addlesson'])->name('addlesson');
 Route::get('/student_join_class/confirm/{id_lop}/{id_taikhoan}',[LopController::class, 'confirmstudent'])->name('confirmstudent');
 Route::get('/student_join_class/delete/{id_lop}/{id_taikhoan}',[LopController::class, 'deletestudent'])->name('deletestudent');
+Route::get('/classlist/detaillesson/{id}',[LopController::class, 'showdetaillesson'])->name('showdetaillesson');
 
 
 
