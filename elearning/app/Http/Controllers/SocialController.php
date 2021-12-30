@@ -10,27 +10,54 @@ use App\Models\TaiKhoan;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Models\gianhaplop;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 
 class SocialController extends Controller
 {
+    public function setpass(Request $request,$id)
+    {
+        $checksession=$request->session()->get('id');
+        if($checksession==$id){
+            $user = TaiKhoan::where('id', $id)->first();
+            return view("user/create_new_password",compact('user'));
+        }
+        return redirect()->route('404');
+    }
+    public function ReSetPass(Request $request, $id)
+    {
+        $user = TaiKhoan::where('id', $id)->first();
+        if(!empty($user)){
+            $user->password=Hash::make($request->password);
+            $user->save();
+            auth()->login($user);
+            return redirect()->route('home');
+        }
+        return redirect()->route('404');
+    }
     public function redirect($provider)
     {
         return Socialite::driver($provider)->redirect();
     }
 
-    public function callback($provider)
+    public function callback(Request $request,$provider)
     {
 
         $getInfo = Socialite::driver($provider)->stateless()->user();
         $user = $this->createUser($getInfo, $provider);
+        if(empty($user->password)){
+            $request->session()->flash('id', $user->id);
+            return redirect()->route('setpass',['id'=>$user->id]);
+        }
         auth()->login($user);
-        $token = session('token');
-        session()->forget('token');
-        $checkjoinclass = gianhaplop::where('Token_mail', $token)->first();
-        if (!empty($checkjoinclass)) {
-            if (auth()->user()->id == $checkjoinclass->ID_TaiKhoan) {
-                return Redirect::to("http://127.0.0.1:8000/student_join_class?token={$token}");
+        if(!empty(session('token'))){
+            $token = session('token');
+            session()->forget('token');
+            $checkjoinclass = gianhaplop::where('Token_mail', $token)->first();
+            if (!empty($checkjoinclass)) {
+                if (auth()->user()->id == $checkjoinclass->ID_TaiKhoan) {
+                    return Redirect::to("http://127.0.0.1:8000/student_join_class?token={$token}");
+                }
             }
         }
         return redirect()->to('/home');

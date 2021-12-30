@@ -120,6 +120,10 @@ Route::get('/404', function () {
 
 Route::get('auth/redirect/{provider}', [SocialController::class, 'redirect']);
 Route::get('callback/{provider}', [SocialController::class, 'callback']);
+Route::get('create_new_password/{id}', [SocialController::class, 'setpass'])->name("setpass");
+Route::post('set_password/{id}', [SocialController::class, 'ReSetPass'])->name("ReSetPass");
+
+
 
 
 

@@ -42,16 +42,12 @@ class ThongTinController extends Controller
     public function capNhatMatKhau(Request $request)
     {
         $taikhoan = TaiKhoan::find(auth()->user()->id);
-        if($request->MatKhauMoi != $request->NhapLaiMatKhauMoi)
-        {
-            return redirect()->route('profile');
-        }
-        else
-        {
+        if (Hash::check($request->oldpassword, $taikhoan->password)) {
             $taikhoan->password =  Hash::make($request->MatKhauMoi);
             $taikhoan->save();
+            return back()->with('success', 'Password update successful');
         }
-        return redirect()->route('profile');
+        return back()->with('failed', 'Incorrect password');
     }
 
     public function capNhatDT(Request $request)

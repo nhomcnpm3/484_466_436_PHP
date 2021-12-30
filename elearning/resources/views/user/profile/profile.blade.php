@@ -66,6 +66,11 @@
             <h2>User profile </h2>
           </div>
           <div class="wm-courses wm-courses-popular wm-courses-mediumsec">
+            @if(Session::has("success"))
+									<div class="alert alert-success alert-dismissible"><button type="button" class="close">&times;</button>{{Session::get('success')}}</div>
+								@elseif(Session::has("failed"))
+									<div class="alert alert-danger alert-dismissible"><button type="button" class="close">&times;</button>{{Session::get('failed')}}</div>
+								@endif
             <form class="form-horizontal" action="{{ route('capNhatMatKhau') }}" method="post">
               @csrf
               <div class="form-group">
@@ -93,6 +98,12 @@
                 <label class="control-label col-sm-2" for="pwd">Email:</label>
                 <div class="col-sm-10">
                   <lable class="form-control">{{ auth()->user()->Email}}</lable>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="pwd">OldPassword:</label>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" id="oldpassword" placeholder="Enter old password" name="oldpassword">
                 </div>
               </div>
               <div class="form-group">
@@ -125,7 +136,7 @@
 </div>
 <script>
 	$('#password, #confirm_password').on('keyup', function () {
-  if (($('#password').val() == $('#confirm_password').val()) && ($('#password').val().length >= 8))
+  if (($('#password').val() == $('#confirm_password').val()) && ($('#password').val().length >= 8)) 
    {
     $('#message').html('Invalid').css('color', 'green');
 	document.getElementById("submit").disabled=false;
