@@ -33,6 +33,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/date-picker.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/prism.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vector-map.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/datatables.css')}}">
+
     <!-- Plugins css Ends-->
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/bootstrap.css')}}">
@@ -191,21 +193,21 @@
                     <a class="setting-primary" href="javascript:void(0)"><i data-feather="settings"></i></a><img class="img-90 rounded-circle" src="{{asset('assets/images/dashboard/1.png')}}" alt="" />
                     <div class="badge-bottom"><span class="badge badge-primary">New</span></div>
                     <a href="user-profile">
-                        <h6 class="mt-3 f-14 f-w-600">Emay Walter</h6>
+                        <h6 class="mt-3 f-14 f-w-600">{{auth()->user()->Ten}}</h6>
                     </a>
-                    <p class="mb-0 font-roboto">Human Resources Department</p>
+                    <p class="mb-0 font-roboto">{{auth()->user()->Email}}</p>
                     <ul>
                         <li>
-                            <span><span class="counter">19.8</span>k</span>
-                            <p>Follow</p>
+                            <span><span class="">{{$countAdmin}}</span></span>
+                            <p>Admin</p>
                         </li>
                         <li>
-                            <span>2 year</span>
-                            <p>Experince</p>
+                            <span><span class="">{{$countTeacher}}</span></span>
+                            <p>Teacher</p>
                         </li>
                         <li>
-                            <span><span class="counter">95.2</span>k</span>
-                            <p>Follower</p>
+                            <span><span class="">{{$countStudent}}</span></span>
+                            <p>Student</p>
                         </li>
                     </ul>
                 </div>
@@ -230,10 +232,10 @@
                                     </ul>
                                 </li>
                                 <li class="dropdown">
-                                    <a class="nav-link menu-title " href="javascript:void(0)"><i data-feather="airplay"></i><span>Widgets</span></a>
+                                    <a class="nav-link menu-title " href="javascript:void(0)"><i data-feather="airplay"></i><span>User Management</span></a>
                                     <ul class="nav-submenu menu-content" style="display: none;">
-                                        <li><a href="https://laravel.pixelstrap.com/viho/widgets/general-widget" class="">General</a></li>
-                                        <li><a href="https://laravel.pixelstrap.com/viho/widgets/chart-widget" class="">Chart</a></li>
+                                        <li><a href="{{route('TeacherManagement')}}" class="">Teacher Management</a></li>
+                                        <li><a href="https://laravel.pixelstrap.com/viho/widgets/chart-widget" class="">Student Management</a></li>
                                     </ul>
                                 </li>
 

@@ -16,6 +16,9 @@ class DangNhapController extends Controller
     {
         if (Auth::attempt(['Email' => $request->email, 'password' =>
         $request->password])) {
+            if(auth()->user()->ID_LoaiTaiKhoan == 1){
+                return redirect()->route('admin_index');
+            }
             $token=session('token');
             session()->forget('token');
             $checkjoinclass=gianhaplop::where('Token_mail',$token)->first();

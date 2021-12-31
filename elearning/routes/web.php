@@ -7,6 +7,7 @@ use App\Http\Controllers\TwilioSMSController;
 use App\Http\Controllers\MailerController;
 use App\Http\Controllers\AnyController;
 use App\Http\Controllers\DangKyController;
+use App\Http\Controllers\DasboardAdminController;
 use App\Http\Controllers\LopController;
 use App\Http\Controllers\SocialController;
 
@@ -110,10 +111,6 @@ Route::post('/ChangePassword', [ThongTinController::class, 'capNhatMatKhau'])->n
 
 
 
-
-Route::get('/admin', function () {
-    return view('admin/index');
-})->name('admin_index');
 Route::get('/404', function () {
     return view('404');
 })->name('404');
@@ -122,6 +119,12 @@ Route::get('auth/redirect/{provider}', [SocialController::class, 'redirect']);
 Route::get('callback/{provider}', [SocialController::class, 'callback']);
 Route::get('create_new_password/{id}', [SocialController::class, 'setpass'])->name("setpass");
 Route::post('set_password/{id}', [SocialController::class, 'ReSetPass'])->name("ReSetPass");
+
+Route::get('admin', [DasboardAdminController::class, 'admin_index'])->name("admin_index");
+
+Route::get('admin/teachermanagement', [DasboardAdminController::class, 'TeacherManagement'])->name("TeacherManagement");
+Route::get('admin/studentmanagement', [DasboardAdminController::class, 'StudentManagement'])->name("StudentManagement");
+
 
 
 

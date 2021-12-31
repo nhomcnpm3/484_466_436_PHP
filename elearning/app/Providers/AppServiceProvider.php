@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use App\Models\TaiKhoan;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        //]
     }
 
     /**
@@ -25,5 +26,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        $countAdmin= TaiKhoan::where('ID_LoaiTaiKhoan',1)->count();
+        $countStudent= TaiKhoan::where('ID_LoaiTaiKhoan',2)->count();
+        $countTeacher= TaiKhoan::where('ID_LoaiTaiKhoan',3)->count();
+        view()->composer('layouts.masteradmin', function($view)
+        {
+            $view->with('countAdmin', 'countAdmin')
+            ->with('countStudent', 'countStudent')
+            ->with('countTeacher', 'countTeacher');
+        });
     }
 }
