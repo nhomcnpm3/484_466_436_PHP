@@ -21,6 +21,8 @@ use App\Http\Controllers\SocialController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 Route::get('clear/session/{key}', [AnyController::class,'clearSessionKey']);
 Route::post('sendSMS', [TwilioSMSController::class, 'index'])->name('verify');
 Route::post('checkotp', [TwilioSMSController::class, 'Checkotp'])->name('verifyotp');
@@ -33,23 +35,50 @@ Route::get('/repupdateotp',[TwilioSMSController::class, 'replyupdateOTP'])->name
 Route::post('checkupdateotp', [TwilioSMSController::class, 'Checkupdateotp'])->name('verifyupdateotp');
 Route::post('sendotp', [TwilioSMSController::class, 'Updatephone'])->name('sendotp');
 
-Route::get('/classlist', [LopController::class, 'showclass'])->name('classlist');
-Route::get('/autojoinclass/{id}', [LopController::class,'autojoinclass'])->name('autojoin');
-Route::post('/classlist', [LopController::class, 'showpersonalclass'])->name('showpersonalclass');
-Route::get('/classlist/create_class',[LopController::class, 'showCreateClass'])->name('showCreateClass');
-Route::post('/classlist/create_class',[LopController::class, 'CreateClass'])->name('CreateClass');
-Route::post('/classlist/join',[LopController::class, 'joinclass'])->name('joinclass');
-Route::get('/classlist/classdetail/{id}',[LopController::class, 'classdetail'])->name('classdetail');
-Route::get('/classlist/addstudent/{id}',[LopController::class, 'addstudent'])->name('addstudent');
-Route::post('/classlist/add_student/{id}',[LopController::class, 'add_student'])->name('add_student');
-Route::get('/student_join_class', [LopController::class, 'checktoken'])->name('checktoken');
-Route::get('/linkclass', [LopController::class, 'joinlink']);
-Route::get('/classlist/classdetail/everyone/{id}', [LopController::class, 'everyone'])->name('everyone');
-Route::get('/classlist/addlesson/{id}',[LopController::class, 'showaddlesson'])->name('showaddlesson');
-Route::post('/classlist/addlesson/{id}',[LopController::class, 'addlesson'])->name('addlesson');
-Route::get('/student_join_class/confirm/{id_lop}/{id_taikhoan}',[LopController::class, 'confirmstudent'])->name('confirmstudent');
-Route::get('/student_join_class/delete/{id_lop}/{id_taikhoan}',[LopController::class, 'deletestudent'])->name('deletestudent');
-Route::get('/classlist/detaillesson/{id}',[LopController::class, 'showdetaillesson'])->name('showdetaillesson');
+
+Route::prefix('classlist')->middleware('auth')->group(function () {
+    Route::get('/', [LopController::class, 'showclass'])->name('classlist');
+    Route::post('/', [LopController::class, 'showpersonalclass'])->name('showpersonalclass');
+    Route::get('create_class',[LopController::class, 'showCreateClass'])->name('showCreateClass');
+    Route::post('create_class',[LopController::class, 'CreateClass'])->name('CreateClass');
+    Route::post('join',[LopController::class, 'joinclass'])->name('joinclass');
+    Route::get('classdetail/{id}',[LopController::class, 'classdetail'])->name('classdetail');
+    Route::get('updateclass/{id}', [LopController::class, 'updateclass'])->name('updateClass');
+    Route::get('deleteclass/{id}', [LopController::class, 'deleteclass'])->name('deleteClass');
+    Route::get('student_join_class', [LopController::class, 'checktoken'])->name('checktoken');
+    Route::get('linkclass', [LopController::class, 'joinlink']);
+    Route::get('everyone/{id}', [LopController::class, 'everyone'])->name('everyone');
+    Route::prefix('Detail')->group(function () {
+        Route::get('addlesson/{id}',[LopController::class, 'showaddlesson'])->name('showaddlesson');
+        Route::post('addlesson/{id}',[LopController::class, 'addlesson'])->name('addlesson');
+        Route::get('addstudent/{id}',[LopController::class, 'addstudent'])->name('addstudent');
+        Route::post('add_student/{id}',[LopController::class, 'add_student'])->name('add_student');
+        Route::get('autojoinclass/{id}', [LopController::class,'autojoinclass'])->name('autojoin');
+        Route::get('detaillesson/{id}',[LopController::class, 'showdetaillesson'])->name('showdetaillesson');
+    });
+    Route::get('/student_join_class/confirm/{id_lop}/{id_taikhoan}',[LopController::class, 'confirmstudent'])->name('confirmstudent');
+    Route::get('/student_join_class/delete/{id_lop}/{id_taikhoan}',[LopController::class, 'deletestudent'])->name('deletestudent');   
+    });
+
+// Route::get('/classlist', [LopController::class, 'showclass'])->name('classlist');
+// Route::get('/autojoinclass/{id}', [LopController::class,'autojoinclass'])->name('autojoin');
+// Route::post('/classlist', [LopController::class, 'showpersonalclass'])->name('showpersonalclass');
+// Route::get('/classlist/create_class',[LopController::class, 'showCreateClass'])->name('showCreateClass');
+// Route::post('/classlist/create_class',[LopController::class, 'CreateClass'])->name('CreateClass');
+// Route::post('/classlist/join',[LopController::class, 'joinclass'])->name('joinclass');
+// Route::get('/classlist/classdetail/{id}',[LopController::class, 'classdetail'])->name('classdetail');
+// Route::get('/classlist/updateclass/{id}', [LopController::class, 'updateclass'])->name('updateClass');
+// Route::get('/classlist/deleteclass/{id}', [LopController::class, 'deleteclass'])->name('deleteClass');
+// Route::get('/classlist/addstudent/{id}',[LopController::class, 'addstudent'])->name('addstudent');
+// Route::post('/classlist/add_student/{id}',[LopController::class, 'add_student'])->name('add_student');
+// Route::get('/student_join_class', [LopController::class, 'checktoken'])->name('checktoken');
+// Route::get('/linkclass', [LopController::class, 'joinlink']);
+// Route::get('/classlist/classdetail/everyone/{id}', [LopController::class, 'everyone'])->name('everyone');
+// Route::get('/classlist/addlesson/{id}',[LopController::class, 'showaddlesson'])->name('showaddlesson');
+// Route::post('/classlist/addlesson/{id}',[LopController::class, 'addlesson'])->name('addlesson');
+// Route::get('/student_join_class/confirm/{id_lop}/{id_taikhoan}',[LopController::class, 'confirmstudent'])->name('confirmstudent');
+// Route::get('/student_join_class/delete/{id_lop}/{id_taikhoan}',[LopController::class, 'deletestudent'])->name('deletestudent');
+// Route::get('/classlist/detaillesson/{id}',[LopController::class, 'showdetaillesson'])->name('showdetaillesson');
 
 
 
@@ -120,15 +149,38 @@ Route::get('callback/{provider}', [SocialController::class, 'callback']);
 Route::get('create_new_password/{id}', [SocialController::class, 'setpass'])->name("setpass");
 Route::post('set_password/{id}', [SocialController::class, 'ReSetPass'])->name("ReSetPass");
 
-Route::get('admin', [DasboardAdminController::class, 'admin_index'])->name("admin_index");
 
-Route::get('admin/teachermanagement', [DasboardAdminController::class, 'TeacherManagement'])->name("TeacherManagement");
-Route::get('admin/studentmanagement', [DasboardAdminController::class, 'StudentManagement'])->name("StudentManagement");
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/', [DasboardAdminController::class, 'admin_index'])->name("admin_index");
+    Route::get('createAccount', [DasboardAdminController::class, 'showcreateAccount'])->name("showcreateAccount");
+    Route::post('createAccount', [DasboardAdminController::class, 'createAccount'])->name("createAccount");
+    Route::get('updateAccount/{id}', [DasboardAdminController::class, 'showupdateAccount'])->name("showupdateAccount");
+    Route::post('updateAccount/{id}', [DasboardAdminController::class, 'updateAccount'])->name("updateAccount");
+    Route::get('deleteAccount/{id}', [DasboardAdminController::class, 'deleteAccount'])->name("deleteAccount");
+    Route::prefix('teachermanagement')->group(function () {
+        Route::get('/', [DasboardAdminController::class, 'TeacherManagement'])->name("TeacherManagement");
+    });
+    Route::prefix('studentmanagement')->group(function () {
+        Route::get('/', [DasboardAdminController::class, 'StudentManagement'])->name("StudentManagement");
+    });
+});
 
+// Route::get('admin/teachermanagement', [DasboardAdminController::class, 'TeacherManagement'])->name("TeacherManagement");
+// Route::get('admin/studentmanagement', [DasboardAdminController::class, 'StudentManagement'])->name("StudentManagement");
+// Route::get('admin/createAccount', [DasboardAdminController::class, 'showcreateAccount'])->name("showcreateAccount");
+// Route::post('admin/createAccount', [DasboardAdminController::class, 'createAccount'])->name("createAccount");
+// Route::get('admin/updateAccount/{id}', [DasboardAdminController::class, 'showupdateAccount'])->name("showupdateAccount");
+// Route::post('admin/updateAccount/{id}', [DasboardAdminController::class, 'updateAccount'])->name("updateAccount");
+// Route::get('admin/deleteAccount/{id}', [DasboardAdminController::class, 'deleteAccount'])->name("deleteAccount");
+    
 
+// Route::get('admin', [DasboardAdminController::class, 'admin_index'])->name("admin_index");
 
-
-
-
-
+// Route::get('admin/teachermanagement', [DasboardAdminController::class, 'TeacherManagement'])->name("TeacherManagement");
+// Route::get('admin/studentmanagement', [DasboardAdminController::class, 'StudentManagement'])->name("StudentManagement");
+// Route::get('admin/createAccount', [DasboardAdminController::class, 'showcreateAccount'])->name("showcreateAccount");
+// Route::post('admin/createAccount', [DasboardAdminController::class, 'createAccount'])->name("createAccount");
+// Route::get('admin/updateAccount/{id}', [DasboardAdminController::class, 'showupdateAccount'])->name("showupdateAccount");
+// Route::post('admin/updateAccount/{id}', [DasboardAdminController::class, 'updateAccount'])->name("updateAccount");
+// Route::get('admin/deleteAccount/{id}', [DasboardAdminController::class, 'deleteAccount'])->name("deleteAccount");
 

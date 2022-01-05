@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -670,10 +670,10 @@
             <div class="page-header">
               <div class="row">
                 <div class="col-sm-6">
-                  <h3>Student Management</h3>
+                  <h3>Create Account</h3>
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route("admin_index")}}">Home</a></li>
-                    <li class="breadcrumb-item">StudentManagement</li>
+                    <li class="breadcrumb-item">CreateAccount</li>
                   </ol>
                 </div>
                 <div class="col-sm-6">
@@ -703,54 +703,83 @@
             <div class="row">
               <!-- Base styles-->
               <div class="col-sm-12">
-                <div class="card">
-                  <div class="card-header">
-                    <h5>Student list</h5>
-                  </div>
-                  <div class="card-body">
-                    <div class="table-responsive">
-                      <table class="display" id="example-style-1">
-                        <thead>
-                          <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Avatar</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>Address</th>
-                            <th>Birth of Date</th>
-                            <th>Status</th>
-                            <th>Option</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          @foreach($Student as $value)
-                          <tr>
-                            <td>{{$value->id}}</td>
-                            <td>{{$value->Ten}}</td>
-                            <td>
-                              <img class="img-thumbnail" style="width:120px;height:80px;"src="{{asset('extra-images')}}/{{$value->AVT}}"></td>   
-                            <td>{{$value->Phone}}</td>
-                            <td>{{$value->Email}}</td>
-                            <td>{{$value->DiaChi}}</td>
-                            <td>{{$value->NgaySinh}}</td>
-                            <td>{{$value->TrangThai}}</td>
-                            <td>
-                              
-                              <a href="{{route('showcreateAccount')}}"> <button type="button" class="btn btn-default"><i class="fa fa-plus"></i></button></a>
-                              <a href="{{route('showupdateAccount', ['id' => $value->id])}}"> <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></button></a>
-                              <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
-
-                              
-
-                            </td>
-                            </tr>
-                          @endforeach
-                        </tbody>
-                      </table>
+                <form class="form-horizontal" action="{{route('updateAccount', ['id'=> $account->id])}}" method="post"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <label class="col-sm-10">Họ tên</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="classname" placeholder="Nhập họ tên"
+                                name="fullname" value="{{ $account->Ten }}">
+                        </div>
                     </div>
-                  </div>
-                </div>
+                    <div class="form-group">
+                        <label class="col-sm-10">Ảnh đại diện</label>
+                        <div class="col-sm-10">
+                            <input class="input-file" id="my-file" type="file" name="avt">
+                            <label tabindex="0" for="my-file" class="input-file-trigger"></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-10">Số điện thoại</label>
+                        <div class="col-sm-10">
+                            <input type="tel" class="form-control" id="classname" placeholder="Nhập số điện thoại"
+                                name="phone" value="{{ $account->Phone }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-10">Email</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="classname"
+                                placeholder="Nhập email" name="email" value="{{ $account->Email }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-10">Mật khẩu</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="classname"
+                                placeholder="Nhập mật khẩu" name="password" value="{{ $account->password }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-10">Địa chỉ</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="classname"
+                                placeholder="Nhập địa chỉ" name="address" value="{{ $account->DiaChi }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-10">Ngày sinh</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" id="classname"
+                                placeholder="Nhập ngày sinh" name="birthday" value="{{ $account->NgaySinh }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-10">Trạng thái</label>
+                        <div class="col-sm-10">
+                            <select name='typeAccount'>
+                                <option value="1">Hoạt động</option>
+                                <option value="2">Khóa</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-10">Loại tài khoản</label>
+                        <div class="col-sm-10">
+                            <select name='typeAccount' >
+                                <option value="none" selected disabled hidden>Chọn loại tài khoản</option>
+                                <option value="2">Học viên</option>
+                                <option value="3">Giáo Viên</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <button type="submit" id="submit" class="btn btn-default">Save</button>
+                        </div>
+                    </div>
+                </form>
               </div>
               <!-- Base styles Ends-->
             
@@ -792,7 +821,6 @@
     <script src="{{asset('assets/js/script.js')}}"></script>
     <script src="{{asset('assets/js/theme-customizer/customizer.js')}}"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    <script src="{{asset('assets/js/tooltip-init.js')}}"></script>
     <!-- login js-->
     <!-- Plugin used-->
   </body>

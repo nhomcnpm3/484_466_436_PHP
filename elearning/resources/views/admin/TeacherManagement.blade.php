@@ -736,9 +736,9 @@
                             <td>{{$value->TrangThai}}</td>
                             <td>
                               
-                              <button type="button" class="btn btn-default"><i class="fa fa-plus"></i></button>
-                              <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span></button>
-                              <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                             <a href="{{route('showcreateAccount')}}"> <button type="button" class="btn btn-default"><i class="fa fa-plus"></i></button></a>
+                             <a href="{{route('showupdateAccount', ['id' => $value->id])}}"> <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></button></a>
+                              <a href="{{route('deleteAccount', ['id' => $value->id])}}"> <button type="button"  class="btn btn-danger"><i class="fa fa-trash"></i></button></a>
 
                               
 
@@ -791,7 +791,7 @@
     <script src="{{asset('assets/js/script.js')}}"></script>
     <script src="{{asset('assets/js/theme-customizer/customizer.js')}}"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    <!-- login js-->
+    <script src="{{asset('assets/js/tooltip-init.js')}}"></script>
     <!-- Plugin used-->
   </body>
 </html>
