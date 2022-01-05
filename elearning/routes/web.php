@@ -22,7 +22,6 @@ use App\Http\Controllers\SocialController;
 |
 */
 
-
 Route::get('clear/session/{key}', [AnyController::class,'clearSessionKey']);
 Route::post('sendSMS', [TwilioSMSController::class, 'index'])->name('verify');
 Route::post('checkotp', [TwilioSMSController::class, 'Checkotp'])->name('verifyotp');
@@ -36,7 +35,7 @@ Route::post('checkupdateotp', [TwilioSMSController::class, 'Checkupdateotp'])->n
 Route::post('sendotp', [TwilioSMSController::class, 'Updatephone'])->name('sendotp');
 
 
-Route::prefix('classlist')->middleware('auth')->group(function () {
+Route::prefix('classlist')->middleware('checkadmin')->group(function () {
     Route::get('/', [LopController::class, 'showclass'])->name('classlist');
     Route::post('/', [LopController::class, 'showpersonalclass'])->name('showpersonalclass');
     Route::get('create_class',[LopController::class, 'showCreateClass'])->name('showCreateClass');
@@ -150,7 +149,7 @@ Route::get('create_new_password/{id}', [SocialController::class, 'setpass'])->na
 Route::post('set_password/{id}', [SocialController::class, 'ReSetPass'])->name("ReSetPass");
 
 
-Route::prefix('admin')->middleware('auth')->group(function () {
+Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
     Route::get('/', [DasboardAdminController::class, 'admin_index'])->name("admin_index");
     Route::get('createAccount', [DasboardAdminController::class, 'showcreateAccount'])->name("showcreateAccount");
     Route::post('createAccount', [DasboardAdminController::class, 'createAccount'])->name("createAccount");
