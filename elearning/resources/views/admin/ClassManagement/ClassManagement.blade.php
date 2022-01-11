@@ -93,10 +93,8 @@
                             <th>Avatar</th>
                             <th>Phone</th>
                             <th>Email</th>
-                            <th>Address</th>
-                            <th>Birth of Date</th>
-                            <th>Status</th>
-                            <th>Option</th>
+                            <th>Total class</th>
+                            <th>Preview</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -107,18 +105,8 @@
                             <td><img style="width:120px;height:80px;"src="{{asset('extra-images')}}/{{$value->AVT}}"></td>   
                             <td>{{$value->Phone}}</td>
                             <td>{{$value->Email}}</td>
-                            <td>{{$value->DiaChi}}</td>
-                            <td>{{$value->NgaySinh}}</td>
-                            <td>{{$value->TrangThai}}</td>
-                            <td>
-                              
-                             <a href="{{route('showcreateAccount')}}"> <button type="button" class="btn btn-default"><i class="fa fa-plus"></i></button></a>
-                             <a href="{{route('showupdateAccount', ['id' => $value->id])}}"> <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></button></a>
-                              <a href="{{route('deleteAccount', ['id' => $value->id])}}"> <button type="button"  class="btn btn-danger"><i class="fa fa-trash"></i></button></a>
-
-                              
-
-                            </td>
+                            <td>{{$value->DanhsachLop->count()}}</td>
+                            <td> <a href="{{route('ShowClass',['id'=>$value->id])}}"class="btn btn-primary" type="button">Show Class</a></td>
                             </tr>
                           @endforeach
                         </tbody>

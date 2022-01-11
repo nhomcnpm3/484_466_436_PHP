@@ -16,5 +16,10 @@ class Lop extends Model
     {
         return $this->belongsTo('App\Models\taikhoan','ID_TaiKhoan','id');
     }
+    public function DSBaiDang()
+    {
+        return $this->hasMany('App\Models\baidang','ID_Lop','id');
+    }
+
 
 }

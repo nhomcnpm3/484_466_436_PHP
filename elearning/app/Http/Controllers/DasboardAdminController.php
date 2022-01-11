@@ -17,27 +17,18 @@ class DasboardAdminController extends Controller
     }
     public function TeacherManagement()
     {
-        $countAdmin= TaiKhoan::where('ID_LoaiTaiKhoan',1)->count();
-        $countStudent= TaiKhoan::where('ID_LoaiTaiKhoan',2)->count();
-        $countTeacher= TaiKhoan::where('ID_LoaiTaiKhoan',3)->count();
         $Teacher= TaiKhoan::where('ID_LoaiTaiKhoan',3)->get();
-        return view('admin/TeacherManagement',compact('Teacher','countAdmin','countStudent','countTeacher'));
+        return view('admin/TeacherManagement',compact('Teacher'));
     }
     public function StudentManagement()
     {
-        $countAdmin= TaiKhoan::where('ID_LoaiTaiKhoan',1)->count();
-        $countStudent= TaiKhoan::where('ID_LoaiTaiKhoan',2)->count();
-        $countTeacher= TaiKhoan::where('ID_LoaiTaiKhoan',3)->count();
         $Student= TaiKhoan::where('ID_LoaiTaiKhoan',2)->get();
-        return view('admin/StudentManagement',compact('Student','countAdmin','countStudent','countTeacher'));
+        return view('admin/StudentManagement',compact('Student'));
     }
     
     public function showcreateAccount()
     {
-        $countAdmin= TaiKhoan::where('ID_LoaiTaiKhoan',1)->count();
-        $countStudent= TaiKhoan::where('ID_LoaiTaiKhoan',2)->count();
-        $countTeacher= TaiKhoan::where('ID_LoaiTaiKhoan',3)->count();
-        return view('admin/createAccount',compact('countAdmin','countStudent','countTeacher'));
+        return view('admin/createAccount');
     }
 
     public function createAccount(Request $request)
@@ -68,11 +59,8 @@ class DasboardAdminController extends Controller
 
     public function showupdateAccount($id)
     {
-        $countAdmin= TaiKhoan::where('ID_LoaiTaiKhoan',1)->count();
-        $countStudent= TaiKhoan::where('ID_LoaiTaiKhoan',2)->count();
-        $countTeacher= TaiKhoan::where('ID_LoaiTaiKhoan',3)->count();
         $account = TaiKhoan::find($id);
-        return view('admin/updateAccount',compact('countAdmin','countStudent','countTeacher','account'));
+        return view('admin/updateAccount');
     }
 
     public function updateAccount(Request $request, $id)
@@ -132,5 +120,16 @@ class DasboardAdminController extends Controller
         {
             return redirect()->route('TeacherManagement');
         }
+    }
+    public function classmanagement()
+    {
+        $Teacher= TaiKhoan::where('ID_LoaiTaiKhoan',3)->get();
+        return view('admin/ClassManagement/ClassManagement',compact('Teacher'));
+    }
+    public function ShowClass($id)
+    {
+        $Teacher= TaiKhoan::where('ID_LoaiTaiKhoan',3)->get();
+        $class=Lop::where('ID_TaiKhoan',$id)->get();
+        return view('admin/ClassManagement/abc',compact('Teacher','class'));
     }
 }

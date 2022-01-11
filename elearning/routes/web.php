@@ -59,28 +59,6 @@ Route::prefix('classlist')->middleware('checkadmin')->group(function () {
     Route::get('/student_join_class/delete/{id_lop}/{id_taikhoan}',[LopController::class, 'deletestudent'])->name('deletestudent');   
     });
 
-// Route::get('/classlist', [LopController::class, 'showclass'])->name('classlist');
-// Route::get('/autojoinclass/{id}', [LopController::class,'autojoinclass'])->name('autojoin');
-// Route::post('/classlist', [LopController::class, 'showpersonalclass'])->name('showpersonalclass');
-// Route::get('/classlist/create_class',[LopController::class, 'showCreateClass'])->name('showCreateClass');
-// Route::post('/classlist/create_class',[LopController::class, 'CreateClass'])->name('CreateClass');
-// Route::post('/classlist/join',[LopController::class, 'joinclass'])->name('joinclass');
-// Route::get('/classlist/classdetail/{id}',[LopController::class, 'classdetail'])->name('classdetail');
-// Route::get('/classlist/updateclass/{id}', [LopController::class, 'updateclass'])->name('updateClass');
-// Route::get('/classlist/deleteclass/{id}', [LopController::class, 'deleteclass'])->name('deleteClass');
-// Route::get('/classlist/addstudent/{id}',[LopController::class, 'addstudent'])->name('addstudent');
-// Route::post('/classlist/add_student/{id}',[LopController::class, 'add_student'])->name('add_student');
-// Route::get('/student_join_class', [LopController::class, 'checktoken'])->name('checktoken');
-// Route::get('/linkclass', [LopController::class, 'joinlink']);
-// Route::get('/classlist/classdetail/everyone/{id}', [LopController::class, 'everyone'])->name('everyone');
-// Route::get('/classlist/addlesson/{id}',[LopController::class, 'showaddlesson'])->name('showaddlesson');
-// Route::post('/classlist/addlesson/{id}',[LopController::class, 'addlesson'])->name('addlesson');
-// Route::get('/student_join_class/confirm/{id_lop}/{id_taikhoan}',[LopController::class, 'confirmstudent'])->name('confirmstudent');
-// Route::get('/student_join_class/delete/{id_lop}/{id_taikhoan}',[LopController::class, 'deletestudent'])->name('deletestudent');
-// Route::get('/classlist/detaillesson/{id}',[LopController::class, 'showdetaillesson'])->name('showdetaillesson');
-
-
-
 
 Route::post('/login', [DangNhapController::class, 'xuLyDangNhap'])->name('xl-dang-nhap');
 Route::get('/logout', [DangNhapController::class, 'dangxuat'])->name('logout');
@@ -162,24 +140,8 @@ Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
     Route::prefix('studentmanagement')->group(function () {
         Route::get('/', [DasboardAdminController::class, 'StudentManagement'])->name("StudentManagement");
     });
+    Route::prefix('classmanagement')->group(function () {
+        Route::get('/', [DasboardAdminController::class, 'classmanagement'])->name("classmanagement");
+        Route::get('/ShowClass/{id}', [DasboardAdminController::class, 'ShowClass'])->name("ShowClass");
+    });
 });
-
-// Route::get('admin/teachermanagement', [DasboardAdminController::class, 'TeacherManagement'])->name("TeacherManagement");
-// Route::get('admin/studentmanagement', [DasboardAdminController::class, 'StudentManagement'])->name("StudentManagement");
-// Route::get('admin/createAccount', [DasboardAdminController::class, 'showcreateAccount'])->name("showcreateAccount");
-// Route::post('admin/createAccount', [DasboardAdminController::class, 'createAccount'])->name("createAccount");
-// Route::get('admin/updateAccount/{id}', [DasboardAdminController::class, 'showupdateAccount'])->name("showupdateAccount");
-// Route::post('admin/updateAccount/{id}', [DasboardAdminController::class, 'updateAccount'])->name("updateAccount");
-// Route::get('admin/deleteAccount/{id}', [DasboardAdminController::class, 'deleteAccount'])->name("deleteAccount");
-    
-
-// Route::get('admin', [DasboardAdminController::class, 'admin_index'])->name("admin_index");
-
-// Route::get('admin/teachermanagement', [DasboardAdminController::class, 'TeacherManagement'])->name("TeacherManagement");
-// Route::get('admin/studentmanagement', [DasboardAdminController::class, 'StudentManagement'])->name("StudentManagement");
-// Route::get('admin/createAccount', [DasboardAdminController::class, 'showcreateAccount'])->name("showcreateAccount");
-// Route::post('admin/createAccount', [DasboardAdminController::class, 'createAccount'])->name("createAccount");
-// Route::get('admin/updateAccount/{id}', [DasboardAdminController::class, 'showupdateAccount'])->name("showupdateAccount");
-// Route::post('admin/updateAccount/{id}', [DasboardAdminController::class, 'updateAccount'])->name("updateAccount");
-// Route::get('admin/deleteAccount/{id}', [DasboardAdminController::class, 'deleteAccount'])->name("deleteAccount");
-
