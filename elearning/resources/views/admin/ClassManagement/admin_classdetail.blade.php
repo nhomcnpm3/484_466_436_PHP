@@ -1,4 +1,4 @@
-﻿
+
     @extends('layouts.masteradmin')
 
     @section('title', 'Admin')
@@ -93,72 +93,111 @@
             <div class="card-body">
               <div class="tab-content" id="top-tabContent">
                 <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
-                  <div class="row">
-                    @foreach($class as $value)
-                    <div class="col-xxl-4 col-lg-6">
-                      <div class="project-box"><span class="badge badge-primary">Active</span>
+                    <div class="container-fluid">
+                        <div class="row">
+                          <!-- Base styles-->
+                          <div class="col-sm-12">
+                            <form class="form-horizontal" action="{{route('ClassDetail', ['id' => $class->id])}}" method="post"
+                                enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <label class="col-sm-10">Tên lớp</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="classname" placeholder="Nhập tên lớp"
+                                            name="tenlop" value="{{$class->TenLop}}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-10">Mô tả</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="classname" placeholder="Nhập mô tả"
+                                            name="mota" value="{{$class->MoTa}}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-10">Logo</label>
+                                    <div class="col-sm-10">
+                                        <input class="input-file" id="my-file" type="file" name="logo" value="{{$class->Logo}}" disabled>
+                                        <label tabindex="0" for="my-file" class="input-file-trigger"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-10">Banner</label>
+                                    <div class="col-sm-10">
+                                        <input class="input-file" id="my-file" type="file" name="banner" value="{{$class->Banner}}" disabled>
+                                        <label tabindex="0" for="my-file" class="input-file-trigger"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">Màu chủ đề:</label>
+                                    <div class="col-sm-10">
+                                        <input type="color" id="favcolor" name="favcolor" value="{{$class->MauChuDe}}" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-10">Mã lớp</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="classname"
+                                            name="malop" value="{{$class->MaLop}}" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                  <label class="col-sm-10">Trạng thái</label>
+                                  <div class="col-sm-10">
+                                      <select name='trangthai'>
+                                          <option value="1">Hoạt động</option>
+                                          <option value="2">Ngưng hoạt động</option>
+                                      </select>
+                                  </div>
+                              </div>
+                                <div class="form-group">
+                                    <div class="col-sm-10">
+                                        <button type="submit" id="submit" class="btn btn-default">Save</button>
+                                    </div>
+                                </div>
+                            </form>
+                          </div>
+                          <!-- Base styles Ends-->
                         
-                        <h6><img style="width:30px;height:30px;border-radius:50px;border:none;margin-right:5px;" src="{{asset('extra-images')}}/{{$value->Logo}}" alt="" data-original-title="" title="">{{$value->TenLop}}</h6>
-                        <div class="media">
-                          <div class="media-body">
-                            <p>{{$value->Mota}}</p>
-                          </div>
                         </div>
-                        <div class="row details">
-                          <div class="col-6"><span>Lesson </span></div>
-                          <div class="col-6 font-primary">
-                             @php 
-                            $count=0;
-                            foreach($value->DSBaiDang as $baidang){
-                              if($baidang->TrangThai ==1)
-                              {
-                                $count++;
-                              }
-                            }
-                            echo"$count";
-                          @endphp
-                          </div>
-                          <div class="col-6"> <span>Exercise</span></div>
-                          <div class="col-6 font-primary">@php 
-                            $count=0;
-                            foreach($value->DSBaiDang as $baidang){
-                              if($baidang->TrangThai ==2)
-                              {
-                                $count++;
-                              }
-                            }
-                            echo"$count";
-                          @endphp</div>
-                          <div class="col-6"> <span>Question</span></div>
-                          <div class="col-6 font-primary">@php 
-                            $count=0;
-                            foreach($value->DSBaiDang as $baidang){
-                              if($baidang->TrangThai ==3)
-                              {
-                                $count++;
-                              }
-                            }
-                            echo"$count";
-                          @endphp</div>
-                        </div>
-                        <div class="customers">
-                          <ul>
-                            @foreach($value->DSTaiKhoan->slice(0, 3) as $img)
-                            <li class="d-inline-block"><img class="img-30 rounded-circle" style="width:25px;height:25px;" src="{{asset('extra-images')}}/{{$img->AVT}}" alt="" data-original-title="" title=""></li>
-                            @endforeach
-                            <li class="d-inline-block ms-2">
-                              @if($value->DSTaiKhoan->count()>3)
-                              <p class="f-12">+{{$value->DSTaiKhoan->count()-3}} More</p>
-                              @endif
-                            </li>
-                          </ul>
-                        </div>
-                        <div class="project-status mt-4">
-                          <a href="{{route('ShowClassDetail',['id'=>$value->id])}}"class="btn btn-primary" type="button">Class Detail</a>                        </div>
                       </div>
-                    </div>
-                    @endforeach
-                  </div>
+                      {{-- Xuất danh sách sinh viên --}}
+                      <div class="container"> 
+                        <h1>Danh sách tài khoản trong lớp</h1>
+                        <div class="table-responsive">
+                          <table class="display table table-striped table-bordered" id="example-style-1">
+                            <thead>
+                              <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Avatar</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Address</th>
+                                <th>Birth of Date</th>
+                                <th>Status</th>
+                                <th>Type Account</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              @foreach($class->DSTaiKhoan as $value)
+                              <tr>
+                                <td>{{$value->id}}</td>
+                                <td>{{$value->Ten}}</td>
+                                <td>
+                                  <img class="img-thumbnail" style="width:120px;height:80px;"src="{{asset('extra-images')}}/{{$value->AVT}}"></td>   
+                                <td>{{$value->Phone}}</td>
+                                <td>{{$value->Email}}</td>
+                                <td>{{$value->DiaChi}}</td>
+                                <td>{{$value->NgaySinh}}</td>
+                                <td>{{$value->TrangThai}}</td>
+                                <td>{{$value->ID_LoaiTaiKhoan}}</td>
+                                </tr>
+                              @endforeach
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
                 </div>
               </div>
             </div>

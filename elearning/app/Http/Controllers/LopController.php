@@ -22,7 +22,7 @@ class LopController extends Controller
     {
         if ((Auth::check())) {
             $classlist = taikhoan::find(auth()->user()->id);
-            return view('user/class/classlist', compact('classlist'))->with('order', '1');
+            return view('user/class/classlist', compact('classlist'))->with('order', '0');
         }
         return redirect()->route('home');
     }
@@ -58,6 +58,7 @@ class LopController extends Controller
         $chitietlop = new chitietlop;
         $chitietlop->ID_TaiKhoan = auth()->user()->id;
         $chitietlop->ID_Lop = $lop->id;
+        $chitietlop->LoaiGiaNhap = 1;
         $chitietlop->TrangThai = 1;
         $chitietlop->save();
         return redirect()->route('classlist');
@@ -78,7 +79,9 @@ class LopController extends Controller
                 $chitietlop->TrangThai = 1;
             }elseif($lop->trangthai==2){
                 $chitietlop->TrangThai = 2;
-            }            $chitietlop->save();
+            }            
+            $chitietlop->LoaiGiaNhap = 2;
+            $chitietlop->save();
             return redirect()->route('classlist');
         }
         return redirect()->route('classlist');
@@ -88,7 +91,11 @@ class LopController extends Controller
         $taikhoan = taikhoan::find(auth()->user()->id);
         $classdetail = lop::find($id);
         $dsBaiDang = baidang::where('ID_Lop',$id)->get();
-        return view('user/class/class_detail', compact('classdetail','dsBaiDang', 'taikhoan'));
+        $checkgetlink= chitietlop::where([['ID_TaiKhoan',auth()->user()->id],['ID_Lop',$id]])->first();
+        if(!empty($checkgetlink)){
+            return view('user/class/class_detail', compact('classdetail','dsBaiDang', 'taikhoan'));
+        }
+        return redirect()->route('404');
     }
     public function addstudent($id)
     {
@@ -132,14 +139,14 @@ class LopController extends Controller
                             $GiaNhapLop->ID_TaiKhoan = $taikhoan->id;
                             $GiaNhapLop->ID_Lop = $id;
                             $mail->addAddress($email);
-                            $mail->MsgHTML("<p>Xin vui long đăng nhập bằng email: <b>$email</b> trước khi nhân vào:click here.</p> <p>$request->content</p><a href='http://127.0.0.1:8000/student_join_class?token={$token}'>click here</a>");
+                            $mail->MsgHTML("<p>Xin vui long đăng nhập bằng email: <b>$email</b> trước khi nhân vào:click here.</p> <p>$request->content</p><a href='http://127.0.0.1:8000/classlist/student_join_class?token={$token}'>click here</a>");
                             $mail->send();
                             $GiaNhapLop->save();
                             $success .= "{$email} - ";
                         } else {
                             $checkgianhap->Token_mail = $token;
                             $mail->addAddress($email);
-                            $mail->MsgHTML("<p>Xin vui long đăng nhập bằng email: <b>$email</b> trước khi nhân vào:click here.</p> <p>$request->content</p><a href='http://127.0.0.1:8000/student_join_class?token={$token}'>click here</a>");
+                            $mail->MsgHTML("<p>Xin vui long đăng nhập bằng email: <b>$email</b> trước khi nhân vào:click here.</p> <p>$request->content</p><a href='http://127.0.0.1:8000/classlist/student_join_class?token={$token}'>click here</a>");
                             $mail->send();
                             $checkgianhap->save();
                             $success .= "{$email} - ";
@@ -177,17 +184,18 @@ class LopController extends Controller
                     $chitietlop->ID_TaiKhoan = $checkgianhap->ID_TaiKhoan;
                     $chitietlop->ID_Lop = $checkgianhap->ID_Lop;
                     $chitietlop->TrangThai = 1;
+                    $chitietlop->LoaiGiaNhap = 2;
                     $chitietlop->save();
                     $checkgianhap->save();
                     return redirect()->route('classdetail', ['id' => $checkgianhap->ID_Lop]);
                 } else {
                     session(['token' => $token]);
-                    return "Vui lòng đăng nhập với Email là: <b>$taikhoan->Email</b> <br/> <a href='home'>Đăng nhập</a>";
+                    return "Vui lòng đăng nhập với Email là: <b>$taikhoan->Email</b> <br/> <a href='../'>Đăng nhập</a>";
                 }
             }
             else{
                 session(['token' => $token]);
-                return "Vui lòng đăng nhập với Email là: <b>$taikhoan->Email</b> <br/> <a href='home'>Đăng nhập</a>";
+                return "Vui lòng đăng nhập với Email là: <b>$taikhoan->Email</b> <br/> <a href='../'>Đăng nhập</a>";
             }
         } else {
             return redirect()->route('404');
@@ -209,6 +217,7 @@ class LopController extends Controller
                     }elseif($class->trangthai==2){
                         $chitietlop->TrangThai = 2;
                     }
+                    $chitietlop->LoaiGiaNhap = 2;
                     $chitietlop->save();
                     return redirect()->route('classdetail', ['id' => $class->id]);
                 }
@@ -231,9 +240,13 @@ class LopController extends Controller
             if ($request->order == 1) {
                 $classlist = taikhoan::find(auth()->user()->id);
                 return view('user/class/classlist', compact('classlist'))->with('order', '1');
-            } else {
+            } elseif($request->order == 2)
+            {
                 $classlist = taikhoan::find(auth()->user()->id);
                 return view('user/class/classlist', compact('classlist'))->with('order', '2');
+            }else{
+                $classlist = taikhoan::find(auth()->user()->id);
+                return view('user/class/classlist', compact('classlist'))->with('order', '0');
             }
         }
         return redirect()->route('home');

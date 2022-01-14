@@ -24,7 +24,7 @@ class DangNhapController extends Controller
             $checkjoinclass=gianhaplop::where('Token_mail',$token)->first();
             if(!empty($checkjoinclass)){
                 if(auth()->user()->id==$checkjoinclass->ID_TaiKhoan){
-                    return Redirect::to("http://127.0.0.1:8000/student_join_class?token={$token}");
+                    return Redirect::to("http://127.0.0.1:8000/classlist/student_join_class?token={$token}");
                 }
             }
             return redirect()->route('home');

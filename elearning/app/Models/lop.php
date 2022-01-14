@@ -10,7 +10,7 @@ class Lop extends Model
     use HasFactory;
     protected $table = "Lop";
     public function DSTaiKhoan(){
-        return $this->belongsToMany('App\Models\taikhoan','chitietlop','ID_Lop','ID_TaiKhoan')->withPivot('TrangThai');
+        return $this->belongsToMany('App\Models\taikhoan','chitietlop','ID_Lop','ID_TaiKhoan')->withPivot('TrangThai')->withPivot('LoaiGiaNhap');
     }
     public function TaiKhoan()
     {

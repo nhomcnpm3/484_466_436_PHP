@@ -19,7 +19,7 @@ class TaiKhoan extends Authentication
         return $this->belongsTo('App\Models\LoaiTaiKhoan');
     }
     public function DSLop(){
-        return $this->belongsToMany('App\Models\lop','chitietlop','ID_TaiKhoan','ID_Lop')->withPivot('TrangThai');
+        return $this->belongsToMany('App\Models\lop','chitietlop','ID_TaiKhoan','ID_Lop')->withPivot('TrangThai')->withPivot('LoaiGiaNhap');
     }
     public function DSBaiDang()
     {

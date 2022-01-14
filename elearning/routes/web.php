@@ -34,8 +34,10 @@ Route::get('/repupdateotp',[TwilioSMSController::class, 'replyupdateOTP'])->name
 Route::post('checkupdateotp', [TwilioSMSController::class, 'Checkupdateotp'])->name('verifyupdateotp');
 Route::post('sendotp', [TwilioSMSController::class, 'Updatephone'])->name('sendotp');
 
+Route::get('autojoinclass/{id}', [LopController::class,'autojoinclass'])->name('autojoin');
+Route::get('linkclass', [LopController::class, 'joinlink']);
 
-Route::prefix('classlist')->middleware('checkadmin')->group(function () {
+Route::prefix('classlist')->middleware('auth')->group(function () {
     Route::get('/', [LopController::class, 'showclass'])->name('classlist');
     Route::post('/', [LopController::class, 'showpersonalclass'])->name('showpersonalclass');
     Route::get('create_class',[LopController::class, 'showCreateClass'])->name('showCreateClass');
@@ -45,14 +47,12 @@ Route::prefix('classlist')->middleware('checkadmin')->group(function () {
     Route::get('updateclass/{id}', [LopController::class, 'updateclass'])->name('updateClass');
     Route::get('deleteclass/{id}', [LopController::class, 'deleteclass'])->name('deleteClass');
     Route::get('student_join_class', [LopController::class, 'checktoken'])->name('checktoken');
-    Route::get('linkclass', [LopController::class, 'joinlink']);
     Route::get('everyone/{id}', [LopController::class, 'everyone'])->name('everyone');
     Route::prefix('Detail')->group(function () {
         Route::get('addlesson/{id}',[LopController::class, 'showaddlesson'])->name('showaddlesson');
         Route::post('addlesson/{id}',[LopController::class, 'addlesson'])->name('addlesson');
         Route::get('addstudent/{id}',[LopController::class, 'addstudent'])->name('addstudent');
         Route::post('add_student/{id}',[LopController::class, 'add_student'])->name('add_student');
-        Route::get('autojoinclass/{id}', [LopController::class,'autojoinclass'])->name('autojoin');
         Route::get('detaillesson/{id}',[LopController::class, 'showdetaillesson'])->name('showdetaillesson');
     });
     Route::get('/student_join_class/confirm/{id_lop}/{id_taikhoan}',[LopController::class, 'confirmstudent'])->name('confirmstudent');
@@ -143,5 +143,8 @@ Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
     Route::prefix('classmanagement')->group(function () {
         Route::get('/', [DasboardAdminController::class, 'classmanagement'])->name("classmanagement");
         Route::get('/ShowClass/{id}', [DasboardAdminController::class, 'ShowClass'])->name("ShowClass");
+        Route::get('/ShowClassDetail/{id}', [DasboardAdminController::class, 'ShowClassDetail'])->name("ShowClassDetail");
+        Route::post('/ClassDetail/{id}', [DasboardAdminController::class, 'ClassDetail'])->name("ClassDetail");
+
     });
 });

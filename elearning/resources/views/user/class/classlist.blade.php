@@ -47,8 +47,9 @@
                                     @csrf
 
                                     <select name="order" onchange='this.form.submit()'>
-                                        <option value="1">Joined class</option>
-                                        <option @if($order==2)selected="selected"@endif value="2">Personal class</option>
+                                        <option @if ($order == 0)selected="selected"@endif value="0">All Class</option>
+                                        <option @if ($order == 1)selected="selected"@endif value="1">Joined class</option>
+                                        <option @if ($order == 2)selected="selected"@endif value="2">Personal class</option>
                                     </select>
                                 </form>
 
@@ -73,41 +74,73 @@
                             <ul class="row">
                                 @if ($order == 1)
                                     @forelse($classlist->DSLop as $class)
-                                        @if($class->pivot->TrangThai==1)
-                                        <li class="col-md-12">
-                                            <div class="wm-courses-popular-wrap">
-                                                <figure> <a href="{{ route('classdetail', ['id' => $class->id]) }}"><img
-                                                            src="{{ asset('extra-images') }}/{{ $class->Logo }}"
-                                                            style="width:265px;height:155px;" alt=""> <span
-                                                            class="wm-popular-hover"> <small>see class</small> </span> </a>
-                                                    <figcaption style="background-color:{{$class->MauChuDe}}">
+                                        @if ($class->pivot->LoaiGiaNhap == 2)
+                                            <li class="col-md-12">
+                                                <div class="wm-courses-popular-wrap">
+                                                    <figure> <a
+                                                            href="{{ route('classdetail', ['id' => $class->id]) }}"><img
+                                                                src="{{ asset('extra-images') }}/{{ $class->Logo }}"
+                                                                style="width:265px;height:155px;" alt=""> <span
+                                                                class="wm-popular-hover"> <small>see class</small> </span>
+                                                        </a>
+                                                        <figcaption style="background-color:{{ $class->MauChuDe }}">
+                                                            <h6><a
+                                                                    href="{{ route('classdetail', ['id' => $class->id]) }}">{{ $class->TaiKhoan->Ten }}</a>
+                                                            </h6>
+                                                        </figcaption>
+                                                    </figure>
+                                                    <div class="wm-popular-courses-text">
                                                         <h6><a
-                                                                href="{{ route('classdetail', ['id' => $class->id]) }}">{{ $class->TaiKhoan->Ten }}</a>
+                                                                href="{{ route('classdetail', ['id' => $class->id]) }}">{{ $class->TenLop }}</a>
                                                         </h6>
-                                                    </figcaption>
-                                                </figure>
-                                                <div class="wm-popular-courses-text">
-                                                    <h6><a
-                                                            href="{{ route('classdetail', ['id' => $class->id]) }}">{{ $class->TenLop }}</a>
-                                                    </h6>
-                                                    <p>{{ $class->mota }}</p>
+                                                        <p>{{ $class->mota }}</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </li>
+                                            </li>
                                         @endif
                                     @empty
                                         <p>Khong co du lieu</p>
                                     @endforelse
-                                @elseif($order ==2)
-                                    @forelse($classlist->DanhsachLop as $class)
-                                    @if($class->pivot->TrangThai==1)
+                                @elseif($order == 2)
+                                    @forelse($classlist->DSLop as $class)
+                                        @if ($class->pivot->LoaiGiaNhap == 1)
+                                            <li class="col-md-12">
+                                                <div class="wm-courses-popular-wrap">
+                                                    <figure> <a
+                                                            href="{{ route('classdetail', ['id' => $class->id]) }}"><img
+                                                                src="{{ asset('extra-images') }}/{{ $class->Logo }}"
+                                                                style="width:265px;height:155px;" alt=""> <span
+                                                                class="wm-popular-hover"> <small>see class</small> </span>
+                                                        </a>
+                                                        <figcaption style="background-color:{{ $class->MauChuDe }}">
+                                                            <h6><a
+                                                                    href="{{ route('classdetail', ['id' => $class->id]) }}">{{ $class->TaiKhoan->Ten }}</a>
+                                                            </h6>
+                                                        </figcaption>
+                                                    </figure>
+                                                    <div class="wm-popular-courses-text">
+                                                        <h6><a
+                                                                href="{{ route('classdetail', ['id' => $class->id]) }}">{{ $class->TenLop }}</a>
+                                                        </h6>
+                                                        <p>{{ $class->mota }}</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        @endif
+
+                                    @empty
+                                        <p>Khong co du lieu</p>
+                                    @endforelse
+
+                                @elseif($order == 0)
+                                    @forelse($classlist->DSLop as $class)
                                         <li class="col-md-12">
                                             <div class="wm-courses-popular-wrap">
                                                 <figure> <a href="{{ route('classdetail', ['id' => $class->id]) }}"><img
                                                             src="{{ asset('extra-images') }}/{{ $class->Logo }}"
                                                             style="width:265px;height:155px;" alt=""> <span
                                                             class="wm-popular-hover"> <small>see class</small> </span> </a>
-                                                    <figcaption style="background-color:{{$class->MauChuDe}}>
+                                                    <figcaption style="background-color:{{ $class->MauChuDe }}">
                                                         <h6><a
                                                                 href="{{ route('classdetail', ['id' => $class->id]) }}">{{ $class->TaiKhoan->Ten }}</a>
                                                         </h6>
@@ -121,8 +154,6 @@
                                                 </div>
                                             </div>
                                         </li>
-                                        @endif
-
                                     @empty
                                         <p>Khong co du lieu</p>
                                     @endforelse

@@ -132,4 +132,24 @@ class DasboardAdminController extends Controller
         $class=Lop::where('ID_TaiKhoan',$id)->get();
         return view('admin/ClassManagement/abc',compact('Teacher','class'));
     }
+    public function ShowClassDetail($id)
+    {
+        $class=Lop::find($id);
+        return view('admin/ClassManagement/admin_classdetail',compact('class'));
+    }
+    public function ClassDetail($id, Request $request)
+    {
+        $class=Lop::find($id);
+        $class->TenLop = $request->tenlop;
+        $class->MoTa = $request->mota;
+        $class->Logo = $class->Logo;
+        $class->Banner = $class->Banner;
+        $class->MauChuDe = $class->MauChuDe;
+        $class->TrangThai = $request->trangthai;
+        $class->ID_TaiKhoan = $class->ID_TaiKhoan;
+        $class->MaLop = $class->MaLop;
+        $class->token = $class->token;
+        $class->save();
+        return redirect()->route('ShowClass', ['id' => $class->ID_TaiKhoan]);
+    }
 }
