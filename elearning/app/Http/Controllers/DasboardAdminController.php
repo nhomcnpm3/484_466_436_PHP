@@ -34,7 +34,7 @@ class DasboardAdminController extends Controller
         $Student= TaiKhoan::where('ID_LoaiTaiKhoan',2)->get();
 
         
-        dd($Student->count());
+        dd($images);
 
         return view('admin/filemanager',compact('Student'));
     }
