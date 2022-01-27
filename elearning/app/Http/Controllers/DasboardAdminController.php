@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\TaiKhoan;
 use App\Models\Lop;
 use App\Models\ChiTietLop;
@@ -13,32 +14,59 @@ class DasboardAdminController extends Controller
 {
     public function admin_index()
     {
-        
+
         return view('admin/index');
     }
     public function TeacherManagement()
     {
-        $Teacher= TaiKhoan::where('ID_LoaiTaiKhoan',3)->get();
+        $Teacher = TaiKhoan::where('ID_LoaiTaiKhoan', 3)->get();
         //$a= Storage::disk('public-folder')->allFiles('');
-        return view('admin/TeacherManagement',compact('Teacher'));
+        return view('admin/TeacherManagement', compact('Teacher'));
     }
     public function StudentManagement()
     {
-        $Student= TaiKhoan::where('ID_LoaiTaiKhoan',2)->get();
-        return view('admin/StudentManagement',compact('Student'));
+        $Student = TaiKhoan::where('ID_LoaiTaiKhoan', 2)->get();
+        return view('admin/StudentManagement', compact('Student'));
     }
-    
+
     public function FileManagement()
     {
-        $images= Storage::disk('public-folder')->allFiles('');
-        $Student= TaiKhoan::where('ID_LoaiTaiKhoan',2)->get();
+        $images = Storage::disk('public-images')->allFiles('');
+        $file = Storage::disk('public-file')->allFiles('');
 
-        
-        dd($images);
-
-        return view('admin/filemanager',compact('Student'));
+        return view('admin/FileManagement/filemanager', compact('images', 'file'));
     }
-    
+    public function DetailFileManager($id)
+    {
+
+        if ($id == 'Images') {
+            $files_with_size = array();
+            $files = Storage::disk('public-images')->files();
+            foreach ($files as $key => $file) {
+                $size = Storage::disk('public-images')->size($file);
+
+                $base = log($size, 1024);
+                $suffixes = array('', 'Kb', 'Mb', 'Gb', 'Tb');
+
+                $files_with_size[$key]['name'] = $file;
+                $files_with_size[$key]['size'] = round(pow(1024, $base - floor($base)), 2) . ' ' . $suffixes[floor($base)];
+            }
+        } else {
+            $files_with_size = array();
+            $files = Storage::disk('public-file')->files();
+            foreach ($files as $key => $file) {
+                $size = Storage::disk('public-file')->size($file);
+
+                $base = log($size, 1024);
+                $suffixes = array('', 'Kb', 'Mb', 'Gb', 'Tb');
+
+                $files_with_size[$key]['name'] = $file;
+                $files_with_size[$key]['size'] = round(pow(1024, $base - floor($base)), 2) . ' ' . $suffixes[floor($base)];
+            }
+        }
+        return view('admin/FileManagement/DetailFolder', compact('files_with_size'));
+    }
+
     public function showcreateAccount()
     {
         return view('admin/createAccount');
@@ -51,7 +79,7 @@ class DasboardAdminController extends Controller
 
         $time = time();
         $file = $request->file('avt')->getClientOriginalName();
-        $new_img_name = $time."-".$file;
+        $new_img_name = $time . "-" . $file;
         $uploadFile = $request->avt;
         $uploadFile->storeAs('extra-images', $new_img_name);
 
@@ -81,21 +109,18 @@ class DasboardAdminController extends Controller
         $account = TaiKhoan::find($id);
         $account->Ten = $request->fullname;
 
-        if($request->avt !="")
-        {
+        if ($request->avt != "") {
             $time = time();
             $file = $request->file('avt')->getClientOriginalName();
-            $new_img_name = $time."-".$file;
+            $new_img_name = $time . "-" . $file;
             $uploadFile = $request->avt;
             $uploadFile->storeAs('extra-images', $new_img_name);
 
             $account->AVT = $new_img_name;
-        }
-        else
-        {
+        } else {
             $account->AVT = $account->AVT;
         }
-        
+
         $account->Phone = $request->phone;
         $account->Email = $request->email;
         $account->DiaChi = $request->address;
@@ -107,15 +132,12 @@ class DasboardAdminController extends Controller
         $account->ID_LoaiTaiKhoan = $request->typeAccount;
 
         $account->save();
-        if($account->ID_LoaiTaiKhoan == 2)
-        {
+        if ($account->ID_LoaiTaiKhoan == 2) {
             return redirect()->route('StudentManagement');
         }
-        if($account->ID_LoaiTaiKhoan == 3)
-        {
+        if ($account->ID_LoaiTaiKhoan == 3) {
             return redirect()->route('TeacherManagement');
         }
-        
     }
 
     public function deleteAccount($id)
@@ -125,34 +147,32 @@ class DasboardAdminController extends Controller
         ChiTietLop::where('ID_TaiKhoan', $id)->delete();
         Lop::where('ID_TaiKhoan', $id)->delete();
         BaiDang::where('ID_TaiKhoan', $id)->delete();
-        if($loaitk->ID_LoaiTaiKhoan == 2)
-        {
+        if ($loaitk->ID_LoaiTaiKhoan == 2) {
             return redirect()->route('StudentManagement');
         }
-        if($loaitk->ID_LoaiTaiKhoan == 3)
-        {
+        if ($loaitk->ID_LoaiTaiKhoan == 3) {
             return redirect()->route('TeacherManagement');
         }
     }
     public function classmanagement()
     {
-        $Teacher= TaiKhoan::where('ID_LoaiTaiKhoan',3)->get();
-        return view('admin/ClassManagement/ClassManagement',compact('Teacher'));
+        $Teacher = TaiKhoan::where('ID_LoaiTaiKhoan', 3)->get();
+        return view('admin/ClassManagement/ClassManagement', compact('Teacher'));
     }
     public function ShowClass($id)
     {
-        $Teacher= TaiKhoan::where('ID_LoaiTaiKhoan',3)->get();
-        $class=Lop::where('ID_TaiKhoan',$id)->get();
-        return view('admin/ClassManagement/abc',compact('Teacher','class'));
+        $Teacher = TaiKhoan::where('ID_LoaiTaiKhoan', 3)->get();
+        $class = Lop::where('ID_TaiKhoan', $id)->get();
+        return view('admin/ClassManagement/abc', compact('Teacher', 'class'));
     }
     public function ShowClassDetail($id)
     {
-        $class=Lop::find($id);
-        return view('admin/ClassManagement/admin_classdetail',compact('class'));
+        $class = Lop::find($id);
+        return view('admin/ClassManagement/admin_classdetail', compact('class'));
     }
     public function ClassDetail($id, Request $request)
     {
-        $class=Lop::find($id);
+        $class = Lop::find($id);
         $class->TenLop = $request->tenlop;
         $class->MoTa = $request->mota;
         $class->Logo = $class->Logo;

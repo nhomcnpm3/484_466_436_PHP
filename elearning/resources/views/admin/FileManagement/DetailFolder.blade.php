@@ -1,4 +1,4 @@
-﻿@extends('layouts.masteradmin')
+@extends('layouts.masteradmin')
  @section('title', 'Admin')
   @section('link')
   <link rel="icon" href="{{asset('assets/images/favicon.png" type="image/x-icon')}}">
@@ -165,101 +165,32 @@
                             <h4>All Files</h4>
                             <h6>Recently opened files</h6>
                             <ul class="files">
+                                @foreach($files_with_size as $value)
                                 <li class="file-box">
-                                    <div class="file-top"> <i class="fa fa-file-image-o txt-primary"></i><i class="fa fa-ellipsis-v f-14 ellips"></i></div>
+                                    <div class="file-top"> 
+                                        @php $domain=explode(".", $value['name']) @endphp
+                                        @if($domain[1]=='docx')
+                                        <i class="fa fa-file-word-o" style="color:blue"></i>
+                                        @endif
+                                        @if($domain[1]=='jpeg' ||$domain[1]=='png' ||$domain[1]=='jpg')
+                                        <i class="fa fa-file-image-o txt-primary"></i>
+                                        @endif
+                                        @if($domain[1]=='pptx')
+                                        <i class="fa fa-file-powerpoint-o txt-danger"></i>
+                                        @endif
+                                        @if($domain[1]=='zip'||$domain[1]=='rar')
+                                        <i class="fa fa-file-archive-o txt-secondary"></i>
+                                        @endif
+                                        <i class="fa fa-ellipsis-v f-14 ellips"></i></div>
                                     <div class="file-bottom">
-                                        <h6>Logo.psd </h6>
-                                        <p class="mb-1">2.0 MB</p>
+                                        <h6>{{$value['name']}}</h6>
+                                        <p class="mb-1">{{$value['size']}}</p>
                                         <p> <b>last open : </b>1 hour ago</p>
                                     </div>
                                 </li>
-                                <li class="file-box">
-                                    <div class="file-top"> <i class="fa fa-file-archive-o txt-secondary"></i><i class="fa fa-ellipsis-v f-14 ellips"></i></div>
-                                    <div class="file-bottom">
-                                        <h6>Project.zip </h6>
-                                        <p class="mb-1">1.90 GB</p>
-                                        <p> <b>last open : </b>1 hour ago</p>
-                                    </div>
-                                </li>
-                                <li class="file-box">
-                                    <div class="file-top"> <i class="fa fa-file-excel-o txt-success"></i><i class="fa fa-ellipsis-v f-14 ellips"></i></div>
-                                    <div class="file-bottom">
-                                        <h6>Backend.xls</h6>
-                                        <p class="mb-1">2.00 GB</p>
-                                        <p> <b>last open : </b>1 hour ago</p>
-                                    </div>
-                                </li>
-                                <li class="file-box">
-                                    <div class="file-top"> <i class="fa fa-file-text-o txt-info"></i><i class="fa fa-ellipsis-v f-14 ellips"></i></div>
-                                    <div class="file-bottom">
-                                        <h6>requirements.txt </h6>
-                                        <p class="mb-1">0.90 KB</p>
-                                        <p> <b>last open : </b>1 hour ago</p>
-                                    </div>
-                                </li>
+                                @endforeach
                             </ul>
-                            <h5 class="mt-4">Folders</h5>
-                            <ul class="folder">
-                                <li class="folder-box">
-                                    <div class="media"><i class="fa fa-folder f-36 txt-warning"></i>
-                                        <div class="media-body ms-3">
-                                            <h6 class="mb-0">Images</h6>
-                                            <p>101 files, 10mb</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="folder-box">
-                                    <div class="media"><i class="fa fa-folder f-36 txt-warning"></i>
-                                        <div class="media-body ms-3">
-                                            <h6 class="mb-0">File upload</h6>
-                                            <p>108 files, 5mb</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="folder-box">
-                                    <div class="media"><i class="fa fa-file-archive-o f-36 txt-warning"></i>
-                                        <div class="media-body ms-3">
-                                            <h6 class="mb-0">Endless admin</h6>
-                                            <p>25 files, 2mb</p>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <h5 class="mt-4">Files</h5>
-                            <ul class="files">
-                                <li class="file-box">
-                                    <div class="file-top"> <i class="fa fa-file-archive-o txt-secondary"></i><i class="fa fa-ellipsis-v f-14 ellips"></i></div>
-                                    <div class="file-bottom">
-                                        <h6>Project.zip </h6>
-                                        <p class="mb-1">1.90 GB</p>
-                                        <p> <b>last open : </b>1 hour ago</p>
-                                    </div>
-                                </li>
-                                <li class="file-box">
-                                    <div class="file-top"> <i class="fa fa-file-excel-o txt-success"></i><i class="fa fa-ellipsis-v f-14 ellips"></i></div>
-                                    <div class="file-bottom">
-                                        <h6>Backend.xls</h6>
-                                        <p class="mb-1">2.00 GB</p>
-                                        <p> <b>last open : </b>1 hour ago</p>
-                                    </div>
-                                </li>
-                                <li class="file-box">
-                                    <div class="file-top"> <i class="fa fa-file-text-o txt-info"></i><i class="fa fa-ellipsis-v f-14 ellips"></i></div>
-                                    <div class="file-bottom">
-                                        <h6>requirements.txt </h6>
-                                        <p class="mb-1">0.90 KB</p>
-                                        <p> <b>last open : </b>1 hour ago</p>
-                                    </div>
-                                </li>
-                                <li class="file-box">
-                                    <div class="file-top"> <i class="fa fa-file-text-o txt-primary"></i><i class="fa fa-ellipsis-v f-14 ellips"></i></div>
-                                    <div class="file-bottom">
-                                        <h6>Logo.psd </h6>
-                                        <p class="mb-1">2.0 MB</p>
-                                        <p> <b>last open : </b>1 hour ago</p>
-                                    </div>
-                                </li>
-                            </ul>
+                           
                         </div>
                     </div>
                 </div>
@@ -268,44 +199,6 @@
     </div>
     <!-- Container-fluid Ends-->
 </div>
-<!-- footer start-->
-<footer class="footer">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6 footer-copyright">
-                <p class="mb-0">Copyright 2021-22 © viho All rights reserved.</p>
-            </div>
-            <div class="col-md-6">
-                <p class="pull-right mb-0">Hand crafted & made with <i class="fa fa-heart font-secondary"></i></p>
-            </div>
-        </div>
-    </div>
-</footer>
-<div class="icon-hover-bottom p-fixed fa-fa-icon-show-div opecity-0">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="icon-popup">
-                <div class="close-icon"><i class="icofont icofont-close"></i></div>
-                <div class="icon-first"><i id="icon_main"></i></div>
-                <div class="icon-class">
-                    <label class="icon-title">data-feather</label><span id="fclass1"></span>
-                </div>
-                <div class="icon-last icon-last">
-                    <label class="icon-title">Markup</label>
-                    <div class="form-inline">
-                        <div class="form-group">
-                            <input class="inp-val form-control m-r-10" id="input_copy" type="text" value="" readonly="readonly">
-                            <button class="btn btn-primary notification" onclick="myFunction()">Copy text</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-</div>
-
 
 @endsection
          @section('script')

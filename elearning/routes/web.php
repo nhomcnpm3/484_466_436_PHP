@@ -142,6 +142,8 @@ Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
     });
     Route::prefix('filemanagement')->group(function () {
         Route::get('/', [DasboardAdminController::class, 'FileManagement'])->name("FileManagement");
+        Route::get('/{id}', [DasboardAdminController::class, 'DetailFileManager'])->name("DetailFile");
+
     });
     Route::prefix('classmanagement')->group(function () {
         Route::get('/', [DasboardAdminController::class, 'classmanagement'])->name("classmanagement");
