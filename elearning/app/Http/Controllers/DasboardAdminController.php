@@ -7,6 +7,7 @@ use App\Models\ChiTietLop;
 use App\Models\BaiDang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class DasboardAdminController extends Controller
 {
@@ -18,12 +19,24 @@ class DasboardAdminController extends Controller
     public function TeacherManagement()
     {
         $Teacher= TaiKhoan::where('ID_LoaiTaiKhoan',3)->get();
+        //$a= Storage::disk('public-folder')->allFiles('');
         return view('admin/TeacherManagement',compact('Teacher'));
     }
     public function StudentManagement()
     {
         $Student= TaiKhoan::where('ID_LoaiTaiKhoan',2)->get();
         return view('admin/StudentManagement',compact('Student'));
+    }
+    
+    public function FileManagement()
+    {
+        $images= Storage::disk('public-folder')->allFiles('');
+        $Student= TaiKhoan::where('ID_LoaiTaiKhoan',2)->get();
+
+        
+        dd($Student->count());
+
+        return view('admin/filemanager',compact('Student'));
     }
     
     public function showcreateAccount()

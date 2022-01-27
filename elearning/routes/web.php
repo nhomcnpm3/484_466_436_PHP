@@ -140,6 +140,9 @@ Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
     Route::prefix('studentmanagement')->group(function () {
         Route::get('/', [DasboardAdminController::class, 'StudentManagement'])->name("StudentManagement");
     });
+    Route::prefix('filemanagement')->group(function () {
+        Route::get('/', [DasboardAdminController::class, 'FileManagement'])->name("FileManagement");
+    });
     Route::prefix('classmanagement')->group(function () {
         Route::get('/', [DasboardAdminController::class, 'classmanagement'])->name("classmanagement");
         Route::get('/ShowClass/{id}', [DasboardAdminController::class, 'ShowClass'])->name("ShowClass");

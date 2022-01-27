@@ -44,7 +44,10 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
-
+        'public-folder' => [
+            'driver' => 'local',
+            'root'   => public_path('extra-images'),
+        ],
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
