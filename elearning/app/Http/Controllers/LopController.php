@@ -10,6 +10,8 @@ use App\Models\chitietlop;
 use App\Models\gianhaplop;
 use App\Models\baidang;
 use App\Models\tepbaidang;
+use App\Models\tepbainop;
+use App\Models\tepbinhluan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -271,14 +273,32 @@ class LopController extends Controller
         $file = $request->file('file_upload')->getClientOriginalName();
         $new_file_name = $time."-".$file;
         $uploadFile = $request->file_upload;
-        $uploadFile->storeAs('file', $new_file_name);
-
-        $tepbaidang = new tepbaidang;
-        $tepbaidang->Url = $new_file_name;
-        $tepbaidang->save();
-
-        $baidang->ID_TepBaiDang = $tepbaidang->id;
         $baidang->save();
+        if($request->status == 1)
+        {
+            $uploadFile->storeAs('filebaidang', $new_file_name);
+            $tepbaidang = new tepbaidang;
+            $tepbaidang->Url = $new_file_name;
+            $tepbaidang->ID_BaiDang = $baidang->id;
+            $tepbaidang->save();
+        }
+        else if($request->status == 2)
+        {
+            $uploadFile->storeAs('filebainop', $new_file_name);
+            $tepbainop = new tepbainop;
+            $tepbainop->Url = $new_file_name;
+            $tepbainop->ID_BaiDang = $baidang->id;
+            $tepbainop->save();
+        }
+        else if($request->status == 3)
+        {
+            $uploadFile->storeAs('filebinhluan', $new_file_name);
+            $tepbinhluan = new tepbinhluan;
+            $tepbinhluan->Url = $new_file_name;
+            $tepbinhluan->ID_BaiDang = $baidang->id;
+            $tepbinhluan->save();
+        }
+        
         return redirect()->route('classdetail', ['id'=>$id]);
     }
     public function autojoinclass($id){
