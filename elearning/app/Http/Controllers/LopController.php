@@ -280,6 +280,8 @@ class LopController extends Controller
             $tepbaidang = new tepbaidang;
             $tepbaidang->Url = $new_file_name;
             $tepbaidang->ID_BaiDang = $baidang->id;
+            $tepbaidang->ID_Lop = $id;
+            $tepbaidang->ID_TaiKhoan = auth()->user()->id;
             $tepbaidang->save();
         }
         else if($request->status == 2)
@@ -288,6 +290,8 @@ class LopController extends Controller
             $tepbainop = new tepbainop;
             $tepbainop->Url = $new_file_name;
             $tepbainop->ID_BaiDang = $baidang->id;
+            $tepbainop->ID_Lop = $id;
+            $tepbainop->ID_TaiKhoan = auth()->user()->id;
             $tepbainop->save();
         }
         else if($request->status == 3)
@@ -296,6 +300,8 @@ class LopController extends Controller
             $tepbinhluan = new tepbinhluan;
             $tepbinhluan->Url = $new_file_name;
             $tepbinhluan->ID_BaiDang = $baidang->id;
+            $tepbinhluan->ID_Lop = $id;
+            $tepbinhluan->ID_TaiKhoan = auth()->user()->id;
             $tepbinhluan->save();
         }
         
