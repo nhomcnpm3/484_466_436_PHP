@@ -40,11 +40,11 @@
       <div class="page-header">
         <div class="row">
           <div class="col-sm-6">
-            <h3>project list</h3>
+            <h3>class list</h3>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.html">Home</a></li>
               <li class="breadcrumb-item">dashboard</li>
-              <li class="breadcrumb-item active">project list</li>
+              <li class="breadcrumb-item active">class list</li>
             </ol>
           </div>
           <div class="col-sm-6">
@@ -95,8 +95,20 @@
                 <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
                   <div class="row">
                     @foreach($class as $value)
-                    <div class="col-xxl-4 col-lg-6">
-                      <div class="project-box"><span class="badge badge-primary">Active</span>
+                    @php
+                    if ($value->trangthai == 1)
+                    {
+                      $color = "badge-primary";
+                      $title = "Active";       
+                    }
+                    else
+                    {
+                      $color = "badge-danger";
+                      $title = "Not Active";                    
+                    }                     
+                    @endphp
+                    <div class="col-xxl-4 col-lg-6">    
+                      <div class="project-box"><span class="badge {{$color}}">{{$title}}</span>
                         
                         <h6><img style="width:30px;height:30px;border-radius:50px;border:none;margin-right:5px;" src="{{asset('extra-images')}}/{{$value->Logo}}" alt="" data-original-title="" title="">{{$value->TenLop}}</h6>
                         <div class="media">

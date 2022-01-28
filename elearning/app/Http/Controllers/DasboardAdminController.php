@@ -73,7 +73,7 @@ class DasboardAdminController extends Controller
     public function showupdateAccount($id)
     {
         $account = TaiKhoan::find($id);
-        return view('admin/updateAccount');
+        return view('admin/updateAccount',compact('account'));
     }
 
     public function updateAccount(Request $request, $id)
@@ -148,7 +148,9 @@ class DasboardAdminController extends Controller
     public function ShowClassDetail($id)
     {
         $class=Lop::find($id);
-        return view('admin/ClassManagement/admin_classdetail',compact('class'));
+        $color = "";
+        $title = "";
+        return view('admin/ClassManagement/admin_classdetail',compact('class', 'color', 'title'));
     }
     public function ClassDetail($id, Request $request)
     {

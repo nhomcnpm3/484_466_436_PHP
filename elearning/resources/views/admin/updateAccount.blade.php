@@ -179,7 +179,7 @@
               </a>
               <p class="mb-0 font-roboto">{{auth()->user()->Email}}</p>
               <ul>
-                  <li>
+                  {{-- <li>
                       <span><span class="">{{$countAdmin}}</span></span>
                       <p>Admin</p>
                   </li>
@@ -190,7 +190,7 @@
                   <li>
                       <span><span class="">{{$countStudent}}</span></span>
                       <p>Student</p>
-                  </li>
+                  </li> --}}
               </ul>
           </div>
           <nav>
@@ -670,10 +670,10 @@
             <div class="page-header">
               <div class="row">
                 <div class="col-sm-6">
-                  <h3>Create Account</h3>
+                  <h3>Update Account: {{$account->Ten}}</h3>
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route("admin_index")}}">Home</a></li>
-                    <li class="breadcrumb-item">CreateAccount</li>
+                    <li class="breadcrumb-item">UpdateAccount</li>
                   </ol>
                 </div>
                 <div class="col-sm-6">
