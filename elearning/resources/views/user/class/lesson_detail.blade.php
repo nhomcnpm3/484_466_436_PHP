@@ -2,9 +2,11 @@
 
 @section('title', 'Home Page')
 
+
 @section('sidebar')
     @parent
 @endsection
+
 
 @section('content')
     <!--// Mini Header \\-->
@@ -52,27 +54,89 @@
                             <a class="wm-read-more" href="#">Read More</a>
                         </div>
                     </aside>
-                    <div class="wm-courses-started">
+                    <div class="ol-md-9">
                         <h1>{{ $lesson->TieuDe }}</h1>
-                        <h3>Nội dung bài đăng: </h3>
+                        <p>{{ $lesson->created_at }} || {{ $lesson->HanNop }}</p>
+                        <hr>
                         <p>{{ $lesson->ChiTiet }}</p>
-                        <ul class="wm-courses-started-listing">
-                            <li>
-                                <a href="#" class="wmicon-tool"></a>
-                                <div class="wm-courses-started-text">
-                                    <span><a href="#" class="wmicon-time2"></a><time datetime="2017-02-14">Ngày tạo:
-                                            {{ $lesson->created_at }}</time></span>
-                                    <span><a href="#" class=" wmicon-clock2"></a><time datetime="2017-02-14" >Deadline:
-                                            {{ $lesson->HanNop }}</time></span>
+                        <div class="card-body file-manager">
+
+                            <ul class="files">
+                                <a href="{{ asset('file') }}/{{ $tep->Url }}">
+                                    <li class="file-box">
+                                        <div class="file-top">
+                                            @php $domain=explode(".", $tep->Url) @endphp
+                                            @if ($domain[1] == 'docx')
+                                                <i class="fa fa-file-word-o" style="color:blue"></i>
+                                            @endif
+                                            @if ($domain[1] == 'jpeg' || $domain[1] == 'png' || $domain[1] == 'jpg')
+                                                <img style="width:60px;height:60px;"
+                                                    src="{{ asset('file') }}/{{ $tep->Url }}" alt="">
+                                            @endif
+                                            @if ($domain[1] == 'pptx')
+                                                <i class="fa fa-file-powerpoint-o txt-danger"></i>
+                                            @endif
+                                            @if ($domain[1] == 'zip' || $domain[1] == 'rar')
+                                                <i class="fa fa-file-archive-o txt-secondary"></i>
+                                            @endif
+                                        </div>
+                                        <div class="file-bottom">
+                                            <h6>{{ $tep->Url }}</h6>
+                                            <p class="mb-1">{{ $sizefile }}</p>
+                                        </div>
+                                    </li>
+                                </a>
+                            </ul>
+                            <hr>
+                            <p><i style="font-size:20px" class="fa">&#xf0c0;</i><span
+                                    style="color:black; font-size:15px">Student comments in class:</span></p>
+                            <div class="media border p-3">
+                                <img style="float:left;border-radius:50%;width:35px;height:35px;"
+                                    src="{{ asset('extra-images') }}/{{ $taikhoan->AVT }}" alt="">
+                                <div class="media-body">
+                                    <p style="color:black;font-size:16px">John Doe <small><i> 19, 2016</i></small></p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua.</p>
                                 </div>
-                            </li>
-                        </ul>
-                        <p><a href="{{ asset('file') }}/{{ $tep->Url }}">Dowload file tại đây</a></p>
-                        <h2>Loại bài: {{ $view }}</h2>
+                            </div>
+                            <img style="float:left;border-radius:50%;width:40px;height:40px;"
+                                src="{{ asset('extra-images') }}/{{ $taikhoan->AVT }}" alt="">
+                            <div>
+                                <input type="text"
+                                    style="position: relative;top:3px;right:-3px;float:left;width:500px;border:solid 1px #b99663;border-radius:10px 0 0 10px;height:33px"
+                                    placeholder="add comment in class">
+                                <input class="input-file" id="my-file" type="file" name="file_upload">
+                                <label tabindex="0" for="my-file"
+                                    style="padding:0;position: relative;top:11px;right:25px;float:left;"
+                                    class="input-file-trigger"><i style="font-size:18px"
+                                        class="fa">&#xf093;</i></label>
+                                <button
+                                    style="float:left;border-radius:0 10px 10px 0;position: relative;top:3px;right:9px;background-color: #b99663;margin:0 0 0 -5px"><i
+                                        style="color:white;padding:3px 3px 0 3px"
+                                        class="material-icons">&#xe163;</i></button>
+                                <br> <br>
+
+
+                                <p style="display:none;position: absolute;padding:3px;border:solid 1px gray" id="filename">
+                                </p>
+
+                            </div>
+                        </div>
+
+                        <script>
+                            $(document).ready(function() {
+                                $('input[type="file"]').change(function(e) {
+                                    var fileName = e.target.files[0].name;
+                                    document.getElementById("filename").style.display = 'block';
+                                    document.getElementById("filename").innerHTML = fileName;
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!--// Main Section \\-->
 

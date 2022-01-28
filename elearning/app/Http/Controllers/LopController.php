@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PHPMailer\PHPMailer\PHPMailer;
 use Exception;
-
+use Illuminate\Support\Facades\Storage;
 
 class LopController extends Controller
 {
@@ -328,7 +328,11 @@ class LopController extends Controller
             $view = "Question";
         }
         $tep = tepbaidang::find($lesson->ID_TepBaiDang);
-        return view('user/class/lesson_detail', compact('taikhoan', 'lesson', 'view','tep'));
+        $size = Storage::disk('public-file')->size($tep->Url);
+        $base = log($size, 1024);
+        $suffixes = array('', 'Kb', 'Mb', 'Gb', 'Tb');
+        $sizefile = round(pow(1024, $base - floor($base)), 2) . ' ' . $suffixes[floor($base)];
+        return view('user/class/lesson_detail', compact('taikhoan', 'lesson', 'view','tep','sizefile'));
     }
     public function updateclass($id, Request $request)
     {
