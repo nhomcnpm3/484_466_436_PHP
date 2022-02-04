@@ -95,21 +95,20 @@
                 <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
                   <div class="row">
                     @foreach($class as $value)
+                    @php
+                     if($value->trangthai == 1)
+                     {
+                       $color="badge-primary";
+                       $title="Avtive";
+                     }
+                     else if($value-> trangthai==2)
+                     {
+                       $color="badge-danger";
+                       $title="Not Avtive";
+                     }   
+                    @endphp
                     <div class="col-xxl-4 col-lg-6">
-                      <div class="project-box">
-                        @php
-                            if($value->trangthai == 1)     
-                            {
-                              $color = "badge-primary";
-                              $active = "Active"; 
-                            } 
-                            if($value->trangthai == 0)     
-                            {
-                              $color = "badge-danger";
-                              $active = "Not Active"; 
-                            }                       
-                        @endphp
-                        <span class="badge @php echo $color @endphp">@php echo $active @endphp</span>
+                      <div class="project-box"><span class="badge {{ $color }}">{{$title}}</span>
                         
                         <h6><img style="width:30px;height:30px;border-radius:50px;border:none;margin-right:5px;" src="{{asset('extra-images')}}/{{$value->Logo}}" alt="" data-original-title="" title="">{{$value->TenLop}}</h6>
                         <div class="media">

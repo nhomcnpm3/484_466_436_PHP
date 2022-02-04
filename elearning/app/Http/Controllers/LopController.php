@@ -8,13 +8,16 @@ use App\Models\lop;
 use App\Models\taikhoan;
 use App\Models\chitietlop;
 use App\Models\gianhaplop;
+use App\Models\BinhLuan;
 use App\Models\baidang;
 use App\Models\tepbaidang;
+use App\Models\tepbainop;
+use App\Models\tepbinhluan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PHPMailer\PHPMailer\PHPMailer;
 use Exception;
-
+use Illuminate\Support\Facades\Storage;
 
 class LopController extends Controller
 {
@@ -75,11 +78,11 @@ class LopController extends Controller
             $chitietlop = new chitietlop;
             $chitietlop->ID_TaiKhoan = auth()->user()->id;
             $chitietlop->ID_Lop = $lop->id;
-            if($lop->trangthai==1){
+            if ($lop->trangthai == 1) {
                 $chitietlop->TrangThai = 1;
-            }elseif($lop->trangthai==2){
+            } elseif ($lop->trangthai == 2) {
                 $chitietlop->TrangThai = 2;
-            }            
+            }
             $chitietlop->LoaiGiaNhap = 2;
             $chitietlop->save();
             return redirect()->route('classlist');
@@ -90,10 +93,10 @@ class LopController extends Controller
     {
         $taikhoan = taikhoan::find(auth()->user()->id);
         $classdetail = lop::find($id);
-        $dsBaiDang = baidang::where('ID_Lop',$id)->get();
-        $checkgetlink= chitietlop::where([['ID_TaiKhoan',auth()->user()->id],['ID_Lop',$id]])->first();
-        if(!empty($checkgetlink)){
-            return view('user/class/class_detail', compact('classdetail','dsBaiDang', 'taikhoan'));
+        $dsBaiDang = baidang::where('ID_Lop', $id)->get();
+        $checkgetlink = chitietlop::where([['ID_TaiKhoan', auth()->user()->id], ['ID_Lop', $id]])->first();
+        if (!empty($checkgetlink)) {
+            return view('user/class/class_detail', compact('classdetail', 'dsBaiDang', 'taikhoan'));
         }
         return redirect()->route('404');
     }
@@ -192,8 +195,7 @@ class LopController extends Controller
                     session(['token' => $token]);
                     return "Vui lòng đăng nhập với Email là: <b>$taikhoan->Email</b> <br/> <a href='../'>Đăng nhập</a>";
                 }
-            }
-            else{
+            } else {
                 session(['token' => $token]);
                 return "Vui lòng đăng nhập với Email là: <b>$taikhoan->Email</b> <br/> <a href='../'>Đăng nhập</a>";
             }
@@ -212,9 +214,9 @@ class LopController extends Controller
                     $chitietlop = new chitietlop;
                     $chitietlop->ID_TaiKhoan = auth()->user()->id;
                     $chitietlop->ID_Lop = $class->id;
-                    if($class->trangthai==1){
+                    if ($class->trangthai == 1) {
                         $chitietlop->TrangThai = 1;
-                    }elseif($class->trangthai==2){
+                    } elseif ($class->trangthai == 2) {
                         $chitietlop->TrangThai = 2;
                     }
                     $chitietlop->LoaiGiaNhap = 2;
@@ -240,11 +242,10 @@ class LopController extends Controller
             if ($request->order == 1) {
                 $classlist = taikhoan::find(auth()->user()->id);
                 return view('user/class/classlist', compact('classlist'))->with('order', '1');
-            } elseif($request->order == 2)
-            {
+            } elseif ($request->order == 2) {
                 $classlist = taikhoan::find(auth()->user()->id);
                 return view('user/class/classlist', compact('classlist'))->with('order', '2');
-            }else{
+            } else {
                 $classlist = taikhoan::find(auth()->user()->id);
                 return view('user/class/classlist', compact('classlist'))->with('order', '0');
             }
@@ -254,8 +255,8 @@ class LopController extends Controller
     public function showaddlesson($id)
     {
         $taikhoan = taikhoan::find(auth()->user()->id);
-        $class = lop::find($id);        ;
-        return view('user/class/add_lesson',compact('taikhoan', 'class'));
+        $class = lop::find($id);;
+        return view('user/class/add_lesson', compact('taikhoan', 'class'));
     }
     public function addlesson($id, Request $request)
     {
@@ -269,66 +270,80 @@ class LopController extends Controller
 
         $time = time();
         $file = $request->file('file_upload')->getClientOriginalName();
-        $new_file_name = $time."-".$file;
+        $new_file_name = $time . "-" . $file;
         $uploadFile = $request->file_upload;
-        $uploadFile->storeAs('file', $new_file_name);
-
-        $tepbaidang = new tepbaidang;
-        $tepbaidang->Url = $new_file_name;
-        $tepbaidang->save();
-
-        $baidang->ID_TepBaiDang = $tepbaidang->id;
         $baidang->save();
-        return redirect()->route('classdetail', ['id'=>$id]);
+        if ($request->status == 1) {
+            $uploadFile->storeAs('filebaidang', $new_file_name);
+            $tepbaidang = new tepbaidang;
+            $tepbaidang->Url = $new_file_name;
+            $tepbaidang->ID_BaiDang = $baidang->id;
+            $tepbaidang->save();
+        } else if ($request->status == 2) {
+            $uploadFile->storeAs('filebainop', $new_file_name);
+            $tepbainop = new tepbainop;
+            $tepbainop->Url = $new_file_name;
+            $tepbainop->ID_BaiDang = $baidang->id;
+            $tepbainop->save();
+        } else if ($request->status == 3) {
+            $uploadFile->storeAs('filebinhluan', $new_file_name);
+            $tepbinhluan = new tepbinhluan;
+            $tepbinhluan->Url = $new_file_name;
+            $tepbinhluan->ID_BaiDang = $baidang->id;
+            $tepbinhluan->save();
+        }
+
+        return redirect()->route('classdetail', ['id' => $id]);
     }
-    public function autojoinclass($id){
-        $StatusClass=lop::find($id);
-        if($StatusClass->trangthai==1){
-            $StatusClass->trangthai=2;
-        }elseif($StatusClass->trangthai==2){
-            $StatusClass->trangthai=1;
+    public function autojoinclass($id)
+    {
+        $StatusClass = lop::find($id);
+        if ($StatusClass->trangthai == 1) {
+            $StatusClass->trangthai = 2;
+        } elseif ($StatusClass->trangthai == 2) {
+            $StatusClass->trangthai = 1;
         }
         $StatusClass->save();
-        return redirect()->route('everyone', ['id'=>$id]);
+        return redirect()->route('everyone', ['id' => $id]);
     }
-    public function confirmstudent($id_lop,$id_taikhoan)
+    public function confirmstudent($id_lop, $id_taikhoan)
     {
-        $chitietlop=chitietlop::where([['ID_Lop',$id_lop],['ID_TaiKhoan',$id_taikhoan]])->first();
-        if(empty($chitietlop)){
+        $chitietlop = chitietlop::where([['ID_Lop', $id_lop], ['ID_TaiKhoan', $id_taikhoan]])->first();
+        if (empty($chitietlop)) {
             return redirect()->route('home');
         }
-        $chitietlop->TrangThai=1;
+        $chitietlop->TrangThai = 1;
         $chitietlop->save();
-        return redirect()->route('everyone', ['id'=>$id_lop]);
+        return redirect()->route('everyone', ['id' => $id_lop]);
     }
-    public function deletestudent($id_lop,$id_taikhoan)
+    public function deletestudent($id_lop, $id_taikhoan)
     {
-        $chitietlop=chitietlop::where([['ID_Lop',$id_lop],['ID_TaiKhoan',$id_taikhoan]])->first();
-        if(empty($chitietlop)){
+        $chitietlop = chitietlop::where([['ID_Lop', $id_lop], ['ID_TaiKhoan', $id_taikhoan]])->first();
+        if (empty($chitietlop)) {
             return redirect()->route('home');
         }
-        $chitietlop-> delete();
-        return redirect()->route('everyone', ['id'=>$id_lop]);
+        $chitietlop->delete();
+        return redirect()->route('everyone', ['id' => $id_lop]);
     }
     public function showdetaillesson($id)
     {
+        $binhluan = BinhLuan::where('ID_BaiDang', $id)->get();
         $lesson = baidang::find($id);
         $taikhoan = taikhoan::find(auth()->user()->id);
         $loaibaidang = $lesson->TrangThai;
-        if($loaibaidang == 1)
-        {
+        if ($loaibaidang == 1) {
             $view = "Lesson";
-        }
-        else if ($loaibaidang == 2)
-        {
+        } else if ($loaibaidang == 2) {
             $view = "Exercise";
-        }
-        else if ($loaibaidang == 3)
-        {
+        } else if ($loaibaidang == 3) {
             $view = "Question";
         }
-        $tep = tepbaidang::find($lesson->ID_TepBaiDang);
-        return view('user/class/lesson_detail', compact('taikhoan', 'lesson', 'view','tep'));
+        $tep = tepbaidang::find($lesson->id);
+        $size = Storage::disk('filebaidang')->size($tep->Url);
+        $base = log($size, 1024);
+        $suffixes = array('', 'Kb', 'Mb', 'Gb', 'Tb');
+        $sizefile = round(pow(1024, $base - floor($base)), 2) . ' ' . $suffixes[floor($base)];
+        return view('user/class/lesson_detail', compact('taikhoan', 'lesson', 'view', 'tep', 'sizefile', 'binhluan'));
     }
     public function updateclass($id, Request $request)
     {

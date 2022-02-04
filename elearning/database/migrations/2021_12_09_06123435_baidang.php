@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Binhluan extends Migration
+class Baidang extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,16 @@ class Binhluan extends Migration
      */
     public function up()
     {
-        Schema::create('BinhLuan', function (Blueprint $table) {
+        Schema::create('BaiDang', function (Blueprint $table) {
             $table->id();
-            $table->string('NoiDung');
+            $table->string('TieuDe');
+            $table->string('ChiTiet');
+            $table->dateTime('HanNop');
             $table->integer('TrangThai');
             $table->unsignedBigInteger('ID_TaiKhoan');
-            $table->unsignedBigInteger('ID_BaiDang');
+            $table->unsignedBigInteger('ID_Lop');
             $table->foreign('ID_TaiKhoan')->references('id')->on('TaiKhoan');
-            $table->foreign('ID_BaiDang')->references('id')->on('BaiDang');
+            $table->foreign('ID_Lop')->references('id')->on('Lop');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +35,6 @@ class Binhluan extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('BinhLuan');
+        Schema::dropIfExists('BaiDang');
     }
 }

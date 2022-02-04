@@ -6,6 +6,7 @@ use App\Http\Controllers\ThongTinController;
 use App\Http\Controllers\TwilioSMSController;
 use App\Http\Controllers\MailerController;
 use App\Http\Controllers\AnyController;
+use App\Http\Controllers\BinhLuanController;
 use App\Http\Controllers\DangKyController;
 use App\Http\Controllers\DasboardAdminController;
 use App\Http\Controllers\LopController;
@@ -54,6 +55,8 @@ Route::prefix('classlist')->middleware('auth')->group(function () {
         Route::get('addstudent/{id}',[LopController::class, 'addstudent'])->name('addstudent');
         Route::post('add_student/{id}',[LopController::class, 'add_student'])->name('add_student');
         Route::get('detaillesson/{id}',[LopController::class, 'showdetaillesson'])->name('showdetaillesson');
+        Route::post('createBinhLuan/{id}',[BinhLuanController::class, 'createBinhLuan'])->name('CreateBinhLuan');
+
     });
     Route::get('/student_join_class/confirm/{id_lop}/{id_taikhoan}',[LopController::class, 'confirmstudent'])->name('confirmstudent');
     Route::get('/student_join_class/delete/{id_lop}/{id_taikhoan}',[LopController::class, 'deletestudent'])->name('deletestudent');   
@@ -139,6 +142,11 @@ Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
     });
     Route::prefix('studentmanagement')->group(function () {
         Route::get('/', [DasboardAdminController::class, 'StudentManagement'])->name("StudentManagement");
+    });
+    Route::prefix('filemanagement')->group(function () {
+        Route::get('/', [DasboardAdminController::class, 'FileManagement'])->name("FileManagement");
+        Route::get('/{id}', [DasboardAdminController::class, 'DetailFileManager'])->name("DetailFile");
+
     });
     Route::prefix('classmanagement')->group(function () {
         Route::get('/', [DasboardAdminController::class, 'classmanagement'])->name("classmanagement");

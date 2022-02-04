@@ -210,7 +210,9 @@
                                         
                                     </ul>
                                 </li>
-
+                                <li class="dropdown">
+                                    <a class="nav-link menu-title link-nav " href="{{route('FileManagement')}}"><i data-feather="git-pull-request"></i><span>File manager</span></a>
+                                </li>
                                 <li class="sidebar-main-title">
                                     <div>
                                         <h6>Components</h6>
@@ -429,9 +431,7 @@
                                         <li><a href="https://laravel.pixelstrap.com/viho/project/projectcreate" class="">Create new </a></li>
                                     </ul>
                                 </li>
-                                <li class="dropdown">
-                                    <a class="nav-link menu-title link-nav " href="https://laravel.pixelstrap.com/viho/file-manager"><i data-feather="git-pull-request"></i><span>File manager</span></a>
-                                </li>
+                                
                                 <li class="dropdown">
                                     <a class="nav-link menu-title link-nav " href="https://laravel.pixelstrap.com/viho/kanban"><i data-feather="monitor"></i><span>Kanban Board</span></a>
                                 </li>

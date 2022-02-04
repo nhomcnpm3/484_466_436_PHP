@@ -670,7 +670,7 @@
             <div class="page-header">
               <div class="row">
                 <div class="col-sm-6">
-                  <h3>Create Account</h3>
+                  <h3>Update Account: {{$account->Ten}}</h3>
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route("admin_index")}}">Home</a></li>
                     <li class="breadcrumb-item">CreateAccount</li>

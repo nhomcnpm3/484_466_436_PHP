@@ -16,6 +16,8 @@ class Tepbinhluan extends Migration
         Schema::create('TepBinhLuan', function (Blueprint $table) {
             $table->id();
             $table->string('Url');
+            $table->unsignedBigInteger('ID_BinhLuan');
+            $table->foreign('ID_BinhLuan')->references('id')->on('BinhLuan');
             $table->timestamps();
             $table->softDeletes();
         });

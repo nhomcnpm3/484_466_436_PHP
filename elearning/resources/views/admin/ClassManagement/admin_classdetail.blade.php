@@ -146,7 +146,7 @@
                                   <div class="col-sm-10">
                                       <select name='trangthai'>
                                           <option value="1">Hoạt động</option>
-                                          <option @if($class->trangthai == 0) selected @endif value="0">Ngưng hoạt động</option>
+                                          <option value="2">Ngưng hoạt động</option>
                                       </select>
                                   </div>
                               </div>

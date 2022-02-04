@@ -16,6 +16,8 @@ class Tepbainop extends Migration
         Schema::create('TepBaiNop', function (Blueprint $table) {
             $table->id();
             $table->string('Url');
+            $table->unsignedBigInteger('ID_BaiDang');
+            $table->foreign('ID_BaiDang')->references('id')->on('BaiDang');
             $table->timestamps();
             $table->softDeletes();
         });
