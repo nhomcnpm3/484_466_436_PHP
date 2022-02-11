@@ -52,6 +52,7 @@ Route::prefix('classlist')->middleware('auth')->group(function () {
     Route::prefix('Detail')->group(function () {
         Route::get('addlesson/{id}',[LopController::class, 'showaddlesson'])->name('showaddlesson');
         Route::post('addlesson/{id}',[LopController::class, 'addlesson'])->name('addlesson');
+        Route::get('deletelesson/{id}',[LopController::class, 'deletelesson'])->name('deletelesson');
         Route::get('addstudent/{id}',[LopController::class, 'addstudent'])->name('addstudent');
         Route::post('add_student/{id}',[LopController::class, 'add_student'])->name('add_student');
         Route::get('detaillesson/{id}',[LopController::class, 'showdetaillesson'])->name('showdetaillesson');

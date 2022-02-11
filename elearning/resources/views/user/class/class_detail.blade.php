@@ -75,7 +75,8 @@
                     </aside>
                     <div class="col-md-9">
                         <div class="wm-blog-single wm-courses">
-                            <div class="wm-blog-author wm-ourcourses" style="background-color:{{$classdetail->MauChuDe}}">
+                            <div class="wm-blog-author wm-ourcourses"
+                                style="background-color:{{ $classdetail->MauChuDe }}">
                                 <div class="wm-blogauthor-left">
                                     <a class="wm-authorpost" href="#">{{ $classdetail->taikhoan->Ten }}</a>
                                 </div>
@@ -98,18 +99,108 @@
                             </div>
                             @forelse($dsBaiDang as $baidang)
                                 <div class="wm-courses-started">
-                                    <span>{{$baidang->TieuDe}}</span>
                                     <ul class="wm-courses-started-listing">
                                         <li>
-                                            <a href="#" class="wmicon-tool"></a>
+                                            <span>{{ $baidang->TieuDe }}</span>
+                                            @if ($baidang->ID_TaiKhoan == auth()->user()->id)
+                                                <span style="float:right"><a
+                                                        href="{{ route('deletelesson', ['id' => $baidang->id]) }}"><i
+                                                            class="fa fa-close"></i></a>
+                                                </span>
+                                                <span style="float:right"><a data-toggle="modal" data-target="#myModal"
+                                                        onclick="myFunction('{{ $baidang->id }}')"><i
+                                                            class="fa fa-edit"></i></a>
+                                                </span>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="myModal" role="dialog">
+                                                    <div class="modal-dialog">
+
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close"
+                                                                    data-dismiss="modal">&times;</button>
+                                                                <h4 class="modal-title">Edit Class</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form class="form-horizontal" method="post"
+                                                                    enctype="multipart/form-data">
+                                                                    @csrf
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-10">Title</label>
+                                                                        <div class="col-sm-10">
+                                                                            <input type="text" value="{{$baidang->TieuDe}}" class="form-control" id="classname" placeholder="Enter new title"
+                                                                                name="title">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-10">Description</label>
+                                                                        <div class="col-sm-10">
+                                                                            <input type="text" value="{{$baidang->ChiTiet}}" class="form-control" id="classname" placeholder="Enter new description"
+                                                                                name="description">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-10">Deadline</label>
+                                                                        <div class="col-sm-10">
+                                                                            @php  $datetime = new DateTime($baidang->HanNop);   @endphp
+                                                                            <input type="datetime-local" value="{{$datetime->format('Y-m-d\TH:i:s');}}" class="form-control" id="classname"
+                                                                                placeholder="Enter new description" name="deadline">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-10">File (img, excel, word...)</label>
+                                                                        <div class="col-sm-10">
+                                                                            <input class="input-file" id="my-file" type="file" name="file_upload">
+                                                                            <label tabindex="0" for="my-file" class="input-file-trigger">Upload File</label>
+                                                                        </div>
+                                                                    </div>
+                                            
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-10">Status</label>
+                                                                        <div class="col-sm-10">
+                                                                            <select name='status'>
+                                                                                <option value="1" @if ($baidang->TrangThai == 1) selected="selected" @endif>$baidang->TrangThai</option>
+                                                                                <option value="2" @if ($baidang->TrangThai == 2) selected="selected" @endif>Exercise</option>
+                                                                                <option value="3" @if ($baidang->TrangThai == 3) selected="selected" @endif>Question</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="col-sm-10">
+                                                                            <button type="submit" id="submit" class="btn btn-default">Save</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default"
+                                                                    data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            @endif
+
+                                            <hr>
+                                            @if ($baidang->TrangThai == 1)
+                                                <a href="#" class="wmicon-tool"><i class="fa fa-book"></i>
+                                                @elseif($baidang->TrangThai == 2)
+                                                    <a href="#" class="wmicon-tool"><i class="fa fa-pencil"></i>
+                                                    @else
+                                                        <a href="#" class="wmicon-tool"><i class="fa fa-question"></i>
+                                            @endif
+                                            </a>
                                             <div class="wm-courses-started-text">
                                                 <span><a href="#" class="wmicon-time2"></a><time
-                                                        datetime="2017-02-14">{{$baidang->create_at}}</time></span>
+                                                        datetime="2017-02-14">{{ $baidang->created_at }}</time></span>
                                                 <span><a href="#" class=" wmicon-clock2"></a><time
-                                                        datetime="2017-02-14">{{$baidang->HanNop}}</time></span>
+                                                        datetime="2017-02-14">{{ $baidang->HanNop }}</time></span>
                                             </div>
                                             <div class="wm-courses-preview">
-                                                <a class="previe" href="{{ route('showdetaillesson', ['id' => $baidang->id]) }}">Preview</a>
+                                                <a class="previe"
+                                                    href="{{ route('showdetaillesson', ['id' => $baidang->id]) }}">Preview</a>
                                             </div>
                                         </li>
                                     </ul>
@@ -120,36 +211,6 @@
                                 </tr>
                             @endforelse
                         </div>
-
-                        <div class="wm-form">
-                            <div class="wm-widgettitle">
-                                <h2>Leave <span>Your Review</span></h2>
-                            </div>
-                            <form>
-                                <ul>
-                                    <li><input type="text" value="Your Name"
-                                            onblur="if(this.value == '') { this.value ='Your Name'; }"
-                                            onfocus="if(this.value =='Your Name') { this.value = ''; }"></li>
-                                    <li>
-                                        <div class="wm-select-two">
-                                            <select>
-                                                <option>1 Star Review</option>
-                                                <option>1 Star Review1</option>
-                                                <option>1 Star Review2</option>
-                                                <option>1 Star Review3</option>
-                                            </select>
-                                        </div>
-                                    </li>
-                                    <li class="wm-full-form">
-                                        <textarea placeholder="Your Comment"></textarea>
-                                    </li>
-                                    <li class="wm-full-form">
-                                        <input type="submit" value="Submit now">
-                                    </li>
-                                </ul>
-                            </form>
-                        </div>
-
                     </div>
                 </div>
             </div>

@@ -60,7 +60,7 @@
                         <hr>
                         <p>{{ $lesson->ChiTiet }}</p>
                         <div class="card-body file-manager">
-
+                            @if(!empty($tep))
                             <ul class="files">
                                 <a href="{{ asset('filebaidang') }}/{{ $tep->Url }}">
                                     <li class="file-box">
@@ -87,6 +87,8 @@
                                     </li>
                                 </a>
                             </ul>
+                            @endif
+                            </br>
                             <hr>
                             <p><i style="font-size:20px" class="fa">&#xf0c0;</i><span
                                     style="color:black; font-size:15px">Student comments in class:</span></p>

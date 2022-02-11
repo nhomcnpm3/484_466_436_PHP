@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use PHPMailer\PHPMailer\PHPMailer;
 use Exception;
 use Illuminate\Support\Facades\Storage;
+use Tepbaidang as GlobalTepbaidang;
 
 class LopController extends Controller
 {
@@ -267,30 +268,18 @@ class LopController extends Controller
         $baidang->TrangThai = $request->status;
         $baidang->ID_TaiKhoan = auth()->user()->id;
         $baidang->ID_Lop = $id;
-
-        $time = time();
-        $file = $request->file('file_upload')->getClientOriginalName();
-        $new_file_name = $time . "-" . $file;
-        $uploadFile = $request->file_upload;
         $baidang->save();
-        if ($request->status == 1) {
+
+        if ($request->hasFile('file_upload')) {
+            $time = time();
+            $file = $request->file('file_upload')->getClientOriginalName();
+            $new_file_name = $time . "-" . $file;
+            $uploadFile = $request->file_upload;
             $uploadFile->storeAs('filebaidang', $new_file_name);
             $tepbaidang = new tepbaidang;
             $tepbaidang->Url = $new_file_name;
             $tepbaidang->ID_BaiDang = $baidang->id;
             $tepbaidang->save();
-        } else if ($request->status == 2) {
-            $uploadFile->storeAs('filebainop', $new_file_name);
-            $tepbainop = new tepbainop;
-            $tepbainop->Url = $new_file_name;
-            $tepbainop->ID_BaiDang = $baidang->id;
-            $tepbainop->save();
-        } else if ($request->status == 3) {
-            $uploadFile->storeAs('filebinhluan', $new_file_name);
-            $tepbinhluan = new tepbinhluan;
-            $tepbinhluan->Url = $new_file_name;
-            $tepbinhluan->ID_BaiDang = $baidang->id;
-            $tepbinhluan->save();
         }
 
         return redirect()->route('classdetail', ['id' => $id]);
@@ -339,11 +328,35 @@ class LopController extends Controller
             $view = "Question";
         }
         $tep = tepbaidang::find($lesson->id);
-        $size = Storage::disk('filebaidang')->size($tep->Url);
-        $base = log($size, 1024);
-        $suffixes = array('', 'Kb', 'Mb', 'Gb', 'Tb');
-        $sizefile = round(pow(1024, $base - floor($base)), 2) . ' ' . $suffixes[floor($base)];
+        $sizefile = '';
+        if (!empty($tep)) {
+            $size = Storage::disk('filebaidang')->size($tep->Url);
+            $base = log($size, 1024);
+            $suffixes = array('', 'Kb', 'Mb', 'Gb', 'Tb');
+            $sizefile = round(pow(1024, $base - floor($base)), 2) . ' ' . $suffixes[floor($base)];
+            return view('user/class/lesson_detail', compact('taikhoan', 'lesson', 'view', 'tep', 'sizefile', 'binhluan'));
+        }
         return view('user/class/lesson_detail', compact('taikhoan', 'lesson', 'view', 'tep', 'sizefile', 'binhluan'));
+    }
+    public function deletelesson($id)
+    {
+        $binhluan = BinhLuan::where('ID_BaiDang', $id)->get();
+        foreach ($binhluan as $value) {
+            $tepbinhluan = tepbinhluan::where('ID_BinhLuan', $value->id)->get();
+            foreach ($tepbinhluan as $value1) {
+                $value1->delete();
+            }
+            $value->delete();
+        }
+        $tepbaidang = tepbaidang::where('ID_BaiDang', $id)->get();
+        foreach ($tepbaidang as $value) {
+            $value->delete();
+        }
+
+        $baidang = baidang::find($id);
+        $baidang->delete();
+
+        return back();
     }
     public function updateclass($id, Request $request)
     {
