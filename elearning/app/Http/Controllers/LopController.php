@@ -327,7 +327,7 @@ class LopController extends Controller
         } else if ($loaibaidang == 3) {
             $view = "Question";
         }
-        $tep = tepbaidang::find($lesson->id);
+        $tep = tepbaidang::where('ID_BaiDang',$lesson->id)->first();
         $sizefile = '';
         if (!empty($tep)) {
             $size = Storage::disk('filebaidang')->size($tep->Url);

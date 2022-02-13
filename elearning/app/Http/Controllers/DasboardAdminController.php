@@ -32,9 +32,9 @@ class DasboardAdminController extends Controller
     public function FileManagement()
     {
         $images = Storage::disk('public-images')->allFiles('');
-        $file = Storage::disk('public-file')->allFiles('');
+        $filebaidang = Storage::disk('filebaidang')->allFiles('');
 
-        return view('admin/FileManagement/filemanager', compact('images', 'file'));
+        return view('admin/FileManagement/filemanager', compact('images', 'filebaidang'));
     }
     public function DetailFileManager($id)
     {
@@ -58,13 +58,13 @@ class DasboardAdminController extends Controller
             }
         } else {
             $files_with_size = array();
-            $files = Storage::disk('public-file')->files();
+            $files = Storage::disk('filebaidang')->files();
             foreach ($files as $key => $file) {
                 $open=null;
                 if (file_exists(public_path('file').'/'.$file)) {
                     $open=date ("d m Y H:i:s", filemtime(public_path('file').'/'.$file));
                     }
-                $size = Storage::disk('public-file')->size($file);
+                $size = Storage::disk('filebaidang')->size($file);
 
                 $base = log($size, 1024);
                 $suffixes = array('', 'Kb', 'Mb', 'Gb', 'Tb');

@@ -210,12 +210,12 @@
                                     </div>
                                 </li>
                                 </a>
-                                <a href="{{route('DetailFile',['id'=>'file'])}}">
+                                <a href="{{route('DetailFile',['id'=>'filebaidang'])}}">
                                 <li class="folder-box">
                                     <div class="media"><i class="fa fa-folder f-36 txt-warning"></i>
                                         <div class="media-body ms-3">
-                                            <h6 class="mb-0">file</h6>
-                                            <p>{{count($file)}} files, 5mb</p>
+                                            <h6 class="mb-0">FileBaiDang</h6>
+                                            <p>{{count($filebaidang)}} files</p>
                                         </div>
                                     </div>
                                 </li>

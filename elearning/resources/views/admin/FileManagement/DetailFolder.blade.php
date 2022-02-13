@@ -170,10 +170,10 @@
                                 <li class="file-box">
                                     <div class="file-top"> 
                                         @php $domain=explode(".", $value['name']) @endphp
-                                        @if($domain[1]=='docx')
+                                        @if($domain[1]=='docx'||$domain[1]=='doc')
                                         <i class="fa fa-file-word-o" style="color:blue"></i>
                                         @endif
-                                        @if($domain[1]=='jpeg' ||$domain[1]=='png' ||$domain[1]=='jpg')
+                                        @if($domain[1]=='jpeg' ||$domain[1]=='Png' ||$domain[1]=='jpg')
                                         <i class="fa fa-file-image-o txt-primary"></i>
                                         @endif
                                         @if($domain[1]=='pptx')
