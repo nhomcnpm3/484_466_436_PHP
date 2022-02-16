@@ -9,6 +9,7 @@ use App\Models\BaiDang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class DasboardAdminController extends Controller
 {
@@ -174,7 +175,7 @@ class DasboardAdminController extends Controller
     {
         $Teacher = TaiKhoan::where('ID_LoaiTaiKhoan', 3)->get();
         $class = Lop::where('ID_TaiKhoan', $id)->get();
-        return view('admin/ClassManagement/abc', compact('Teacher', 'class'));
+        return view('admin/ClassManagement/abc', compact('Teacher', 'class','id'));
     }
     public function ShowClassDetail($id)
     {
@@ -196,4 +197,42 @@ class DasboardAdminController extends Controller
         $class->save();
         return redirect()->route('ShowClass', ['id' => $class->ID_TaiKhoan]);
     }
+    public function ShowClassAdd($id)
+    {
+        return view('admin/ClassManagement/admin_classadd',compact('id'));
+    }
+    public function ClassAdd($id, Request $request)
+    {
+        $lop = new lop;
+        $lop->TenLop = $request->tenlop;
+        $lop->MoTa = $request->mota;
+        $time = time();
+        $file = $request->file('logo')->getClientOriginalName();
+        $new_img_name = $time . "-" . $file;
+        $uploadLogo = $request->logo;
+        $uploadLogo->storeAs('extra-images', $new_img_name);
+        $lop->Logo = $new_img_name;
+        $time = time();
+        $file = $request->file('banner')->getClientOriginalName();
+        $new_img_name = $time . "-" . $file;
+        $uploadBanner = $request->banner;
+        $uploadBanner->storeAs('extra-images', $new_img_name);
+        $lop->Banner = $new_img_name;
+        $lop->MauChuDe = $request->favcolor;
+        $lop->trangthai = 1;
+        $lop->ID_TaiKhoan = $id;
+        $lop->MaLop = Str::random(7);
+        $token = openssl_random_pseudo_bytes(16);
+        $token = bin2hex($token);
+        $lop->token = $token;
+        $lop->save();
+        $chitietlop = new chitietlop;
+        $chitietlop->ID_TaiKhoan =$id;
+        $chitietlop->ID_Lop = $lop->id;
+        $chitietlop->LoaiGiaNhap = 1;
+        $chitietlop->TrangThai = 1;
+        $chitietlop->save();
+        return redirect()->route('ShowClass', ['id' => $id]);
+    }
+
 }

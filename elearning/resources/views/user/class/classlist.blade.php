@@ -47,9 +47,12 @@
                                     @csrf
 
                                     <select name="order" onchange='this.form.submit()'>
-                                        <option @if ($order == 0)selected="selected"@endif value="0">All Class</option>
-                                        <option @if ($order == 1)selected="selected"@endif value="1">Joined class</option>
-                                        <option @if ($order == 2)selected="selected"@endif value="2">Personal class</option>
+                                        <option @if ($order == 0) selected="selected" @endif value="0">All
+                                            Class</option>
+                                        <option @if ($order == 1) selected="selected" @endif value="1">
+                                            Joined class</option>
+                                        <option @if ($order == 2) selected="selected" @endif value="2">
+                                            Personal class</option>
                                     </select>
                                 </form>
 
@@ -76,6 +79,13 @@
                                     @forelse($classlist->DSLop as $class)
                                         @if ($class->pivot->LoaiGiaNhap == 2)
                                             <li class="col-md-12">
+                                                @if ($classlist->id == Auth::User()->id)
+                                                    <span style="float:right"><a href="{{route('deleteClass',['id'=>$class->id])}}"><i class="fa fa-close"></i></a>
+                                                    </span>
+                                                    <span style="float:right"><a 
+                                                             href="{{route('updateClass',['id'=>$class->id])}}"><i class="fa fa-edit"></i></a>
+                                                    </span>
+                                                @endif
                                                 <div class="wm-courses-popular-wrap">
                                                     <figure> <a
                                                             href="{{ route('classdetail', ['id' => $class->id]) }}"><img
@@ -94,6 +104,12 @@
                                                                 href="{{ route('classdetail', ['id' => $class->id]) }}">{{ $class->TenLop }}</a>
                                                         </h6>
                                                         <p>{{ $class->mota }}</p>
+                                                        <a href="{{ route('showcreateAccount') }}"> <button type="button"
+                                                                class="btn btn-default"><i
+                                                                    class="fa fa-plus"></i></button></a>
+                                                        <a href="{{ route('showupdateAccount', ['id' => $value->id]) }}">
+                                                            <button type="button" class="btn btn-warning"><span
+                                                                    class="glyphicon glyphicon-edit"></button></a>
                                                     </div>
                                                 </div>
                                             </li>
@@ -105,6 +121,13 @@
                                     @forelse($classlist->DSLop as $class)
                                         @if ($class->pivot->LoaiGiaNhap == 1)
                                             <li class="col-md-12">
+                                                @if ($classlist->id == Auth::User()->id)
+                                                    <span style="float:right"><a href="{{route('deleteClass',['id'=>$class->id])}}"><i class="fa fa-close"></i></a>
+                                                    </span>
+                                                    <span style="float:right"><a 
+                                                         href="{{route('updateClass',['id'=>$class->id])}}"><i class="fa fa-edit"></i></a>
+                                                    </span>
+                                                @endif
                                                 <div class="wm-courses-popular-wrap">
                                                     <figure> <a
                                                             href="{{ route('classdetail', ['id' => $class->id]) }}"><img
@@ -123,6 +146,12 @@
                                                                 href="{{ route('classdetail', ['id' => $class->id]) }}">{{ $class->TenLop }}</a>
                                                         </h6>
                                                         <p>{{ $class->mota }}</p>
+                                                        <a href="{{ route('showcreateAccount') }}"> <button type="button"
+                                                                class="btn btn-default"><i
+                                                                    class="fa fa-plus"></i></button></a>
+                                                        <a href="{{ route('showupdateAccount', ['id' => $value->id]) }}">
+                                                            <button type="button" class="btn btn-warning"><span
+                                                                    class="glyphicon glyphicon-edit"></button></a>
                                                     </div>
                                                 </div>
                                             </li>
@@ -135,6 +164,13 @@
                                 @elseif($order == 0)
                                     @forelse($classlist->DSLop as $class)
                                         <li class="col-md-12">
+                                            @if ($classlist->id == Auth::User()->id)
+                                                <span style="float:right"><a href="{{route('deleteClass',['id'=>$class->id])}}"><i class="fa fa-close"></i></a>
+                                                </span>
+                                                <span style="float:right"><a 
+                                                     href="{{route('showupdateClass',['id'=>$class->id])}}"><i class="fa fa-edit"></i></a>
+                                                </span>
+                                            @endif
                                             <div class="wm-courses-popular-wrap">
                                                 <figure> <a href="{{ route('classdetail', ['id' => $class->id]) }}"><img
                                                             src="{{ asset('extra-images') }}/{{ $class->Logo }}"
@@ -150,7 +186,9 @@
                                                     <h6><a
                                                             href="{{ route('classdetail', ['id' => $class->id]) }}">{{ $class->TenLop }}</a>
                                                     </h6>
+
                                                     <p>{{ $class->mota }}</p>
+
                                                 </div>
                                             </div>
                                         </li>

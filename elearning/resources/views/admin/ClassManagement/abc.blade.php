@@ -83,7 +83,7 @@
                 </ul>
               </div>
               <div class="col-md-6 p-0">                    
-                <div class="form-group mb-0 me-0"></div><a class="btn btn-primary" href="projectcreate.html"> <i data-feather="plus-square"> </i>Create New Project</a>
+                <div class="form-group mb-0 me-0"></div><a class="btn btn-primary" href="{{route('ShowClassAdd',['id'=>$id])}}"> <i data-feather="plus-square"> </i>Create New Class For Teacher</a>
               </div>
             </div>
           </div>
@@ -114,6 +114,7 @@
                         <div class="media">
                           <div class="media-body">
                             <p>{{$value->Mota}}</p>
+                            <p>Class code: {{$value->MaLop}}</p>
                           </div>
                         </div>
                         <div class="row details">

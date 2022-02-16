@@ -45,7 +45,10 @@ Route::prefix('classlist')->middleware('auth')->group(function () {
     Route::post('create_class',[LopController::class, 'CreateClass'])->name('CreateClass');
     Route::post('join',[LopController::class, 'joinclass'])->name('joinclass');
     Route::get('classdetail/{id}',[LopController::class, 'classdetail'])->name('classdetail');
-    Route::get('updateclass/{id}', [LopController::class, 'updateclass'])->name('updateClass');
+    Route::get('updateclass/{id}', [LopController::class, 'showupdateClass'])->name('showupdateClass');
+    Route::post('updateclass/{id}', [LopController::class, 'updateclass'])->name('updateclass');
+
+    
     Route::get('deleteclass/{id}', [LopController::class, 'deleteclass'])->name('deleteClass');
     Route::get('student_join_class', [LopController::class, 'checktoken'])->name('checktoken');
     Route::get('everyone/{id}', [LopController::class, 'everyone'])->name('everyone');
@@ -154,6 +157,8 @@ Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
         Route::get('/ShowClass/{id}', [DasboardAdminController::class, 'ShowClass'])->name("ShowClass");
         Route::get('/ShowClassDetail/{id}', [DasboardAdminController::class, 'ShowClassDetail'])->name("ShowClassDetail");
         Route::post('/ClassDetail/{id}', [DasboardAdminController::class, 'ClassDetail'])->name("ClassDetail");
+        Route::get('/ShowCreateClass/{id}', [DasboardAdminController::class, 'ShowClassAdd'])->name("ShowClassAdd");
+        Route::post('/CreateClass/{id}', [DasboardAdminController::class, 'ClassAdd'])->name("ClassAdd");
 
     });
 });

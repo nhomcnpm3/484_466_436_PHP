@@ -73,7 +73,7 @@
     <div class="container-fluid">
       <div class="row project-cards">
         <div class="col-md-12 project-list">
-          
+        
         </div>
         <div class="col-sm-12">
           <div class="card">
@@ -84,48 +84,41 @@
                         <div class="row">
                           <!-- Base styles-->
                           <div class="col-sm-12">
-                            <form class="form-horizontal" action="{{route('ClassDetail', ['id' => $class->id])}}" method="post"
+                            <form class="form-horizontal" action="{{route('ClassAdd',['id'=>$id])}}" method="post"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label class="col-sm-10">Tên lớp</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="classname" placeholder="Nhập tên lớp"
-                                            name="tenlop" value="{{$class->TenLop}}">
+                                            name="tenlop" value="">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-10">Mô tả</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="classname" placeholder="Nhập mô tả"
-                                            name="mota" value="{{$class->MoTa}}">
+                                            name="mota" value="">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-10">Logo</label>
                                     <div class="col-sm-10">
-                                        <input class="input-file" id="my-file" type="file" name="logo" value="{{$class->Logo}}" disabled>
+                                        <input class="input-file" id="my-file" type="file" name="logo" value="" >
                                         <label tabindex="0" for="my-file" class="input-file-trigger"></label>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-10">Banner</label>
                                     <div class="col-sm-10">
-                                        <input class="input-file" id="my-file" type="file" name="banner" value="{{$class->Banner}}" disabled>
+                                        <input class="input-file" id="my-file" type="file" name="banner" value="" >
                                         <label tabindex="0" for="my-file" class="input-file-trigger"></label>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-sm-2">Màu chủ đề:</label>
                                     <div class="col-sm-10">
-                                        <input type="color" id="favcolor" name="favcolor" value="{{$class->MauChuDe}}" disabled>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-10">Mã lớp</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="classname"
-                                            name="malop" value="{{$class->MaLop}}" disabled>
+                                        <input type="color" id="favcolor" name="favcolor" value="" >
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -148,43 +141,7 @@
                         
                         </div>
                       </div>
-                      {{-- Xuất danh sách sinh viên --}}
-                      <div class="container"> 
-                        <h1>Danh sách tài khoản trong lớp</h1>
-                        <div class="table-responsive">
-                          <table class="display table table-striped table-bordered" id="example-style-1">
-                            <thead>
-                              <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Avatar</th>
-                                <th>Phone</th>
-                                <th>Email</th>
-                                <th>Address</th>
-                                <th>Birth of Date</th>
-                                <th>Status</th>
-                                <th>Type Account</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              @foreach($class->DSTaiKhoan as $value)
-                              <tr>
-                                <td>{{$value->id}}</td>
-                                <td>{{$value->Ten}}</td>
-                                <td>
-                                  <img class="img-thumbnail" style="width:120px;height:80px;"src="{{asset('extra-images')}}/{{$value->AVT}}"></td>   
-                                <td>{{$value->Phone}}</td>
-                                <td>{{$value->Email}}</td>
-                                <td>{{$value->DiaChi}}</td>
-                                <td>{{$value->NgaySinh}}</td>
-                                <td>{{$value->TrangThai}}</td>
-                                <td>{{$value->ID_LoaiTaiKhoan}}</td>
-                                </tr>
-                              @endforeach
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
+                      
                 </div>
               </div>
             </div>

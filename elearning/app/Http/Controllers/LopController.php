@@ -358,37 +358,58 @@ class LopController extends Controller
 
         return back();
     }
+    
+    public function showupdateClass($id)
+    {
+        $class = lop::find($id);
+        if ($class == null) {
+            return redirect()->route('404');
+        }
+        
+        return view('user/class/editclass',compact('class'));
+    }
     public function updateclass($id, Request $request)
     {
         $lop = lop::find($id);
         if ($lop == null) {
             return "Không tìm thấy lớp có mã ={$id}";
         }
-        $lop->TenLop = $request->classname;
-        $lop->MoTa = $request->description;
-        $time = time();
-        $file = $request->file('logo')->getClientOriginalName();
-        $new_img_name = $time . "-" . $file;
-        $uploadLogo = $request->logo;
-        $uploadLogo->storeAs('extra-images', $new_img_name);
-        $lop->Logo = $new_img_name;
-        $time = time();
-        $file = $request->file('banner')->getClientOriginalName();
-        $new_img_name = $time . "-" . $file;
-        $uploadBanner = $request->banner;
-        $uploadBanner->storeAs('extra-images', $new_img_name);
-        $lop->Banner = $new_img_name;
+        $lop->TenLop = $request->tenlop;
+        $lop->MoTa = $request->mota;
+        if(!empty($request->logo))
+        {
+            $time = time();
+            $file = $request->file('logo')->getClientOriginalName();
+            $new_img_name = $time . "-" . $file;
+            $uploadLogo = $request->logo;
+            $uploadLogo->storeAs('extra-images', $new_img_name);
+            $lop->Logo = $new_img_name;
+        }
+        if(!empty($request->banner)){
+            $time = time();
+            $file = $request->file('banner')->getClientOriginalName();
+            $new_img_name = $time . "-" . $file;
+            $uploadBanner = $request->banner;
+            $uploadBanner->storeAs('extra-images', $new_img_name);
+            $lop->Banner = $new_img_name;
+        }
         $lop->MauChuDe = $request->favcolor;
         $lop->save();
-        return redirect()->route('classdetail', ['id' => $id]);
+        return redirect()->route('classlist', ['id' => $id]);
     }
     public function deleteclass($id, Request $request)
     {
         $lop = lop::find($id);
+        $chitiet= chitietlop::where('ID_Lop',$id)->get();
+        foreach($chitiet as $vale){
+            $vale->delete();
+
+        }
         if ($lop == null) {
             return "Không tìm thấy lớp có id ={$id}";
         }
         $lop->delete();
-        return redirect()->route('classdetail', ['id' => $id]);
-    }
+
+        $classlist = taikhoan::find(auth()->user()->id);
+        return view('user/class/classlist', compact('classlist'))->with('order', '0');    }
 }
