@@ -119,12 +119,12 @@ class LopController extends Controller
             $mail->Host = 'smtp.gmail.com';
             //  smtp host
             $mail->SMTPAuth = true;
-            $mail->Username = 'tranducanhtu.backend@gmail.com';   //  sender username
-            $mail->Password = 'igxiypzaeanxhmbt';       // sender password
+            $mail->Username = 'tranducanhtu.frontend@gmail.com';   //  sender username
+            $mail->Password = '01697223552aA';       // sender password
             $mail->SMTPSecure = 'ssl';                  // encryption - ssl/tls
             $mail->Port = 465;                          // port - 587/465
             $mail->Subject = "join class";
-            $mail->setFrom('tranducanhtu.backend@gmail.com', 'tranducanhtu.developer');
+            $mail->setFrom('tranducanhtu.frontend@gmail.com', 'tranducanhtu.developer');
             $error = "";
             $exist = "";
             $success = "";

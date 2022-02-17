@@ -53,12 +53,12 @@ class TwilioSMSController extends Controller
                 $mail->Host = 'smtp.gmail.com';  
                 //  smtp host
                 $mail->SMTPAuth = true;
-                $mail->Username = 'tranducanhtu.backend@gmail.com';   //  sender username
-                $mail->Password = 'igxiypzaeanxhmbt';       // sender password
+                $mail->Username = 'tranducanhtu.frontend@gmail.com';   //  sender username
+                $mail->Password = '01697223552aA';       // sender password
                 $mail->SMTPSecure = 'ssl';                  // encryption - ssl/tls
                 $mail->Port = 465;                          // port - 587/465
                 $mail->Subject = "Test";
-                $mail->setFrom('tranducanhtu.backend@gmail.com', 'tranducanhtu.developer');
+                $mail->setFrom('tranducanhtu.frontend@gmail.com', 'tranducanhtu.developer');
                 $mail->addAddress($request->email);
                 $mail->MsgHTML('<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
                 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -483,7 +483,6 @@ class TwilioSMSController extends Controller
                 </body>
                 
                 </html>');
-                
                 
                 
                 $mail->send();
