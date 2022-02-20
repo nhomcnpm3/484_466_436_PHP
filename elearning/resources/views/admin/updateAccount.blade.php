@@ -178,7 +178,7 @@
                   <h6 class="mt-3 f-14 f-w-600">{{auth()->user()->Ten}}</h6>
               </a>
               <p class="mb-0 font-roboto">{{auth()->user()->Email}}</p>
-              <ul>
+              {{-- <ul>
                   <li>
                       <span><span class="">{{$countAdmin}}</span></span>
                       <p>Admin</p>
@@ -191,7 +191,7 @@
                       <span><span class="">{{$countStudent}}</span></span>
                       <p>Student</p>
                   </li>
-              </ul>
+              </ul> --}}
           </div>
           <nav>
               <div class="main-navbar">

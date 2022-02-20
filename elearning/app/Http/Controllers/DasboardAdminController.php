@@ -113,7 +113,7 @@ class DasboardAdminController extends Controller
     public function showupdateAccount($id)
     {
         $account = TaiKhoan::find($id);
-        return view('admin/updateAccount');
+        return view('admin/updateAccount', compact('account'));
     }
 
     public function updateAccount(Request $request, $id)

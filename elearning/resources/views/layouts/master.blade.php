@@ -772,13 +772,21 @@
                 <form action="{{route('signup')}}" method="POST" enctype="multipart/form-data">
                   @csrf
                   <ul>
-                    <li> <input type="text" name="mail" value="Your E-mail" onblur="if(this.value == '') { this.value ='Your E-mail'; }" onfocus="if(this.value =='Your E-mail') { this.value = ''; }"> </li>
-                    <li> <input type="text" name="fullname" value="FullName" onblur="if(this.value == '') { this.value ='Your Username'; }" onfocus="if(this.value =='Your Username') { this.value = ''; }"> </li>
+                    <li>Your Email</li>
+                    <li> <input type="text" name="mail" value="E-mail" onblur="if(this.value == '') { this.value ='Your E-mail'; }" onfocus="if(this.value =='Your E-mail') { this.value = ''; }"> </li>
+                    <li>FUll name</li>
+                    <li><input type="text" name="fullname" value="FullName" onblur="if(this.value == '') { this.value ='Your Username'; }" onfocus="if(this.value =='Your Username') { this.value = ''; }"> </li>
+                    <li>Number phone</li>
                     <li> <input type="text" name="phone" value="Phone" onblur="if(this.value == '') { this.value ='Phone'; }" onfocus="if(this.value =='Phone') { this.value = ''; }"> </li>
+                    <li>Address</li>
                     <li> <input type="text" name="address" value="Address" onblur="if(this.value == '') { this.value ='Address'; }" onfocus="if(this.value =='Address') { this.value = ''; }"> </li>
+                    <li>Birthday</li>
                     <li> <input type="date" name="birthday" value="Birth of Date" onblur="if(this.value == '') { this.value ='Birth of Date'; }" onfocus="if(this.value =='Birth of Date') { this.value = ''; }"> </li>
+                    <li>Avatar</li>
                     <li> <input type="file" name="image"></li>
+                    <li>Password</li>
                     <li> <input type="password" id="newaccpassword" name="pass" value="password" onblur="if(this.value == '') { this.value ='password'; }" onfocus="if(this.value =='password') { this.value = ''; }"> </li>
+                    <li>Confirm password</li>
                     <li> <input type="password" id="newaccconfirm_password"  name="passconfirm" value="Confirm Password" onblur="if(this.value == '') { this.value ='Confirm Password'; }" onfocus="if(this.value =='Confirm Password') { this.value = ''; }"> </li>
                     <span id='message'></span>
                     <li> <input id="submit"  disabled="disabled" type="submit" value="Create Account"> </li>

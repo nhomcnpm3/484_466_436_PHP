@@ -69,7 +69,7 @@
                         @if (auth()->user()->ID_LoaiTaiKhoan != 2)
                             <a href="{{ route('showCreateClass') }}" class="btn  btn-lg"
                                 style="background-color:#b99663;color:white">
-                                <span class="glyphicon glyphicon-plus" style="color:white"></span>More class
+                                <span class="glyphicon glyphicon-plus" style="color:white"></span> Add class
                             </a>
                         @endif
 
