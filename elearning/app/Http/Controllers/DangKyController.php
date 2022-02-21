@@ -12,7 +12,7 @@ class DangKyController extends Controller
     public function signup(Request $request)
     {
         $kiemtraemail = TaiKhoan::where('Email', $request->mail)->first();
-        if (empty($xqkiemtraemail)) {
+        if (empty($kiemtraemail)) {
 
             $taikhoan = new TaiKhoan;
             $taikhoan->token = "";

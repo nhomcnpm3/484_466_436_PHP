@@ -269,7 +269,6 @@ class LopController extends Controller
         $baidang->ID_TaiKhoan = auth()->user()->id;
         $baidang->ID_Lop = $id;
         $baidang->save();
-
         if ($request->hasFile('file_upload')) {
             $time = time();
             $file = $request->file('file_upload')->getClientOriginalName();
